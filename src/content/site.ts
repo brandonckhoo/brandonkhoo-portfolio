@@ -363,7 +363,7 @@ export const siteContent = {
 
   sideProjects: {
     title: "AI Side Projects",
-    subtitle: "Builder mode — shipping fast with Claude and Cursor",
+    subtitle: "Builder mode — shipping fast with Claude and Cursor over the weekend",
     items: [
       {
         slug: "alice-abm-prototype",
