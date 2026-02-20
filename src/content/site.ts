@@ -181,8 +181,8 @@ export const siteContent = {
   nav: {
     links: [
       { label: "Case Studies", href: "#work" },
-      { label: "Experience", href: "#experience" },
       { label: "AI Projects", href: "#side-projects" },
+      { label: "Experience", href: "#experience" },
       { label: "About", href: "#about" },
     ] as NavLink[],
     cta: { label: "Book a call →", href: "https://calendly.com/brandoncharleskhoo" } as NavLink,
