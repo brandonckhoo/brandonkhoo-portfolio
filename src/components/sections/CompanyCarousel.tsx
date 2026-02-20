@@ -17,7 +17,7 @@ export default function CompanyCarousel() {
             {companies.items.map((name) => (
               <span
                 key={name}
-                className="text-sm font-medium text-ink-2 hover:text-ink transition-colors duration-200"
+                className="text-lg font-medium text-ink-2 hover:text-ink transition-colors duration-200"
               >
                 {name}
               </span>
