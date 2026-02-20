@@ -508,15 +508,15 @@ export const siteContent = {
   about: {
     title: "About",
     bio: [
-      "I'm a product manager who cares about making complex systems actually work for people. My background spans B2B SaaS platforms, marketplace growth, and enterprise consulting — with a through-line of building things that scale.",
-      "Right now I'm most interested in AI-powered workflows, voice automation, and the product thinking behind getting agents to production. I prototype fast with Claude and Cursor, and I care a lot about how products are measured — not just shipped.",
-      "I'm based in Australia and open to US-based or global remote product roles, particularly in platform, AI, or B2B SaaS.",
+      "I build AI powered product platforms that scale. My background spans enterprise consulting, marketplace operations, and B2B SaaS platform work at KPMG, Uber, and Amplitude.",
+      "At Amplitude I led the CDP from $6M to $21M ARR, grew the integration ecosystem from 40 to 130 partners, and shipped AI powered features across session replay, audience segmentation, and developer tooling. I think in systems: data pipelines, APIs, agent workflows, and the measurement layer that makes them trustworthy.",
+      "I prototype fast with Claude and Cursor, run experiments before committing to roadmaps, and treat evaluation as a core product requirement.",
     ] as string[],
     quickFacts: [
-      { label: "Based in", value: "Australia — open to US roles" },
-      { label: "Toolkit", value: "Claude Code, Cursor, Figma, Next.js" },
-      { label: "Domains", value: "B2B SaaS, Platform, AI voice" },
-      { label: "Looking for", value: "Senior PM or AI PM roles" },
+      { label: "Based in", value: "Australia, open to US roles" },
+      { label: "Focus", value: "AI powered platforms, voice automation, agent workflows" },
+      { label: "Strengths", value: "Integrations and APIs, workflow design, measurement and experimentation" },
+      { label: "Selected companies", value: "Apple, Uber, Amplitude, KPMG" },
     ] as QuickFact[],
   },
 
