@@ -3,6 +3,7 @@ import FeaturedWork from "@/components/sections/FeaturedWork";
 import About from "@/components/sections/About";
 import Experience from "@/components/sections/Experience";
 import SideProjects from "@/components/sections/SideProjects";
+import ProductPrinciples from "@/components/sections/ProductPrinciples";
 import Footer from "@/components/sections/Footer";
 
 export default function HomePage() {
@@ -11,6 +12,7 @@ export default function HomePage() {
       <Hero />
       <FeaturedWork />
       <SideProjects />
+      <ProductPrinciples />
       <Experience />
       <Footer />
     </main>
