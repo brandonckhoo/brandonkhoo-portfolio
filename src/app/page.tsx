@@ -4,6 +4,7 @@ import About from "@/components/sections/About";
 import Experience from "@/components/sections/Experience";
 import SideProjects from "@/components/sections/SideProjects";
 import ProductPrinciples from "@/components/sections/ProductPrinciples";
+import PhotoMosaic from "@/components/sections/PhotoMosaic";
 import Footer from "@/components/sections/Footer";
 
 export default function HomePage() {
@@ -13,6 +14,7 @@ export default function HomePage() {
       <FeaturedWork />
       <SideProjects />
       <ProductPrinciples />
+      <PhotoMosaic />
       <Experience />
       <Footer />
     </main>
