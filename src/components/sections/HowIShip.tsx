@@ -159,8 +159,7 @@ export default function HowIShip() {
     <section
       id="shipping"
       ref={sectionRef}
-      style={{ background: "#0a1628" }}
-      className="section-py"
+      className="section-py bg-bg"
     >
       <div className="max-w-content mx-auto content-px">
 
@@ -171,10 +170,10 @@ export default function HowIShip() {
           transition={{ duration: 0.3, ease: "easeOut" }}
           className="flex flex-col md:flex-row md:items-start md:justify-between gap-5 mb-10"
         >
-          <h2 className="font-display text-4xl sm:text-5xl text-white flex-shrink-0">
+          <h2 className="font-display text-4xl sm:text-5xl text-ink flex-shrink-0">
             How I Ship Products
           </h2>
-          <p className="text-white/50 text-base leading-relaxed max-w-md md:text-right">
+          <p className="text-ink-2 text-base leading-relaxed max-w-md md:text-right">
             My default operating system for shipping products fast, using Claude Code, Cursor, and Vercel previews to validate workflows with real customers.
           </p>
         </motion.div>
@@ -186,17 +185,13 @@ export default function HowIShip() {
           transition={{ duration: 0.32, ease: "easeOut", delay: 0.1 }}
           className="rounded-2xl overflow-hidden"
           style={{
-            background: "rgba(255,255,255,0.04)",
-            border: "1px solid rgba(255,255,255,0.10)",
-            boxShadow: "0 8px 40px rgba(0,0,0,0.3)",
+            background: "#f0eeeb",
+            border: "1px solid rgba(0,0,0,0.07)",
+            boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
           }}
         >
           {/* ── Tab bar ── */}
-          <div
-            className="px-4 pt-5 pb-0 flex justify-center"
-            style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}
-          >
-            {/* Scrollable row on small screens */}
+          <div className="px-4 pt-5 pb-0 flex justify-center">
             <div
               role="tablist"
               aria-label="Shipping methodology tabs"
@@ -219,15 +214,13 @@ export default function HowIShip() {
                     className="flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer whitespace-nowrap"
                     style={
                       isActive
-                        ? { background: "rgba(255,255,255,0.15)", color: "#ffffff" }
-                        : { background: "transparent", color: "rgba(255,255,255,0.45)" }
+                        ? {
+                            background: "#ffffff",
+                            color: "#0a1628",
+                            boxShadow: "0 1px 4px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.06)",
+                          }
+                        : { background: "transparent", color: "#888880" }
                     }
-                    onMouseEnter={(e) => {
-                      if (!isActive) (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.75)";
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!isActive) (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.45)";
-                    }}
                   >
                     {tab.label}
                   </button>
@@ -253,36 +246,36 @@ export default function HowIShip() {
             >
               {/* Panel header */}
               <div className="mb-7">
-                <h3 className="font-display text-2xl text-white mb-1">
+                <h3 className="font-display text-2xl text-ink mb-1">
                   {active.title}
                 </h3>
-                <p className="text-white/45 text-sm">{active.subtitle}</p>
+                <p className="text-ink-3 text-sm">{active.subtitle}</p>
               </div>
 
               {/* Items grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {active.items.map((item, i) => (
                   <div
                     key={i}
-                    className="flex gap-4 p-4 rounded-xl"
-                    style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
+                    className="flex gap-4 p-4 rounded-xl bg-white"
+                    style={{ border: "1px solid rgba(0,0,0,0.06)" }}
                   >
                     {/* Number */}
                     <span
                       className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-semibold mt-0.5"
                       style={{
-                        background: "rgba(255,255,255,0.10)",
-                        color: "rgba(255,255,255,0.55)",
+                        background: "rgba(0,0,0,0.06)",
+                        color: "#888880",
                       }}
                     >
                       {i + 1}
                     </span>
                     {/* Text */}
                     <div>
-                      <p className="text-white font-semibold text-sm leading-snug mb-1">
+                      <p className="text-ink font-semibold text-sm leading-snug mb-1">
                         {item.label}
                       </p>
-                      <p className="text-white/50 text-sm leading-relaxed">
+                      <p className="text-ink-2 text-sm leading-relaxed">
                         {item.body}
                       </p>
                     </div>
