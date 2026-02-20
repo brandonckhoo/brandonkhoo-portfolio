@@ -186,6 +186,7 @@ export const siteContent = {
       { label: "Case Studies", href: "#work" },
       { label: "AI Side Projects", href: "#side-projects" },
       { label: "Principles", href: "#principles" },
+      { label: "How I Ship", href: "#shipping" },
       { label: "Gallery", href: "#gallery" },
       { label: "Resume", href: "#experience" },
     ] as NavLink[],
