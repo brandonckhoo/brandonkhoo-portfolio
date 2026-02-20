@@ -46,7 +46,7 @@ function WorkCard({ item }: { item: (typeof featuredWork.items)[number] }) {
       >
         {/* Hero image */}
         {item.image && (
-          <div className="relative w-full h-44 overflow-hidden">
+          <div className="relative w-full h-64 overflow-hidden">
             <Image
               src={item.image}
               alt={item.title}
