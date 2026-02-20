@@ -17,7 +17,7 @@ const stats = [
 export default function Hero() {
   return (
     <section className="relative flex items-center justify-center bg-bg overflow-hidden pt-16">
-      <div className="max-w-2xl mx-auto content-px w-full py-12 flex flex-col items-center text-center">
+      <div className="max-w-2xl mx-auto content-px w-full pt-20 pb-12 flex flex-col items-center text-center">
 
         {/* Profile photo */}
         <motion.div
