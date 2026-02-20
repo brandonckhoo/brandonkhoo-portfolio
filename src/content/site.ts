@@ -191,7 +191,7 @@ export const siteContent = {
   hero: {
     headline: "AI Product Manager building platforms, integrations, and agent experiences teams rely on",
     subline:
-      "I turn model capability into reliable workflows: clean data and APIs, operator controls, and evaluation that maps to business outcomes.",
+      "Product Lead with 10+ years of experience building products in San Francisco and Australia. Known for exceptional product sense, AI transformation expertise, and driving $20M in revenue impact.",
     ctas: [
       { label: "Book a call", href: "https://calendly.com/brandoncharleskhoo", variant: "primary" },
     ] as Cta[],
@@ -215,7 +215,7 @@ export const siteContent = {
   },
 
   companies: {
-    title: "Worked with",
+    title: "Trusted by",
     items: ["Apple", "KPMG", "Uber", "Amplitude"] as string[],
   },
 
