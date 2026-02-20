@@ -61,17 +61,17 @@ const principles: Principle[] = [
     },
   },
   {
-    title: "See the problem, not just the metric",
+    title: "Customer is part of the team",
     belief:
-      "Quantitative signals tell you where to look. Session Replay shows you why it is happening.",
+      "The fastest way to build the right thing is to watch real users struggle, then fix it with them.",
     star: {
       situation:
-        "Activation dropped after a new onboarding change, but funnels only showed the step where users abandoned.",
-      task: "Identify the actual friction so we could fix the highest impact issue without guessing.",
+        "A key workflow showed healthy top-line conversion, but enterprise accounts were still complaining about setup friction and time to first value.",
+      task: "Find the exact moments users got stuck and turn that into a weekly ship loop.",
       action:
-        "Pulled session replays for users who failed the step, tagged patterns, and compared them against successful sessions. Found users repeatedly mis-clicking a non-obvious control and getting stuck in a validation loop, especially on smaller screens.",
+        "Pulled session replays for new enterprise workspaces in their first 7 days, tagged failure patterns, then paired those clips with customer calls to confirm intent. Found repeated confusion around a permissions gate and a hidden configuration step that caused users to loop between pages. Shipped a clearer inline explanation, better defaults, and a guided checklist, then re-reviewed new replays to confirm behavior changed.",
       result:
-        "Shipped a UI and copy fix plus safer validation. Drop-off decreased, time to first value improved, and support tickets for that flow fell.",
+        "Fewer stuck sessions, faster setup completion, improved time to first value, and fewer CS escalations because customers could see their feedback turned into fixes within 1 to 2 releases.",
     },
   },
 ];
