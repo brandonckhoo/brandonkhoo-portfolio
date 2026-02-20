@@ -85,6 +85,7 @@ export interface SideProject {
   wouldImprove?: string[];
   demoScenarios?: DemoScenario[];
   steps?: string[];
+  image?: string;
 }
 
 export interface WritingPost {
@@ -375,6 +376,7 @@ export const siteContent = {
         oneliner:
           "Built an end-to-end account-based workflow prototype showing how 11x Alice could move from target accounts to pipeline — with tighter control, better coordination, and measurable outcomes.",
         type: "prototype",
+        image: "/alice-abm.png",
         positioning:
           "Product improvement prototype focused on enterprise ABM workflows rather than single-lead outbound.",
         links: [
@@ -404,6 +406,7 @@ export const siteContent = {
         title: "Cosmo Labs",
         oneliner: "Building voice AI agent demos for real business workflows.",
         type: "demo",
+        image: "/cosmo-labs.png",
         links: [
           {
             label: "Live demo",
@@ -451,6 +454,7 @@ export const siteContent = {
         oneliner:
           "Recreated a retro space shooter and shipped it end-to-end using Cursor, Claude, GitHub, and Vercel.",
         type: "game",
+        image: "/space-shooter.png",
         links: [
           {
             label: "Play live",

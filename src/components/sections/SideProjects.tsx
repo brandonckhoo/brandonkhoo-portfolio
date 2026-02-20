@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { siteContent, SideProject } from "@/content/site";
 import Section, { SectionHeader } from "@/components/ui/Section";
@@ -56,11 +57,22 @@ function SideProjectCard({ project }: { project: SideProject }) {
       }}
       transition={{ duration: 0.18, ease: "easeOut" }}
     >
-      {/* Accent bar */}
-      <div
-        className="h-1 w-full"
-        style={{ background: typeAccent[project.type] }}
-      />
+      {/* Hero image */}
+      {project.image ? (
+        <div className="relative w-full h-48 overflow-hidden">
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            className="object-cover object-top"
+          />
+        </div>
+      ) : (
+        <div
+          className="h-1 w-full"
+          style={{ background: typeAccent[project.type] }}
+        />
+      )}
 
       <div className="flex flex-col flex-1 p-6">
         {/* Type badge + title */}
