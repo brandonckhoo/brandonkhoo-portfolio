@@ -35,6 +35,7 @@ export interface WorkCard {
   role: string;
   metric: WorkMetric;
   tags: string[];
+  image?: string;
 }
 
 export interface ExperienceRole {
@@ -231,6 +232,7 @@ export const siteContent = {
         role: "Product Manager & Senior PM",
         metric: { label: "CDP ARR", value: "$6M → $21M" },
         tags: ["CDP", "APIs", "Developer Platform", "Partnerships", "Platform"],
+        image: "/cdp.png",
       },
       {
         slug: "amplitude-developer-ecosystem",
@@ -240,6 +242,7 @@ export const siteContent = {
         role: "Product Lead",
         metric: { label: "Review time reduction", value: "50%" },
         tags: ["AI", "Session Replay", "Experimentation", "Analytics"],
+        image: "/session-replay.png",
       },
       {
         slug: "uber-eats-growth",
@@ -249,6 +252,7 @@ export const siteContent = {
         role: "Strategy & Operations Manager",
         metric: { label: "Avg ticket (vs $22 Eats avg)", value: "$109" },
         tags: ["Marketplace", "0→1", "Growth", "Experimentation"],
+        image: "/uber-moments.png",
       },
     ] as WorkCard[],
   },

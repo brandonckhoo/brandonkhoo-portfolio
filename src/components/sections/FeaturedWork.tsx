@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { siteContent } from "@/content/site";
 import Section, { SectionHeader } from "@/components/ui/Section";
@@ -34,7 +35,7 @@ function WorkCard({ item }: { item: (typeof featuredWork.items)[number] }) {
   return (
     <Link href={`/work/${item.slug}`} className="block group" tabIndex={0}>
       <motion.article
-        className="h-full flex flex-col bg-surface rounded-2xl border border-border shadow-card p-6 cursor-pointer"
+        className="h-full flex flex-col bg-surface rounded-2xl border border-border shadow-card overflow-hidden cursor-pointer"
         whileHover={{
           scale: 1.01,
           y: -3,
@@ -43,6 +44,21 @@ function WorkCard({ item }: { item: (typeof featuredWork.items)[number] }) {
         }}
         transition={{ duration: 0.18, ease: "easeOut" }}
       >
+        {/* Hero image */}
+        {item.image && (
+          <div className="relative w-full h-44 overflow-hidden">
+            <Image
+              src={item.image}
+              alt={item.title}
+              fill
+              className="object-cover"
+            />
+          </div>
+        )}
+
+        {/* Card body */}
+        <div className="flex flex-col flex-1 p-6">
+
         {/* Header */}
         <div className="flex items-start justify-between gap-3 mb-4">
           <div>
@@ -93,6 +109,7 @@ function WorkCard({ item }: { item: (typeof featuredWork.items)[number] }) {
             <Tag key={tag} label={tag} />
           ))}
         </div>
+        </div>{/* end card body */}
       </motion.article>
     </Link>
   );
