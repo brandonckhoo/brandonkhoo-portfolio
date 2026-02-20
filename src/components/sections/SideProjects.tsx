@@ -33,9 +33,9 @@ export default function SideProjects() {
         />
       </FadeUp>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         {sideProjects.items.map((project, i) => (
-          <FadeUp key={project.slug} delay={i * 0.08}>
+          <FadeUp key={project.slug} delay={i * 0.08} className="h-full">
             <SideProjectCard project={project} />
           </FadeUp>
         ))}
@@ -109,26 +109,6 @@ function SideProjectCard({ project }: { project: SideProject }) {
                 </li>
               ))}
             </ul>
-          </div>
-        )}
-
-        {/* Demo scenarios (Cosmo) */}
-        {project.demoScenarios && (
-          <div className="mb-4">
-            <p className="text-[11px] font-semibold text-ink-3 uppercase tracking-wider mb-2">
-              Demo scenarios
-            </p>
-            <div className="flex flex-col gap-2">
-              {project.demoScenarios.map((s) => (
-                <div
-                  key={s.label}
-                  className="px-3 py-2.5 rounded-xl bg-surface-subtle border border-border"
-                >
-                  <p className="text-sm font-medium text-ink">{s.label}</p>
-                  <p className="text-xs text-ink-2 mt-0.5">{s.description}</p>
-                </div>
-              ))}
-            </div>
           </div>
         )}
 
