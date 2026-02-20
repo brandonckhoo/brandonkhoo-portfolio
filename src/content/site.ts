@@ -528,6 +528,10 @@ export const siteContent = {
     email: "brandon@brandonkhoo.com",
     links: [
       {
+        label: "Book a call",
+        href: "https://calendly.com/brandoncharleskhoo",
+      },
+      {
         label: "Email",
         href: "mailto:brandon@brandonkhoo.com",
       },

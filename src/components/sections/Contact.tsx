@@ -43,7 +43,7 @@ export default function Contact() {
                 href={link.href}
                 target={link.href.startsWith("mailto") ? undefined : "_blank"}
                 rel="noopener noreferrer"
-                variant={link.label === "Email" ? "primary" : "secondary"}
+                variant={link.label === "Book a call" ? "primary" : "secondary"}
                 size="md"
               >
                 {link.label}
