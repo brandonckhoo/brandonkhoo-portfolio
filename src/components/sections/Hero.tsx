@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { siteContent } from "@/content/site";
 import { ButtonLink } from "@/components/ui/Button";
 
-const { hero, meta } = siteContent;
+const { hero, meta, companies } = siteContent;
 
 const stats = [
   { value: "10+", label: "Years Experience" },
@@ -115,6 +115,25 @@ export default function Hero() {
               )}
             </ButtonLink>
           ))}
+        </motion.div>
+
+        {/* Trusted by */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, ease: "easeOut", delay: 0.38 }}
+          className="mt-12 flex flex-col items-center gap-4"
+        >
+          <p className="text-xs font-medium text-ink-3 uppercase tracking-widest">
+            {companies.title}
+          </p>
+          <div className="flex items-center justify-center gap-10 flex-wrap">
+            {companies.items.map((name) => (
+              <span key={name} className="text-lg font-medium text-ink-2">
+                {name}
+              </span>
+            ))}
+          </div>
         </motion.div>
 
       </div>

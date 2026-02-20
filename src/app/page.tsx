@@ -1,5 +1,4 @@
 import Hero from "@/components/sections/Hero";
-import CompanyCarousel from "@/components/sections/CompanyCarousel";
 import FeaturedWork from "@/components/sections/FeaturedWork";
 import About from "@/components/sections/About";
 import Experience from "@/components/sections/Experience";
@@ -10,7 +9,6 @@ export default function HomePage() {
   return (
     <main>
       <Hero />
-      <CompanyCarousel />
       <FeaturedWork />
       <SideProjects />
       <About />
