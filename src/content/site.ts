@@ -183,7 +183,6 @@ export const siteContent = {
       { label: "Case Studies", href: "#work" },
       { label: "Experience", href: "#experience" },
       { label: "AI Projects", href: "#side-projects" },
-      { label: "Writing", href: "#writing" },
       { label: "About", href: "#about" },
     ] as NavLink[],
     cta: { label: "Contact", href: "#contact" } as NavLink,
