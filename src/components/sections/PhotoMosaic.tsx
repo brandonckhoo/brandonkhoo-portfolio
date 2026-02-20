@@ -130,7 +130,7 @@ export default function PhotoMosaic() {
     <section
       id="gallery"
       ref={sectionRef}
-      style={{ background: "#0a1628" }}
+      style={{ background: "#0e1f3c" }}
       className="section-py"
     >
       <div className="max-w-content mx-auto content-px">
