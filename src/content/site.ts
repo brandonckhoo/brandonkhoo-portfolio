@@ -547,9 +547,8 @@ export const siteContent = {
 
   footer: {
     name: "Brandon Khoo",
-    year: 2025,
+    year: 2026,
     links: [
-      { label: "Work", href: "#work" },
       { label: "Writing", href: "#writing" },
       { label: "GitHub", href: "https://github.com/brandonckhoo" },
       { label: "LinkedIn", href: "https://www.linkedin.com/in/brandoncharleskhoo/" },
