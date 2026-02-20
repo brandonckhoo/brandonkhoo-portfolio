@@ -98,13 +98,14 @@ export default function Navbar() {
               );
             })}
 
-            <button
-              onClick={() => handleNavClick(nav.cta.href)}
-              className="ml-3 px-5 py-2 bg-ink text-white rounded-pill text-sm font-medium hover:bg-[var(--color-primary-hover)] transition-colors cursor-pointer min-h-[40px]"
-              aria-label="Jump to contact section"
+            <a
+              href={nav.cta.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-3 px-5 py-2 bg-ink text-white rounded-pill text-sm font-medium hover:bg-[var(--color-primary-hover)] transition-colors cursor-pointer min-h-[40px] inline-flex items-center"
             >
               {nav.cta.label}
-            </button>
+            </a>
           </div>
 
           {/* Mobile hamburger */}
@@ -156,12 +157,14 @@ export default function Navbar() {
               {link.label}
             </button>
           ))}
-          <button
-            onClick={() => handleNavClick(nav.cta.href)}
-            className="mt-8 px-6 py-3.5 bg-ink text-white rounded-pill text-base font-medium cursor-pointer self-start"
+          <a
+            href={nav.cta.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 px-6 py-3.5 bg-ink text-white rounded-pill text-base font-medium cursor-pointer self-start inline-flex items-center"
           >
             {nav.cta.label}
-          </button>
+          </a>
         </div>
       </div>
     </>

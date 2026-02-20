@@ -74,14 +74,16 @@ export default function Hero() {
                 <ButtonLink
                   key={cta.href}
                   href={cta.href}
+                  target={cta.href.startsWith("http") ? "_blank" : undefined}
+                  rel={cta.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   variant={cta.variant as "primary" | "secondary"}
                   size="lg"
                   onClick={(e) => {
-                    e.preventDefault();
-                    const id = cta.href.replace("#", "");
-                    document.getElementById(id)?.scrollIntoView({
-                      behavior: "smooth",
-                    });
+                    if (cta.href.startsWith("#")) {
+                      e.preventDefault();
+                      const id = cta.href.replace("#", "");
+                      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+                    }
                   }}
                 >
                   {cta.label}

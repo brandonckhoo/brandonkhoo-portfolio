@@ -185,7 +185,7 @@ export const siteContent = {
       { label: "AI Projects", href: "#side-projects" },
       { label: "About", href: "#about" },
     ] as NavLink[],
-    cta: { label: "Contact", href: "#contact" } as NavLink,
+    cta: { label: "Book a call →", href: "https://calendly.com/brandoncharleskhoo" } as NavLink,
   },
 
   hero: {
@@ -193,7 +193,7 @@ export const siteContent = {
     subline:
       "I turn model capability into reliable workflows: clean data and APIs, operator controls, and evaluation that maps to business outcomes.",
     ctas: [
-      { label: "View work", href: "#work", variant: "primary" },
+      { label: "Book a call", href: "https://calendly.com/brandoncharleskhoo", variant: "primary" },
       { label: "Get in touch", href: "#contact", variant: "secondary" },
     ] as Cta[],
     floatingCards: [
