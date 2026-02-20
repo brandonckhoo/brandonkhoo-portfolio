@@ -16,7 +16,6 @@ export default function HomePage() {
       <SideProjects />
       <About />
       <Experience />
-      <Contact />
       <Footer />
     </main>
   );
