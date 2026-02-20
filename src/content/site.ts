@@ -549,7 +549,6 @@ export const siteContent = {
     name: "Brandon Khoo",
     year: 2026,
     links: [
-      { label: "Writing", href: "#writing" },
       { label: "GitHub", href: "https://github.com/brandonckhoo" },
       { label: "LinkedIn", href: "https://www.linkedin.com/in/brandoncharleskhoo/" },
     ] as NavLink[],
