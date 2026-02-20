@@ -28,7 +28,7 @@ export default function Hero() {
         >
           <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-border shadow-md mx-auto bg-surface">
             <Image
-              src="/profile.jpg"
+              src="/profile.png"
               alt="Brandon Khoo"
               width={112}
               height={112}
