@@ -180,9 +180,9 @@ export const siteContent = {
 
   nav: {
     links: [
-      { label: "Work", href: "#work" },
+      { label: "Case Studies", href: "#work" },
       { label: "Experience", href: "#experience" },
-      { label: "Side Projects", href: "#side-projects" },
+      { label: "AI Projects", href: "#side-projects" },
       { label: "Writing", href: "#writing" },
       { label: "About", href: "#about" },
     ] as NavLink[],
@@ -222,7 +222,7 @@ export const siteContent = {
   },
 
   featuredWork: {
-    title: "Featured Work",
+    title: "Case Studies",
     subtitle: "Selected professional case studies",
     items: [
       {
@@ -364,7 +364,7 @@ export const siteContent = {
   },
 
   sideProjects: {
-    title: "Side Projects",
+    title: "AI Projects",
     subtitle: "Builder mode — shipping fast with Claude and Cursor",
     items: [
       {
