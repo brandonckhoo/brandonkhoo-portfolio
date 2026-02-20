@@ -1,50 +1,50 @@
 /* ─────────────────────────────────────────────
    Design Tokens — Brandon Khoo Portfolio
-   Dark navy theme inspired by Retell AI
+   Clean white theme inspired by Retell AI
    ───────────────────────────────────────────── */
 
 :root {
   /* ── Backgrounds ──────────────────────────── */
-  --color-bg: #00091E;             /* deep navy base */
-  --color-surface: #000F2E;        /* card/panel surface */
-  --color-surface-subtle: #001235; /* inset sections */
-  --color-surface-elevated: #001A45;
+  --color-bg: #ffffff;             /* pure white */
+  --color-surface: #f8f9fb;        /* card/panel surface */
+  --color-surface-subtle: #f0f2f5; /* inset sections */
+  --color-surface-elevated: #ffffff;
 
   /* ── Borders ──────────────────────────────── */
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-strong: rgba(255, 255, 255, 0.18);
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-strong: rgba(0, 0, 0, 0.16);
 
   /* ── Text ─────────────────────────────────── */
-  --color-text: #E4EEFF;           /* primary: cool white */
-  --color-text-secondary: #6B8BAF; /* secondary: muted blue-grey */
-  --color-text-muted: #2E4A68;     /* muted */
-  --color-text-on-dark: #E4EEFF;
+  --color-text: #0a1628;           /* primary: deep navy */
+  --color-text-secondary: #506280; /* secondary: medium blue-grey */
+  --color-text-muted: #9aaabb;     /* muted */
+  --color-text-on-dark: #ffffff;
 
-  /* ── Vivid accents (pop on dark bg) ──────── */
-  --color-accent-blush: #FF6B8A;   /* coral-pink */
-  --color-accent-lavender: #9B87F5; /* vivid purple */
-  --color-accent-sage: #00D4AA;    /* retell-style teal */
-  --color-accent-sky: #4D9EFF;     /* bright blue */
-  --color-accent-peach: #FF9F47;   /* warm amber */
+  /* ── Accents (adjusted for white bg) ──────── */
+  --color-accent-blush: #e03d60;   /* coral-red */
+  --color-accent-lavender: #7c5cdb; /* vivid purple */
+  --color-accent-sage: #00a07a;    /* teal */
+  --color-accent-sky: #2563eb;     /* bright blue */
+  --color-accent-peach: #d97706;   /* amber */
 
-  /* ── Primary CTA (white pill on dark bg) ─── */
-  --color-primary: #FFFFFF;
-  --color-primary-text: #00091E;
-  --color-primary-hover: #CDD8FF;
+  /* ── Primary CTA (dark navy on white bg) ─── */
+  --color-primary: #0a1628;
+  --color-primary-text: #ffffff;
+  --color-primary-hover: #1a2d4e;
 
   /* ── Gradients ────────────────────────────── */
   --gradient-hero-panel: linear-gradient(
     145deg,
-    rgba(155, 135, 245, 0.35) 0%,
-    rgba(77, 158, 255, 0.28) 45%,
-    rgba(0, 212, 170, 0.22) 100%
+    rgba(124, 92, 219, 0.30) 0%,
+    rgba(37, 99, 235, 0.25) 45%,
+    rgba(0, 160, 122, 0.22) 100%
   );
   --gradient-hero-panel-subtle: linear-gradient(
     135deg,
-    rgba(155, 135, 245, 0.14),
-    rgba(77, 158, 255, 0.10)
+    rgba(124, 92, 219, 0.08),
+    rgba(37, 99, 235, 0.06)
   );
-  --gradient-metric: linear-gradient(135deg, rgba(155,135,245,0.2), rgba(77,158,255,0.2));
+  --gradient-metric: linear-gradient(135deg, rgba(124,92,219,0.12), rgba(37,99,235,0.12));
 
   /* ── Radius ───────────────────────────────── */
   --radius-xs: 4px;
@@ -55,11 +55,11 @@
   --radius-2xl: 28px;
   --radius-pill: 9999px;
 
-  /* ── Shadows (glow-style for dark bg) ──────── */
-  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.4);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.04);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.06);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.08);
+  /* ── Shadows (lighter for white bg) ────────── */
+  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.07), 0 0 0 1px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.09), 0 0 0 1px rgba(0,0,0,0.04);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0,0,0,0.04);
 
   /* ── Spacing & Layout ─────────────────────── */
   --section-py: 112px;
