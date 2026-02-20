@@ -16,7 +16,7 @@ const stats = [
 
 export default function Hero() {
   return (
-    <section className="relative flex items-center justify-center bg-bg overflow-hidden pt-16">
+    <section className="relative min-h-[100dvh] flex items-center justify-center bg-bg overflow-hidden pt-16">
       <div className="max-w-2xl mx-auto content-px w-full pt-20 pb-12 flex flex-col items-center text-center">
 
         {/* Profile photo */}
@@ -26,12 +26,12 @@ export default function Hero() {
           transition={{ duration: 0.4, ease: "easeOut" }}
           className="mb-7"
         >
-          <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-border shadow-md mx-auto bg-surface">
+          <div className="w-40 h-40 rounded-full overflow-hidden border-2 border-border shadow-md mx-auto bg-surface">
             <Image
               src="/profile.jpg"
               alt="Brandon Khoo"
-              width={112}
-              height={112}
+              width={160}
+              height={160}
               className="w-full h-full object-cover"
               priority
             />
