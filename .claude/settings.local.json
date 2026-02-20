@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(/usr/local/bin/npm install)",
+      "Bash(echo:*)",
+      "Bash(\"/Applications/Cursor.app/Contents/Resources/app/resources/helpers/node\" --version)",
+      "Bash(curl:*)",
+      "Bash(bash)",
+      "Bash(export:*)",
+      "Bash(. \"$NVM_DIR/nvm.sh\")",
+      "Bash(npx tsc:*)",
+      "Bash(~/.nvm/versions/node/v24.13.1/bin/npx tsc --noEmit)",
+      "Bash(~/.nvm/versions/node/v24.13.1/bin/npm install simple-icons)",
+      "Bash(PATH=\"$HOME/.nvm/versions/node/v24.13.1/bin:$PATH\" npm install:*)",
+      "Bash(env PATH=\"$HOME/.nvm/versions/node/v24.13.1/bin:$PATH\" npm install:*)",
+      "Bash(~/.nvm/versions/node/v24.13.1/bin/node ~/.nvm/versions/node/v24.13.1/bin/npm install simple-icons)",
+      "Bash(~/.nvm/versions/node/v24.13.1/bin/node:*)",
+      "WebFetch(domain:www.retellai.com)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}
