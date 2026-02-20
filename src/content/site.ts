@@ -194,7 +194,6 @@ export const siteContent = {
       "I turn model capability into reliable workflows: clean data and APIs, operator controls, and evaluation that maps to business outcomes.",
     ctas: [
       { label: "Book a call", href: "https://calendly.com/brandoncharleskhoo", variant: "primary" },
-      { label: "Get in touch", href: "#contact", variant: "secondary" },
     ] as Cta[],
     floatingCards: [
       {
