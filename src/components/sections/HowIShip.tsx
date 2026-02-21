@@ -95,6 +95,34 @@ const tabs: TabData[] = [
     ],
   },
   {
+    id: "claude",
+    label: "How I use Claude",
+    title: "How I use Claude",
+    subtitle: "Claude as a thinking partner across the full product lifecycle",
+    items: [
+      {
+        label: "Specs and PRDs",
+        body: "I use Claude to draft and pressure-test product specs. I give it context on the user, the workflow, and the constraint, then ask it to poke holes, surface edge cases, and tighten the success criteria before engineering picks it up.",
+      },
+      {
+        label: "Market and competitor research",
+        body: "I run structured research prompts to map the competitive landscape, synthesize positioning gaps, and identify table-stakes vs differentiating features. Claude compresses hours of desk research into a working draft I can refine.",
+      },
+      {
+        label: "Data analysis and interpretation",
+        body: "I paste funnel data, cohort breakdowns, or survey results and ask Claude to surface patterns, hypotheses, and the most likely root causes. It helps me move from numbers to narrative faster.",
+      },
+      {
+        label: "Interview and feedback synthesis",
+        body: "After customer calls I paste raw notes into Claude and ask it to tag themes, map them to journey steps, and flag contradictions between what users say and what I know from behavior data.",
+      },
+      {
+        label: "Writing and comms",
+        body: "From exec readouts to release notes to async Slack updates, I use Claude to sharpen structure and cut noise. I always write the first draft or give it strong direction — Claude tightens, not invents.",
+      },
+    ],
+  },
+  {
     id: "feedback",
     label: "How I use customer feedback",
     title: "How I use customer feedback",
