@@ -23,7 +23,7 @@ const categories: Category[] = [
   {
     id: "ai",
     label: "AI & Prototyping",
-    description: "Rapid AI-assisted ideation and prototype shipping",
+    description: "Rapid AI-assisted research, ideation and prototyping",
     tools: [{ label: "Claude" }, { label: "Cursor" }, { label: "Bolt" }, { label: "Lovable", badge: "L4 Platinum" }, { label: "Perplexity" }],
     accent: "rgba(124, 92, 219, 0.75)",
     icon: (
