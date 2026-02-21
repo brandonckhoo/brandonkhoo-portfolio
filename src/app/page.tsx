@@ -20,8 +20,8 @@ export default function HomePage() {
       <HowIShip />
       <PhotoMosaic />
       <AmplitudeBlog />
-      <Experience />
       <ProductStackSection />
+      <Experience />
       <Footer />
     </main>
   );
