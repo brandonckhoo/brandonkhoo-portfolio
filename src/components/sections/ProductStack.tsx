@@ -31,7 +31,7 @@ const categories: Category[] = [
     id: "design",
     label: "Design & Collaboration",
     description: "End-to-end design, async communication, and documentation",
-    tools: ["Figma", "Miro", "Loom", "Confluence", "Discourse"],
+    tools: ["Figma", "Miro", "Loom", "Confluence", "Discourse", "Zoom", "Google Meet"],
     accent: "rgba(37, 99, 235, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
