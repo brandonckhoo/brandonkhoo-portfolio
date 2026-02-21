@@ -43,6 +43,20 @@ const categories: Category[] = [
     ),
   },
   {
+    id: "analytics",
+    label: "Analytics & Experimentation",
+    description: "Product analytics, funnels, retention, and A/B testing",
+    tools: ["Amplitude"],
+    accent: "rgba(0, 160, 122, 0.75)",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <rect x="2" y="10" width="3" height="6" rx="1" stroke="currentColor" strokeWidth="1.4" />
+        <rect x="7.5" y="6" width="3" height="10" rx="1" stroke="currentColor" strokeWidth="1.4" />
+        <rect x="13" y="2" width="3" height="14" rx="1" stroke="currentColor" strokeWidth="1.4" />
+      </svg>
+    ),
+  },
+  {
     id: "delivery",
     label: "Delivery & Roadmapping",
     description: "Backlog management, sprint tracking, and prioritisation",
