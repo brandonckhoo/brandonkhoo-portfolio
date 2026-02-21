@@ -165,9 +165,9 @@ function ToolChip({ label, accent }: { label: string; accent: string }) {
     <motion.span
       className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full cursor-default select-none"
       style={{
-        background: "rgba(255,255,255,0.06)",
-        border: "1px solid rgba(255,255,255,0.12)",
-        color: "rgba(255,255,255,0.75)",
+        background: "rgba(255,255,255,0.12)",
+        border: "1px solid rgba(255,255,255,0.22)",
+        color: "rgba(255,255,255,0.9)",
       }}
       whileHover={{
         background: accent.replace("0.75", "0.12"),
