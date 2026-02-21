@@ -112,6 +112,7 @@ export interface AmplitudeBlogPost {
   date: string;
   readTime: string;
   href: string;
+  imageUrl: string;
 }
 
 // ── Detail page types ─────────────────────────────────────────────────────────
@@ -574,49 +575,56 @@ export const siteContent = {
         category: "Product",
         date: "Jun 20, 2024",
         readTime: "3 min read",
-        href: "https://amplitude.com/blog/author/brandon-khoo",
+        href: "https://amplitude.com/blog/connections-overview",
+        imageUrl: "https://cdn.sanity.io/images/l5rq9j6r/production/26ce5c950a694d2d4ab9cc5aeb0a94370bd7e2ee-1920x1080.png",
       },
       {
         title: "The Amplitude Integration Portal: Connecting Your Data Ecosystem",
         category: "Product",
         date: "Jun 18, 2024",
         readTime: "7 min read",
-        href: "https://amplitude.com/blog/author/brandon-khoo",
+        href: "https://amplitude.com/blog/integration-portal",
+        imageUrl: "https://cdn.sanity.io/images/l5rq9j6r/production/a28a4dd9227c8c743ad4e58430db03e7c96482b0-1920x1440.png",
       },
       {
         title: "Is Your Data Actually Reliable? 8 Ways to Determine Data Quality",
         category: "Insights",
         date: "Nov 29, 2022",
         readTime: "10 min read",
-        href: "https://amplitude.com/blog/author/brandon-khoo",
+        href: "https://amplitude.com/blog/data-quality",
+        imageUrl: "https://cdn.sanity.io/images/l5rq9j6r/production/b1f3a9666ec857d4339df18092c6c31f093ece31-1500x938.jpg",
       },
       {
         title: "First-Party Data: What It Is, Importance, & How to Gather It",
         category: "Insights",
         date: "Oct 27, 2022",
         readTime: "12 min read",
-        href: "https://amplitude.com/blog/author/brandon-khoo",
+        href: "https://amplitude.com/blog/first-party-data",
+        imageUrl: "https://cdn.sanity.io/images/l5rq9j6r/production/d968cfb62335158d575f3761f507d366274de546-1500x938.jpg",
       },
       {
         title: "Attrition & Retention Analytics to Increase Repeat Buyers",
         category: "Insights",
         date: "Aug 26, 2022",
         readTime: "16 min read",
-        href: "https://amplitude.com/blog/author/brandon-khoo",
+        href: "https://amplitude.com/blog/attrition-retention-analytics",
+        imageUrl: "https://cdn.sanity.io/images/l5rq9j6r/production/e1c6b2d433de77217f38bb607e71a42bc6245e23-2250x1407.jpg",
       },
       {
         title: "32 Product Management Interview Questions & How to Answer",
         category: "Insights",
         date: "Jun 16, 2022",
         readTime: "11 min read",
-        href: "https://amplitude.com/blog/author/brandon-khoo",
+        href: "https://amplitude.com/blog/product-management-interview-questions",
+        imageUrl: "https://cdn.sanity.io/images/l5rq9j6r/production/de78be29e998e526845887efe5c566444e5137ed-1500x938.jpg",
       },
       {
         title: "The Modern Business Software Stack for Product & Growth",
         category: "Insights",
         date: "Oct 18, 2021",
         readTime: "9 min read",
-        href: "https://amplitude.com/blog/author/brandon-khoo",
+        href: "https://amplitude.com/blog/business-software",
+        imageUrl: "https://cdn.sanity.io/images/l5rq9j6r/production/3d93ad3125293f17d2029ac45adbd01bdeaba5b2-1500x938.jpg",
       },
     ] as AmplitudeBlogPost[],
   },
