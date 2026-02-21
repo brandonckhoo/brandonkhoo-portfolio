@@ -263,7 +263,7 @@ export default function ProductStackSection() {
           <h2 className="font-display text-4xl sm:text-5xl text-white mb-3">
             My Product and Data Stack
           </h2>
-          <p className="text-white/50 text-base leading-relaxed max-w-xl mx-auto">
+          <p className="text-white/50 text-base leading-relaxed whitespace-nowrap">
             The tools I use to prototype, ship, measure, and collaborate across
             the product lifecycle.
           </p>
