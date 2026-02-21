@@ -36,7 +36,7 @@ const categories: Category[] = [
     id: "design",
     label: "Design & Collaboration",
     description: "End-to-end design, async communication, and documentation",
-    tools: [{ label: "Figma" }, { label: "Miro" }, { label: "Loom" }, { label: "Confluence" }, { label: "Discourse" }, { label: "Zoom" }, { label: "Google Meet" }, { label: "Slack" }, { label: "Notion" }],
+    tools: [{ label: "Figma" }, { label: "Miro" }, { label: "Loom" }, { label: "Confluence" }, { label: "Discourse" }, { label: "Zoom" }, { label: "Google Meet" }, { label: "Slack" }, { label: "Notion" }, { label: "GAMMA" }],
     accent: "rgba(37, 99, 235, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
