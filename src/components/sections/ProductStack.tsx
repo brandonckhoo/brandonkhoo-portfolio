@@ -184,12 +184,12 @@ function CategoryCard({ cat, delay, isInView }: CategoryCardProps) {
       <motion.div
         className="h-full rounded-2xl p-5 flex flex-col gap-4"
         style={{
-          background: "rgba(255,255,255,0.04)",
-          border: "1px solid rgba(255,255,255,0.08)",
+          background: "rgba(255,255,255,0.09)",
+          border: "1px solid rgba(255,255,255,0.16)",
         }}
         whileHover={{
-          background: "rgba(255,255,255,0.065)",
-          borderColor: "rgba(255,255,255,0.14)",
+          background: "rgba(255,255,255,0.13)",
+          borderColor: "rgba(255,255,255,0.26)",
         }}
         transition={{ duration: 0.18, ease: "easeOut" }}
       >
