@@ -88,7 +88,7 @@ const gallery: GalleryItem[] = [
     desktopColSpan: 8,
     desktopRowStart: 3,
     desktopRowSpan: 1,
-    objectPosition: "center 72%",
+    objectPosition: "center 85%",
   },
 ];
 
