@@ -5,11 +5,16 @@ import { useRef } from "react";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
+interface Tool {
+  label: string;
+  badge?: string;
+}
+
 interface Category {
   id: string;
   label: string;
   description: string;
-  tools: string[];
+  tools: Tool[];
   accent: string;
   icon: React.ReactNode;
 }
@@ -19,7 +24,7 @@ const categories: Category[] = [
     id: "ai",
     label: "AI & Prototyping",
     description: "Rapid AI-assisted ideation and prototype shipping",
-    tools: ["Claude", "Cursor", "Bolt"],
+    tools: [{ label: "Claude" }, { label: "Cursor" }, { label: "Bolt" }, { label: "Lovable", badge: "L4 Platinum" }],
     accent: "rgba(124, 92, 219, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -31,7 +36,7 @@ const categories: Category[] = [
     id: "design",
     label: "Design & Collaboration",
     description: "End-to-end design, async communication, and documentation",
-    tools: ["Figma", "Miro", "Loom", "Confluence", "Discourse", "Zoom", "Google Meet"],
+    tools: [{ label: "Figma" }, { label: "Miro" }, { label: "Loom" }, { label: "Confluence" }, { label: "Discourse" }, { label: "Zoom" }, { label: "Google Meet" }, { label: "Slack" }, { label: "Notion" }],
     accent: "rgba(37, 99, 235, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -46,7 +51,7 @@ const categories: Category[] = [
     id: "analytics",
     label: "Analytics & Experimentation",
     description: "Product analytics, funnels, retention, and A/B testing",
-    tools: ["Amplitude"],
+    tools: [{ label: "Amplitude" }],
     accent: "rgba(0, 160, 122, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -60,7 +65,7 @@ const categories: Category[] = [
     id: "delivery",
     label: "Delivery & Roadmapping",
     description: "Backlog management, sprint tracking, and prioritisation",
-    tools: ["Jira", "Productboard"],
+    tools: [{ label: "Jira" }, { label: "Productboard" }],
     accent: "rgba(217, 119, 6, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -75,7 +80,7 @@ const categories: Category[] = [
     id: "crm",
     label: "CRM & Growth Systems",
     description: "Pipeline management and revenue operations",
-    tools: ["Salesforce", "HubSpot", "GHL"],
+    tools: [{ label: "Salesforce" }, { label: "HubSpot" }, { label: "GHL" }],
     accent: "rgba(0, 160, 122, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -88,7 +93,7 @@ const categories: Category[] = [
     id: "lifecycle",
     label: "Lifecycle & Support",
     description: "Onboarding flows, messaging automation, and in-app guidance",
-    tools: ["Braze", "Intercom", "Userflow"],
+    tools: [{ label: "Braze" }, { label: "Intercom" }, { label: "Userflow" }],
     accent: "rgba(224, 61, 96, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -101,7 +106,7 @@ const categories: Category[] = [
     id: "reliability",
     label: "Reliability & Observability",
     description: "Uptime monitoring, alerting, and production visibility",
-    tools: ["DataDog"],
+    tools: [{ label: "DataDog" }],
     accent: "rgba(217, 119, 6, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -114,7 +119,7 @@ const categories: Category[] = [
     id: "data",
     label: "Data & Storage",
     description: "Warehousing, querying, and scalable object storage",
-    tools: ["Snowflake", "Amazon S3"],
+    tools: [{ label: "Snowflake" }, { label: "Amazon S3" }],
     accent: "rgba(37, 99, 235, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -128,7 +133,7 @@ const categories: Category[] = [
     id: "voice",
     label: "Voice Agents",
     description: "AI voice agent infrastructure, workflows, and integrations",
-    tools: ["Retell AI", "ElevenLabs", "GHL"],
+    tools: [{ label: "Retell AI" }, { label: "ElevenLabs" }, { label: "GHL" }],
     accent: "rgba(224, 61, 96, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -142,7 +147,7 @@ const categories: Category[] = [
     id: "deployment",
     label: "Deployment",
     description: "Frontend hosting, CI/CD, and zero-config previews",
-    tools: ["Vercel"],
+    tools: [{ label: "Vercel" }],
     accent: "rgba(124, 92, 219, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -160,10 +165,10 @@ const highlights = [
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function ToolChip({ label, accent }: { label: string; accent: string }) {
+function ToolChip({ tool, accent }: { tool: Tool; accent: string }) {
   return (
     <motion.span
-      className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full cursor-default select-none"
+      className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full cursor-default select-none"
       style={{
         background: "rgba(255,255,255,0.12)",
         border: "1px solid rgba(255,255,255,0.22)",
@@ -177,7 +182,18 @@ function ToolChip({ label, accent }: { label: string; accent: string }) {
       }}
       transition={{ duration: 0.16, ease: "easeOut" }}
     >
-      {label}
+      {tool.label}
+      {tool.badge && (
+        <span
+          className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full"
+          style={{
+            background: accent.replace("0.75", "0.25"),
+            color: accent.replace("0.75", "1)").replace("rgba(", "rgb(").replace(", 1)", ")"),
+          }}
+        >
+          {tool.badge}
+        </span>
+      )}
     </motion.span>
   );
 }
@@ -231,7 +247,7 @@ function CategoryCard({ cat, delay, isInView }: CategoryCardProps) {
         {/* Tool chips */}
         <div className="flex flex-wrap gap-1.5">
           {cat.tools.map((tool) => (
-            <ToolChip key={tool} label={tool} accent={cat.accent} />
+            <ToolChip key={tool.label} tool={tool} accent={cat.accent} />
           ))}
         </div>
       </motion.div>
