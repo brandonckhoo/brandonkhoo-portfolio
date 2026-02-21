@@ -6,6 +6,7 @@ import SideProjects from "@/components/sections/SideProjects";
 import ProductPrinciples from "@/components/sections/ProductPrinciples";
 import HowIShip from "@/components/sections/HowIShip";
 import PhotoMosaic from "@/components/sections/PhotoMosaic";
+import AmplitudeBlog from "@/components/sections/AmplitudeBlog";
 import Footer from "@/components/sections/Footer";
 
 export default function HomePage() {
@@ -17,6 +18,7 @@ export default function HomePage() {
       <ProductPrinciples />
       <HowIShip />
       <PhotoMosaic />
+      <AmplitudeBlog />
       <Experience />
       <Footer />
     </main>

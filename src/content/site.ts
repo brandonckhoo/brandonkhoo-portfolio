@@ -106,6 +106,14 @@ export interface ContactLink {
   href: string;
 }
 
+export interface AmplitudeBlogPost {
+  title: string;
+  category: "Product" | "Insights";
+  date: string;
+  readTime: string;
+  href: string;
+}
+
 // ── Detail page types ─────────────────────────────────────────────────────────
 
 export interface TradeoffDecision {
@@ -188,6 +196,7 @@ export const siteContent = {
       { label: "Principles", href: "#principles" },
       { label: "How I Ship", href: "#shipping" },
       { label: "Gallery", href: "#gallery" },
+      { label: "Blog", href: "#blog" },
       { label: "Resume", href: "#experience" },
     ] as NavLink[],
     cta: { label: "Book a call →", href: "https://calendly.com/brandoncharleskhoo" } as NavLink,
@@ -553,6 +562,63 @@ export const siteContent = {
         href: "https://github.com/brandonckhoo",
       },
     ] as ContactLink[],
+  },
+
+  amplitudeBlog: {
+    title: "Amplitude Blog",
+    subtitle: "Authored 7 thought leadership pieces on Data, Governance, and Product Management.",
+    authorUrl: "https://amplitude.com/blog/author/brandon-khoo",
+    posts: [
+      {
+        title: "Maximize the Power of Your Data Ecosystem: Introducing Amplitude's Connections Overview",
+        category: "Product",
+        date: "Jun 20, 2024",
+        readTime: "3 min read",
+        href: "https://amplitude.com/blog/author/brandon-khoo",
+      },
+      {
+        title: "The Amplitude Integration Portal: Connecting Your Data Ecosystem",
+        category: "Product",
+        date: "Jun 18, 2024",
+        readTime: "7 min read",
+        href: "https://amplitude.com/blog/author/brandon-khoo",
+      },
+      {
+        title: "Is Your Data Actually Reliable? 8 Ways to Determine Data Quality",
+        category: "Insights",
+        date: "Nov 29, 2022",
+        readTime: "10 min read",
+        href: "https://amplitude.com/blog/author/brandon-khoo",
+      },
+      {
+        title: "First-Party Data: What It Is, Importance, & How to Gather It",
+        category: "Insights",
+        date: "Oct 27, 2022",
+        readTime: "12 min read",
+        href: "https://amplitude.com/blog/author/brandon-khoo",
+      },
+      {
+        title: "Attrition & Retention Analytics to Increase Repeat Buyers",
+        category: "Insights",
+        date: "Aug 26, 2022",
+        readTime: "16 min read",
+        href: "https://amplitude.com/blog/author/brandon-khoo",
+      },
+      {
+        title: "32 Product Management Interview Questions & How to Answer",
+        category: "Insights",
+        date: "Jun 16, 2022",
+        readTime: "11 min read",
+        href: "https://amplitude.com/blog/author/brandon-khoo",
+      },
+      {
+        title: "The Modern Business Software Stack for Product & Growth",
+        category: "Insights",
+        date: "Oct 18, 2021",
+        readTime: "9 min read",
+        href: "https://amplitude.com/blog/author/brandon-khoo",
+      },
+    ] as AmplitudeBlogPost[],
   },
 
   footer: {
