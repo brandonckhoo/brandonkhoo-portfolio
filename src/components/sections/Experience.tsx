@@ -18,7 +18,7 @@ export default function Experience() {
           <a
             href="/brandon-khoo-resume.pdf"
             download="Brandon Khoo Resume.pdf"
-            className="flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-pill border border-border text-sm font-medium text-ink-2 hover:text-ink hover:border-border-strong transition-colors"
+            className="flex-shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-pill bg-[#0a1628] text-white text-sm font-medium hover:bg-[#1a2d4e] transition-colors shadow-sm"
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M7 1v8M4 6l3 3 3-3M2 11h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
