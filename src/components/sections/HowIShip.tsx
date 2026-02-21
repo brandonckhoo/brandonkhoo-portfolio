@@ -174,7 +174,7 @@ export default function HowIShip() {
             How I Ship Products
           </h2>
           <p className="text-ink-2 text-base leading-relaxed max-w-md md:text-right">
-            My default operating system for shipping products fast, using Claude Code, Cursor, and Vercel previews to validate workflows with real customers.
+            My default operating system for shipping products fast in this new AI era, using Claude Code, Cursor, and Vercel previews to validate workflows with real customers.
           </p>
         </motion.div>
 
