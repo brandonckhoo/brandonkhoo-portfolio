@@ -1,53 +1,58 @@
-"use client";
-
 import Image from "next/image";
+import Link from "next/link";
 import { siteContent, AmplitudeBlogPost } from "@/content/site";
-import FadeUp from "@/components/ui/FadeUp";
+import Footer from "@/components/sections/Footer";
 
-const { amplitudeBlog } = siteContent;
+export const metadata = {
+  title: "Blog — Brandon Khoo",
+  description: "Thought leadership on Data, Governance, and Product Management by Brandon Khoo.",
+};
+
+// ── All posts live here — add future posts to this array ──────────────────────
+// Posts are shown newest-first. To add a new post from any publication,
+// append an entry with source set to the publication name (e.g. "Substack").
+const allPosts: AmplitudeBlogPost[] = siteContent.amplitudeBlog.posts;
 
 const categoryColor: Record<AmplitudeBlogPost["category"], string> = {
   Product:  "#7c5cdb",
   Insights: "#7c5cdb",
 };
 
-export default function AmplitudeBlog() {
+export default function BlogPage() {
   return (
-    <section id="blog" className="section-py bg-bg">
-      <div className="max-w-content mx-auto content-px">
+    <>
+      <main className="min-h-screen bg-bg pt-20 pb-0">
+        <div className="max-w-content mx-auto content-px">
 
-        {/* Header */}
-        <FadeUp>
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
-            <div>
-              <h2 className="font-display text-4xl sm:text-5xl text-ink mb-2">
-                {amplitudeBlog.title}
-              </h2>
-              <p className="text-ink-2 text-base leading-relaxed whitespace-nowrap">
-                {amplitudeBlog.subtitle}
-              </p>
-            </div>
-            <a
-              href="/blog"
-              className="flex-shrink-0 inline-flex items-center gap-1.5 text-sm font-medium text-ink-2 hover:text-ink transition-colors group whitespace-nowrap"
+          {/* Back link */}
+          <div className="pt-10 pb-2">
+            <Link
+              href="/#blog"
+              className="inline-flex items-center gap-1.5 text-sm text-ink-3 hover:text-ink transition-colors"
             >
-              View all 7 posts
-              <span className="group-hover:translate-x-0.5 transition-transform">→</span>
-            </a>
+              ← Back
+            </Link>
           </div>
-        </FadeUp>
 
-        {/* Cards grid — 4 cols desktop, 2 tablet, 1 mobile */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {amplitudeBlog.posts.map((post, i) => (
-            <FadeUp key={i} delay={i * 0.05}>
-              <BlogCard post={post} />
-            </FadeUp>
-          ))}
+          {/* Header */}
+          <div className="py-10 border-b border-border mb-10">
+            <h1 className="font-display text-5xl sm:text-6xl text-ink mb-3">Blog</h1>
+            <p className="text-ink-2 text-base">
+              {allPosts.length} posts on Data, Governance, and Product Management.
+            </p>
+          </div>
+
+          {/* Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pb-24">
+            {allPosts.map((post, i) => (
+              <BlogCard key={i} post={post} />
+            ))}
+          </div>
+
         </div>
-
-      </div>
-    </section>
+      </main>
+      <Footer />
+    </>
   );
 }
 
@@ -72,18 +77,20 @@ function BlogCard({ post }: { post: AmplitudeBlogPost }) {
 
       {/* Content */}
       <div className="flex flex-col flex-1 p-4 gap-3">
-        {/* Category */}
-        <span
-          className="text-xs font-semibold"
-          style={{ color: categoryColor[post.category] }}
-        >
-          {post.category}
-        </span>
+        {/* Category + source */}
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-semibold" style={{ color: categoryColor[post.category] }}>
+            {post.category}
+          </span>
+          {post.source && (
+            <span className="text-xs text-ink-3">{post.source}</span>
+          )}
+        </div>
 
         {/* Title */}
-        <h3 className="text-sm font-semibold text-ink leading-snug flex-1 group-hover:text-ink-2 transition-colors">
+        <h2 className="text-sm font-semibold text-ink leading-snug flex-1 group-hover:text-ink-2 transition-colors">
           {post.title}
-        </h3>
+        </h2>
 
         {/* Meta */}
         <div className="flex flex-col gap-1 mt-1">
