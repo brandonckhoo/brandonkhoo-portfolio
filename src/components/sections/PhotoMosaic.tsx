@@ -144,7 +144,7 @@ export default function PhotoMosaic() {
           <h2 className="font-display text-4xl sm:text-5xl text-white mb-3">
             In the field
           </h2>
-          <p className="text-white/50 text-base max-w-md mx-auto leading-relaxed">
+          <p className="text-white/50 text-base max-w-xl mx-auto leading-relaxed whitespace-nowrap">
             Moments from building products with teams and customers.
           </p>
         </motion.div>
