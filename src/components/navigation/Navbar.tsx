@@ -10,10 +10,28 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState<string>("");
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
 
-  // Scroll shadow
+  const DARK_SECTION_IDS = ["principles", "gallery"];
+  const NAV_HEIGHT = 64;
+
+  // Scroll shadow + dark section detection
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+
+      const navMidY = window.scrollY + NAV_HEIGHT / 2;
+      const isOverDark = DARK_SECTION_IDS.some((id) => {
+        const el = document.getElementById(id);
+        if (!el) return false;
+        const top = el.offsetTop;
+        const bottom = top + el.offsetHeight;
+        return navMidY >= top && navMidY < bottom;
+      });
+      setIsDark(isOverDark);
+    };
+
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -76,7 +94,10 @@ export default function Navbar() {
           {/* Logo */}
           <a
             href="#"
-            className="font-display text-xl text-ink hover:opacity-75 transition-opacity"
+            className={cn(
+              "font-display text-xl hover:opacity-75 transition-opacity",
+              isDark ? "text-white" : "text-ink"
+            )}
             aria-label="Brandon Khoo — Home"
           >
             {meta.name}
@@ -92,7 +113,11 @@ export default function Navbar() {
                   onClick={() => handleNavClick(link.href)}
                   className={cn(
                     "px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer",
-                    isActive
+                    isDark
+                      ? isActive
+                        ? "text-white font-medium"
+                        : "text-white/70 hover:text-white"
+                      : isActive
                       ? "text-ink font-medium"
                       : "text-ink-2 hover:text-ink"
                   )}
@@ -121,19 +146,22 @@ export default function Navbar() {
           >
             <span
               className={cn(
-                "block w-5 h-0.5 bg-ink rounded-full transition-all duration-300",
+                "block w-5 h-0.5 rounded-full transition-all duration-300",
+                isDark ? "bg-white" : "bg-ink",
                 mobileOpen && "translate-y-2 rotate-45"
               )}
             />
             <span
               className={cn(
-                "block w-5 h-0.5 bg-ink rounded-full transition-all duration-300",
+                "block w-5 h-0.5 rounded-full transition-all duration-300",
+                isDark ? "bg-white" : "bg-ink",
                 mobileOpen && "opacity-0"
               )}
             />
             <span
               className={cn(
-                "block w-5 h-0.5 bg-ink rounded-full transition-all duration-300",
+                "block w-5 h-0.5 rounded-full transition-all duration-300",
+                isDark ? "bg-white" : "bg-ink",
                 mobileOpen && "-translate-y-2 -rotate-45"
               )}
             />
