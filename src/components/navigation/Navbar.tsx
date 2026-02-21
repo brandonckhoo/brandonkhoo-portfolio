@@ -12,7 +12,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
-  const DARK_SECTION_IDS = ["principles", "gallery"];
+  const DARK_SECTION_IDS = ["principles", "gallery", "stack"];
   const NAV_HEIGHT = 64;
 
   // Scroll shadow + dark section detection
