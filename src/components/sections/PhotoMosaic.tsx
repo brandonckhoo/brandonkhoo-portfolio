@@ -64,7 +64,7 @@ const gallery: GalleryItem[] = [
     desktopColSpan: 5,
     desktopRowStart: 2,
     desktopRowSpan: 1,
-    objectPosition: "center 15%",
+    objectPosition: "center 45%",
   },
   {
     // REPLACE: put your image at /gallery/inbound-team.png
@@ -88,7 +88,7 @@ const gallery: GalleryItem[] = [
     desktopColSpan: 8,
     desktopRowStart: 3,
     desktopRowSpan: 1,
-    objectPosition: "center 55%",
+    objectPosition: "center 72%",
   },
 ];
 
