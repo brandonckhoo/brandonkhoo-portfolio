@@ -198,7 +198,7 @@ export const siteContent = {
       { label: "Principles", href: "#principles" },
       { label: "How I Ship", href: "#shipping" },
       { label: "Gallery", href: "#gallery" },
-      { label: "Blog", href: "/blog" },
+      { label: "Blog", href: "#blog" },
       { label: "Resume", href: "#experience" },
     ] as NavLink[],
     cta: { label: "Book a call →", href: "https://calendly.com/brandoncharleskhoo" } as NavLink,
