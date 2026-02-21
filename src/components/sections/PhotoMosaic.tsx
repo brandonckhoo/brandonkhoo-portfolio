@@ -69,14 +69,14 @@ const gallery: GalleryItem[] = [
   {
     // REPLACE: put your image at /gallery/inbound-team.png
     src: "/gallery/inbound-team.png",
-    alt: "Team at Inbound 24 at the Amplitude x HubSpot booth",
-    title: "Inbound 24",
+    alt: "Team at HubSpot Inbound 2024 at the Amplitude x HubSpot booth",
+    title: "HubSpot Inbound 2024",
     description: "Running the Amplitude × HubSpot partner booth at Inbound 2024, Boston.",
     desktopColStart: 1,
     desktopColSpan: 4,
     desktopRowStart: 3,
     desktopRowSpan: 1,
-    objectPosition: "center top",
+    objectPosition: "center 75%",
   },
   {
     // REPLACE: put your image at /gallery/inbound-partner-day.png
@@ -88,7 +88,7 @@ const gallery: GalleryItem[] = [
     desktopColSpan: 8,
     desktopRowStart: 3,
     desktopRowSpan: 1,
-    objectPosition: "center center",
+    objectPosition: "center bottom",
   },
 ];
 
