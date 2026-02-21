@@ -108,9 +108,8 @@ export default function ProductPrinciples() {
           <h2 className="font-display text-4xl sm:text-5xl text-white mb-4">
             How I Think
           </h2>
-          <p className="text-white/55 text-base max-w-xl mx-auto leading-relaxed">
-            Product principles that guide how I build platforms, integrations,
-            and agent workflows.{" "}
+          <p className="text-white/55 text-base mx-auto leading-relaxed whitespace-nowrap">
+            Product principles that guide how I build platforms, integrations, and agent workflows.{" "}
             <span className="text-white/35">Click to expand.</span>
           </p>
         </motion.div>
