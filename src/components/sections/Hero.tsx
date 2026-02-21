@@ -11,7 +11,7 @@ const stats = [
   { value: "10+", label: "Years Experience" },
   { value: "$21M", label: "CDP ARR" },
   { value: "130+", label: "Integrations Built" },
-  { value: "$20M+", label: "Revenue Impact" },
+  { value: "$25M+", label: "Revenue Impact" },
 ];
 
 export default function Hero() {
