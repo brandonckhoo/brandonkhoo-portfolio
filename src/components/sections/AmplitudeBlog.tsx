@@ -23,7 +23,7 @@ export default function AmplitudeBlog() {
               <h2 className="font-display text-4xl sm:text-5xl text-ink mb-2">
                 {amplitudeBlog.title}
               </h2>
-              <p className="text-ink-2 text-base leading-relaxed max-w-lg">
+              <p className="text-ink-2 text-base leading-relaxed whitespace-nowrap">
                 {amplitudeBlog.subtitle}
               </p>
             </div>

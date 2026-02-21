@@ -566,7 +566,7 @@ export const siteContent = {
   },
 
   amplitudeBlog: {
-    title: "Amplitude Blog",
+    title: "Blog",
     subtitle: "Authored 7 thought leadership pieces on Data, Governance, and Product Management.",
     authorUrl: "https://amplitude.com/blog/author/brandon-khoo",
     posts: [
