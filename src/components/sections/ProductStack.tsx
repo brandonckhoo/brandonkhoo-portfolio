@@ -75,7 +75,7 @@ const categories: Category[] = [
     id: "crm",
     label: "CRM & Growth Systems",
     description: "Pipeline management and revenue operations",
-    tools: ["Salesforce", "HubSpot"],
+    tools: ["Salesforce", "HubSpot", "GHL"],
     accent: "rgba(0, 160, 122, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -121,6 +121,20 @@ const categories: Category[] = [
         <ellipse cx="9" cy="5" rx="6" ry="2.5" stroke="currentColor" strokeWidth="1.4" />
         <path d="M3 5V9C3 10.38 5.69 11.5 9 11.5C12.31 11.5 15 10.38 15 9V5" stroke="currentColor" strokeWidth="1.4" />
         <path d="M3 9V13C3 14.38 5.69 15.5 9 15.5C12.31 15.5 15 14.38 15 13V9" stroke="currentColor" strokeWidth="1.4" />
+      </svg>
+    ),
+  },
+  {
+    id: "voice",
+    label: "Voice Agents",
+    description: "AI voice agent infrastructure, workflows, and integrations",
+    tools: ["Retell AI", "GHL"],
+    accent: "rgba(224, 61, 96, 0.75)",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <path d="M9 2a3 3 0 0 1 3 3v4a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3Z" stroke="currentColor" strokeWidth="1.4" />
+        <path d="M4 9a5 5 0 0 0 10 0" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+        <path d="M9 14v2M7 16h4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
       </svg>
     ),
   },
