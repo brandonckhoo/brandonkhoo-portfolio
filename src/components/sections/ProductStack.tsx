@@ -24,7 +24,7 @@ const categories: Category[] = [
     id: "ai",
     label: "AI & Prototyping",
     description: "Rapid AI-assisted ideation and prototype shipping",
-    tools: [{ label: "Claude" }, { label: "Cursor" }, { label: "Bolt" }, { label: "Lovable", badge: "L4 Platinum" }],
+    tools: [{ label: "Claude" }, { label: "Cursor" }, { label: "Bolt" }, { label: "Lovable", badge: "L4 Platinum" }, { label: "Perplexity" }],
     accent: "rgba(124, 92, 219, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -133,7 +133,7 @@ const categories: Category[] = [
     id: "voice",
     label: "Voice Agents",
     description: "AI voice agent infrastructure, workflows, and integrations",
-    tools: [{ label: "Retell AI" }, { label: "ElevenLabs" }, { label: "GHL" }],
+    tools: [{ label: "Retell AI" }, { label: "ElevenLabs" }],
     accent: "rgba(224, 61, 96, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
