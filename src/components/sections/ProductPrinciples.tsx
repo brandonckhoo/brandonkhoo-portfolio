@@ -19,37 +19,23 @@ interface Principle {
 
 const principles: Principle[] = [
   {
-    title: "Start with the workflow, not the feature",
+    title: "Customer is part of the team",
     belief:
-      "If you do not map the end to end workflow, you ship features that get ignored.",
+      "We treat customers as teammates, not feedback tickets. We watch them use the product, debug with them, and design alongside them. The fastest path to the right product is building with users, not for them.",
     star: {
       situation:
-        "CDP had to become a sellable product, but the experience felt like disconnected parts.",
-      task: "Define the smallest workflow that creates value and supports a credible Sales narrative.",
+        "A key workflow showed healthy top-line conversion, but enterprise accounts were still complaining about setup friction and time to first value.",
+      task: "Find the exact moments users got stuck and turn that into a weekly ship loop.",
       action:
-        "Mapped the activation workflow from data selection to audience creation to downstream action, then prioritized the outbound activation surface first because it tied directly to customer outcomes and monetization.",
+        "Pulled session replays for new enterprise workspaces in their first 7 days, tagged failure patterns, then paired those clips with customer calls to confirm intent. Found repeated confusion around a permissions gate and a hidden configuration step that caused users to loop between pages. Shipped a clearer inline explanation, better defaults, and a guided checklist, then re-reviewed new replays to confirm behavior changed.",
       result:
-        "A clearer product story, faster time to first value, and a roadmap anchored to outcomes not a feature list.",
+        "Fewer stuck sessions, faster setup completion, improved time to first value, and fewer CS escalations because customers could see their feedback turned into fixes within 1 to 2 releases.",
     },
   },
   {
-    title: "Ecosystems scale faster than internal teams",
+    title: "Ship fast to get signal and iterate",
     belief:
-      "When integrations are the product, developer leverage beats headcount.",
-    star: {
-      situation:
-        "Sales struggled to build pipeline because integration coverage was thin, while engineering time was being consumed by bespoke builds.",
-      task: "Create a scalable motion to grow integrations without becoming a services team.",
-      action:
-        "Aligned on the highest leverage partner categories, hardened the API contract with schemas and versioning, and created repeatable patterns for partners to build on.",
-      result:
-        "Faster partner throughput and less dependency on custom engineering, improving ecosystem credibility.",
-    },
-  },
-  {
-    title: "Trust is a product feature",
-    belief:
-      "For data and AI products, trust failures kill adoption more than missing features.",
+      "Speed is a strategy. Ship the smallest version that can generate real behavior, measure it, then iterate. Opinions do not scale. Signal does. The goal is learning velocity, not feature velocity.",
     star: {
       situation:
         "Partners hesitated to adopt because breaking changes could disrupt production workflows.",
@@ -61,17 +47,31 @@ const principles: Principle[] = [
     },
   },
   {
-    title: "Customer is part of the team",
+    title: "Think in systems and workflows",
     belief:
-      "The fastest way to build the right thing is to watch real users struggle, then fix it with them.",
+      "Features do not exist in isolation. Map the end to end workflow and optimize the full system. If the workflow is broken, no individual feature will save it. Great products remove friction across the entire journey.",
     star: {
       situation:
-        "A key workflow showed healthy top-line conversion, but enterprise accounts were still complaining about setup friction and time to first value.",
-      task: "Find the exact moments users got stuck and turn that into a weekly ship loop.",
+        "CDP had to become a sellable product, but the experience felt like disconnected parts.",
+      task: "Define the smallest workflow that creates value and supports a credible Sales narrative.",
       action:
-        "Pulled session replays for new enterprise workspaces in their first 7 days, tagged failure patterns, then paired those clips with customer calls to confirm intent. Found repeated confusion around a permissions gate and a hidden configuration step that caused users to loop between pages. Shipped a clearer inline explanation, better defaults, and a guided checklist, then re-reviewed new replays to confirm behavior changed.",
+        "Mapped the activation workflow from data selection to audience creation to downstream action, then prioritized the outbound activation surface first because it tied directly to customer outcomes and monetization.",
       result:
-        "Fewer stuck sessions, faster setup completion, improved time to first value, and fewer CS escalations because customers could see their feedback turned into fixes within 1 to 2 releases.",
+        "A clearer product story, faster time to first value, and a roadmap anchored to outcomes not a feature list.",
+    },
+  },
+  {
+    title: "Build for leverage, not headcount",
+    belief:
+      "Design products that scale through ecosystems, automation, and integrations. When integrations are the product, developer leverage beats internal resourcing. Durable advantage comes from compounding systems, not adding more people.",
+    star: {
+      situation:
+        "Sales struggled to build pipeline because integration coverage was thin, while engineering time was being consumed by bespoke builds.",
+      task: "Create a scalable motion to grow integrations without becoming a services team.",
+      action:
+        "Aligned on the highest leverage partner categories, hardened the API contract with schemas and versioning, and created repeatable patterns for partners to build on.",
+      result:
+        "Faster partner throughput and less dependency on custom engineering, improving ecosystem credibility.",
     },
   },
 ];
