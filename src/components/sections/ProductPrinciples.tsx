@@ -61,9 +61,9 @@ const principles: Principle[] = [
     },
   },
   {
-    title: "Build for leverage, not headcount",
+    title: "Build systems that compound",
     belief:
-      "Design products that scale through ecosystems, automation, and integrations. When integrations are the product, developer leverage beats internal resourcing. Durable advantage comes from compounding systems, not adding more people.",
+      "Use AI to automate decisions, not just assist them. Create workflows that improve with usage and ecosystems that extend beyond your team. The goal is output per person, not team size.",
     star: {
       situation:
         "Sales struggled to build pipeline because integration coverage was thin, while engineering time was being consumed by bespoke builds.",
