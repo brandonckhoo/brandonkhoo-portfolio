@@ -250,16 +250,6 @@ export const siteContent = {
         image: "/cdp.png",
       },
       {
-        slug: "amplitude-developer-ecosystem",
-        title: "Amplitude Session Replay",
-        outcome:
-          "Owned product vision for Session Replay and launched AI-powered summaries that cut review time in half",
-        role: "Product Lead",
-        metric: { label: "Review time reduction", value: "50%" },
-        tags: ["AI", "Session Replay", "Experimentation", "Analytics"],
-        image: "/session-replay.png",
-      },
-      {
         slug: "uber-eats-growth",
         title: "Uber Moments",
         outcome:
