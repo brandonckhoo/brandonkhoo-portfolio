@@ -51,7 +51,7 @@ const categories: Category[] = [
     id: "analytics",
     label: "Analytics & Experimentation",
     description: "Product analytics, funnels, retention, and A/B testing",
-    tools: [{ label: "Amplitude" }],
+    tools: [{ label: "Amplitude" }, { label: "Mixpanel" }],
     accent: "rgba(0, 160, 122, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
