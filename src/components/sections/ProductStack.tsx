@@ -119,7 +119,7 @@ const categories: Category[] = [
     id: "data",
     label: "Data & Storage",
     description: "Warehousing, querying, and scalable object storage",
-    tools: [{ label: "Snowflake" }, { label: "Amazon S3" }, { label: "Supabase" }],
+    tools: [{ label: "Snowflake" }, { label: "Amazon S3" }, { label: "Supabase" }, { label: "Pinecone" }],
     accent: "rgba(37, 99, 235, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
