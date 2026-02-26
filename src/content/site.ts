@@ -240,26 +240,6 @@ export const siteContent = {
     subtitle: "Selected professional case studies",
     items: [
       {
-        slug: "amplitude-cdp-integrations",
-        title: "Amplitude Platform & Integrations",
-        outcome:
-          "Built the CDP and developer platform that scaled revenue 3.5× and grew the integration ecosystem from 40 to 130+ partners",
-        role: "Product Manager & Senior PM",
-        metric: { label: "CDP ARR", value: "$6M → $21M" },
-        tags: ["CDP", "APIs", "Developer Platform", "Partnerships", "Platform"],
-        image: "/cdp.png",
-      },
-      {
-        slug: "uber-eats-growth",
-        title: "Uber Moments",
-        outcome:
-          "Co-founded a first-of-its-kind experience marketplace on UberEats, covered in 16+ media outlets",
-        role: "Strategy & Operations Manager",
-        metric: { label: "Avg ticket (vs $22 Eats avg)", value: "$109" },
-        tags: ["Marketplace", "0→1", "Growth", "Experimentation"],
-        image: "/uber-moments.png",
-      },
-      {
         slug: "ai-summaries",
         title: "AI Summaries for Session Replay",
         outcome: "Built an eval-driven LLM feature that surfaces instant replay insights, cutting review time in half and lifting new user activation",
@@ -285,6 +265,26 @@ export const siteContent = {
         metric: { label: "Targeting performance lift", value: "+15%" },
         tags: ["AI", "Segmentation", "LLM", "Activation"],
         image: "/case-studies/AI-Audience Segmentation.png",
+      },
+      {
+        slug: "amplitude-cdp-integrations",
+        title: "Amplitude Platform & Integrations",
+        outcome:
+          "Built the CDP and developer platform that scaled revenue 3.5× and grew the integration ecosystem from 40 to 130+ partners",
+        role: "Product Manager & Senior PM",
+        metric: { label: "CDP ARR", value: "$6M → $21M" },
+        tags: ["CDP", "APIs", "Developer Platform", "Partnerships", "Platform"],
+        image: "/cdp.png",
+      },
+      {
+        slug: "uber-eats-growth",
+        title: "Uber Moments",
+        outcome:
+          "Co-founded a first-of-its-kind experience marketplace on UberEats, covered in 16+ media outlets",
+        role: "Strategy & Operations Manager",
+        metric: { label: "Avg ticket (vs $22 Eats avg)", value: "$109" },
+        tags: ["Marketplace", "0→1", "Growth", "Experimentation"],
+        image: "/uber-moments.png",
       },
     ] as WorkCard[],
   },
@@ -731,62 +731,6 @@ export const workCaseStudies: WorkCaseStudy[] = [
         term: "Time-to-integrate",
         definition:
           "Days from a partner submitting their integration spec to GA launch on the marketplace.",
-      },
-    ],
-  },
-  {
-    slug: "amplitude-developer-ecosystem",
-    title: "Amplitude Session Replay",
-    role: "Product Lead",
-    timeline: "2024",
-    stack: ["Session Replay SDK", "AI Summarisation", "Experimentation Platform", "Amplitude Analytics"],
-    metrics: [
-      { label: "Review time reduction", value: "50%" },
-      { label: "Experiment adoption lift", value: "25%" },
-      { label: "Engineering teams led", value: "2" },
-    ],
-    context:
-      "Session Replay at Amplitude was a high-visibility product sitting at the intersection of analytics, debugging, and AI. Teams wanted to understand user behaviour at a deeper level but were spending hours manually scrubbing through recordings to find the moments that mattered.",
-    problem:
-      "The core problem was signal-to-noise. Replay libraries were filling up with recordings, but extracting actionable insight required too much manual effort. PMs and engineers were reviewing sessions one at a time without any intelligent surfacing of patterns, friction points, or anomalies. The product also had no integration with Amplitude's flagship experimentation platform, leaving a major gap in the variant-level insight story.",
-    approach: [
-      "Owned product vision and strategy across 2 engineering teams covering SDK instrumentation and the core replay experience.",
-      "Ran discovery with 30+ customers to identify the highest-friction parts of the replay review workflow.",
-      "Defined the AI summarisation spec: a model-generated replay summary surfacing key interaction patterns, rage clicks, and drop-off signals per session.",
-      "Scoped and shipped the Experimentation integration, allowing teams to filter replays by experiment variant and observe real user behaviour behind A/B test results.",
-      "Established a quality framework for AI-generated summaries including a human eval loop and accuracy benchmarks before GA.",
-    ],
-    whatIShipped: [
-      "AI replay summaries that auto-surface key interaction patterns, reducing manual review time by 50%",
-      "Experimentation integration enabling variant-level session filtering, driving a 25% adoption lift",
-      "SDK improvements reducing instrumentation gaps and increasing replay capture fidelity",
-      "A quality evaluation framework for AI-generated session summaries with human-in-the-loop review",
-    ],
-    impact: [
-      "Review time cut by 50% after AI summaries launched, with teams reporting faster root cause identification.",
-      "25% lift in Session Replay adoption driven by the Experimentation integration surfacing replay directly in A/B test results.",
-      "Replay became a key differentiator in competitive deals, cited in multiple enterprise win reviews.",
-    ],
-    learnings: [
-      "AI summaries only create value if the underlying data is reliable. We spent 3 weeks improving SDK capture fidelity before the AI layer added real signal.",
-      "Integrations drive adoption. Connecting Replay to Experimentation brought in users who had never opened a replay before. Distribution through adjacent products is underrated.",
-      "Quality gates for AI outputs matter from day one. Teams trust a summary that is sometimes incomplete over one that is occasionally wrong.",
-    ],
-    tradeoff: {
-      decision: "Ship AI summaries broadly vs. gate behind a manual quality review step",
-      rationale:
-        "Broad availability would drive adoption but risked trust if summaries were inaccurate. We chose a middle path: GA with a confidence score UI that flagged lower-certainty summaries.",
-      tradeoff:
-        "Some customers found the confidence scoring confusing. In hindsight a simpler quality threshold with a fallback to no summary would have been cleaner UX.",
-    },
-    metricDefinitions: [
-      {
-        term: "Review time reduction",
-        definition: "Average time from opening a replay session to identifying the key interaction pattern, measured via in-product instrumentation pre and post AI summary launch.",
-      },
-      {
-        term: "Experiment adoption lift",
-        definition: "Increase in weekly active Session Replay users attributable to the Experimentation integration, measured as a percentage change from the 30-day baseline before launch.",
       },
     ],
   },
