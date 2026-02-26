@@ -269,6 +269,33 @@ export const siteContent = {
         tags: ["Marketplace", "0→1", "Growth", "Experimentation"],
         image: "/uber-moments.png",
       },
+      {
+        slug: "ai-summaries",
+        title: "AI Summaries for Session Replay",
+        outcome: "Built an eval-driven LLM feature that surfaces instant replay insights, cutting review time in half and lifting new user activation",
+        role: "Product Lead",
+        metric: { label: "Activation lift", value: "+17%" },
+        tags: ["AI", "LLM", "Evals", "Activation"],
+        image: "/session-replay.png",
+      },
+      {
+        slug: "amplitude-recommendations",
+        title: "Amplitude Recommendations",
+        outcome: "Upgraded the real-time User Profile service to serve fresher behavioral signals, driving measurable lifts in content engagement for customers like HBO",
+        role: "Product Lead",
+        metric: { label: "Engagement lift", value: "+20%" },
+        tags: ["AI", "Personalization", "Real-time", "ML"],
+        image: "/cdp.png",
+      },
+      {
+        slug: "ai-audience-segmentation",
+        title: "AI Audience Segmentation",
+        outcome: "Replaced manual segment-building with auto-generated cohorts using clustering and LLM labeling, improving activation targeting precision",
+        role: "Product Lead",
+        metric: { label: "Targeting performance lift", value: "+15%" },
+        tags: ["AI", "Segmentation", "LLM", "Activation"],
+        image: "/cdp.png",
+      },
     ] as WorkCard[],
   },
 
@@ -837,6 +864,149 @@ export const workCaseStudies: WorkCaseStudy[] = [
         term: "Supply density",
         definition:
           "Number of active restaurant partners per 1km radius of the delivery zone centroid.",
+      },
+    ],
+  },
+  {
+    slug: "ai-summaries",
+    title: "AI Summaries for Session Replay",
+    role: "Product Lead",
+    timeline: "2023 — 2024",
+    stack: ["LLM", "Structured Event Data", "AI Summarisation", "Experimentation Platform", "Amplitude Analytics"],
+    metrics: [
+      { label: "Replay review time reduction", value: "~50%" },
+      { label: "First-time user activation lift", value: "+17%" },
+    ],
+    context: "Amplitude Session Replay gives teams visibility into how users move through their product. After launch, over 50% of new customers never opened Replay. Among those who did, many dropped off — scrubbing through 10 to 15 minute recordings to find what mattered was too slow. Replay felt like a storage tool, not an insight tool.",
+    problem: "New users couldn't find value fast enough. The workflow required watching replays end to end, which slowed time to first insight and made it hard to justify the tool during onboarding.",
+    approach: [
+      "Built an evaluation framework before writing any prompts. We pulled real customer replays and defined what a good summary had to include: key user actions, meaningful friction points, and behavioral signals. That became our labeled eval set. We tracked groundedness, signal capture, and noise — every prompt or model change ran against that dataset. When we found a new failure mode, we added it as a permanent test case.",
+      "Reduced hallucination risk by grounding the LLM on structured event data rather than raw video or loosely formatted logs. The model handled reasoning; we controlled the inputs and enforced a strict output format to keep summaries consistent and auditable.",
+      "Shipped the product changes: a Summary Card on every replay showing instant AI-generated insights, and updated onboarding so new users saw the summary first instead of being dropped into a raw recording.",
+    ],
+    whatIShipped: [
+      "Summary Card surfaced on every session replay with AI-generated insight highlights",
+      "Labeled eval dataset built from real customer replays, used to validate every model and prompt change",
+      "Eval framework tracking groundedness, signal capture, and noise — with regression tests for known failure modes",
+      "Updated onboarding flow prioritising the Summary Card as the activation entry point",
+    ],
+    impact: [
+      "Replay review time dropped by approximately 50% — users could scan summaries and jump directly to important moments.",
+      "First-time user activation increased 17% across key workflows.",
+      "Users could quickly decide what to investigate without watching full sessions.",
+    ],
+    learnings: [
+      "LLM quality has to be treated like a product surface. If the summary is wrong one in ten times, trust drops fast. Defining a labeled eval set from real replays and testing every prompt change against it was critical — it forced us to measure groundedness and signal capture rather than relying on gut feel.",
+      "Grounding beats clever prompting. The biggest quality lift came from constraining the model to structured event data rather than raw video. Controlled inputs produced consistent, reliable outputs.",
+      "AI alone doesn't move activation — workflow does. The model was necessary but not sufficient. Activation moved when we changed the entry point and pushed users to the Summary Card first. The onboarding changes were just as important as the model quality.",
+    ],
+    tradeoff: {
+      decision: "Summarise structured event data vs. attempt direct video or transcript summarisation",
+      rationale: "Structured events gave us a clean, auditable input format with far lower hallucination risk. Video or transcript summarisation would have been richer in theory but unpredictable in practice.",
+      tradeoff: "We gave up some nuance — tone, emotional cues, visual context — that a transcript might have captured. For an analytics tool where precision matters more than colour, that was the right trade.",
+    },
+    metricDefinitions: [
+      {
+        term: "Replay review time",
+        definition: "Median time from opening a session replay to the user taking an action or closing — measured via instrumentation on the replay player.",
+      },
+      {
+        term: "First-time user activation",
+        definition: "Percentage of new Replay users who completed a defined activation event (e.g. jumping to a flagged moment or sharing a replay) within their first session.",
+      },
+    ],
+  },
+  {
+    slug: "amplitude-recommendations",
+    title: "Amplitude Recommendations",
+    role: "Product Lead",
+    timeline: "2022 — 2023",
+    stack: ["User Profile API", "Streaming Infrastructure", "ML Ranking Models", "Experimentation Platform", "Amplitude Analytics"],
+    metrics: [
+      { label: "Engagement lift", value: "+20%" },
+      { label: "Content consumption lift", value: "+15%" },
+    ],
+    context: "Amplitude Recommendations is the ML-powered personalization engine used by media and commerce customers like HBO to drive content engagement. The system ranked content based on user behavior signals — but those signals were bottlenecked by the User Profile API, which wasn't optimised for low-latency real-time updates and lacked richer attributes like genre, SKU, or structured metadata.",
+    problem: "In practice, HBO's 'Recommended For You' row could feel stale. If a user binged a crime series or explored a new genre, the homepage might still serve generic or older titles because profile updates weren't fast or expressive enough for the ranking model to react in near real time.",
+    approach: [
+      "Partnered with engineering to upgrade the User Profile service from a batch-oriented update model to streaming profile updates. Introduced a low-latency serving layer so ranking models could read fresh user state in near real time.",
+      "Expanded the profile schema to support richer attributes including product category, SKU, and structured content metadata. This gave ranking models more granular behavioral and content signals to work with.",
+      "Worked closely with data science to ensure enriched profile data was incorporated into the ranking logic. Ran controlled experiments comparing the baseline model against the enhanced real-time profile-driven model, instrumenting engagement at the recommendation unit level.",
+    ],
+    whatIShipped: [
+      "Upgraded User Profile service with streaming update support and a low-latency serving layer",
+      "Expanded profile schema supporting richer content and behavioral attributes",
+      "Experiment framework comparing baseline vs. real-time profile-driven ranking models",
+      "Instrumentation at the recommendation unit level for engagement measurement",
+    ],
+    impact: [
+      "20% higher engagement for customers on the upgraded recommendation stack.",
+      "15% more content consumption, measured at the recommendation unit level.",
+      "Recommendations became dynamic and responsive — reflecting what users just watched rather than serving stale suggestions.",
+    ],
+    learnings: [
+      "Infrastructure quality determines product quality. The ranking model was only as good as the profile data feeding it. Investing in the serving layer wasn't glamorous, but it was the actual unlock.",
+      "Real-time beats batch for personalization. The latency gap between when something happened and when the model knew about it was the core problem. Closing that gap — not improving the ranking algorithm — drove the result.",
+      "Measure at the unit level. Aggregate engagement metrics masked what was happening at the recommendation row. Instrumenting individual recommendation units let us attribute impact cleanly and run tighter experiments.",
+    ],
+    tradeoff: {
+      decision: "Upgrade the shared User Profile service vs. build a lightweight real-time profile layer just for Recommendations",
+      rationale: "A Recommendations-specific layer would have been faster to ship but created divergent profile representations across the platform. Upgrading the shared service took longer but benefited every downstream consumer of user data.",
+      tradeoff: "The shared service approach added coordination overhead and slowed the initial rollout by about 6 weeks. Worth it — the improved profile layer was later used by the Audiences and Cohorts products as well.",
+    },
+    metricDefinitions: [
+      {
+        term: "Engagement lift",
+        definition: "Relative increase in click-through rate on recommended content, measured via A/B experiment with the prior recommendation model as control.",
+      },
+      {
+        term: "Content consumption lift",
+        definition: "Relative increase in content play-through events (watch time, article reads) attributed to recommended content in the test group.",
+      },
+    ],
+  },
+  {
+    slug: "ai-audience-segmentation",
+    title: "AI Audience Segmentation",
+    role: "Product Lead",
+    timeline: "2023 — 2024",
+    stack: ["Clustering Algorithms", "LLM Labeling", "Amplitude Analytics", "Experimentation Platform", "Activation Workflows"],
+    metrics: [
+      { label: "Activation targeting performance lift", value: "+15%" },
+    ],
+    context: "My product area covered how marketers built cohorts for downstream personalization — targeted email, push, and in-app campaigns. Segments were built manually using filters and SQL, which meant they were often stale, overly broad, and dependent on the marketer's technical skill. Conversion rates were inconsistent across campaigns as a result.",
+    problem: "Targeting quality was a function of who built the segment. Advanced marketers built precise cohorts; less technical ones built blunt ones. The floor was too low and the ceiling too hard to reach consistently.",
+    approach: [
+      "Instead of building a smarter segmentation tool, we generated high-intent cohorts automatically. We clustered behavioral event data to surface natural user groups based on recency, frequency, engagement depth, and product interactions.",
+      "Used an LLM to interpret and label those clusters, producing activation-ready cohorts with human-readable names like 'high intent trial users' or 'churn risk accounts'. The LLM handled interpretation; the clustering handled the actual grouping logic.",
+      "Surfaced the generated cohorts directly inside the activation workflow so marketers could use them in one click, without needing to understand how they were built. Cohorts refreshed dynamically. Validated impact with controlled experiments comparing AI-generated cohorts against manually defined segments.",
+    ],
+    whatIShipped: [
+      "Behavioral clustering pipeline grouping users by recency, frequency, engagement depth, and product interactions",
+      "LLM labeling layer interpreting clusters into activation-ready cohort names and descriptions",
+      "Cohort surface integrated directly into activation workflows with one-click use",
+      "Dynamic cohort refresh so segments stayed current without manual maintenance",
+      "A/B experiment framework validating AI cohorts against manually built segments",
+    ],
+    impact: [
+      "AI-generated cohorts improved activation targeting performance by 15% compared to manually defined segments.",
+      "Targeting quality became consistent and scalable — no longer dependent on how advanced a marketer was at building filters.",
+      "Reduced the time marketers spent on segment creation, freeing them to focus on campaign strategy.",
+    ],
+    learnings: [
+      "Automation works best when it raises the floor, not just the ceiling. The goal wasn't to replace expert marketers — it was to make every marketer perform like an expert. Consistent quality at scale was the metric that mattered.",
+      "LLM labeling made the output usable. Clusters without labels are just numbers. The labeling step was what turned a data science artifact into a product feature marketers could actually trust and act on.",
+      "Controlled experiments are non-negotiable for AI features. Self-reported improvement isn't enough — we needed a clean comparison against the baseline to prove the cohorts were actually better, not just different.",
+    ],
+    tradeoff: {
+      decision: "Auto-generate cohorts vs. build AI-assisted tooling to help marketers build better segments themselves",
+      rationale: "Assisted tooling would have preserved marketer control but still required expertise to use well. Auto-generation removed the skill dependency entirely and let us own the quality outcome.",
+      tradeoff: "Some power users wanted more control over cluster parameters and labeling. We added an override path post-launch, but the default auto-generated cohorts drove the majority of usage and impact.",
+    },
+    metricDefinitions: [
+      {
+        term: "Activation targeting performance",
+        definition: "Conversion rate of campaigns using the target cohort — measured as the percentage of targeted users who completed the defined activation event within the campaign window.",
       },
     ],
   },

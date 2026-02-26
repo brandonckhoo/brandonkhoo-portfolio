@@ -3,14 +3,24 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { siteContent } from "@/content/site";
 import Section, { SectionHeader } from "@/components/ui/Section";
 import Tag from "@/components/ui/Tag";
 import FadeUp, { Stagger } from "@/components/ui/FadeUp";
+import PillTabs from "@/components/ui/PillTabs";
 
 const { featuredWork } = siteContent;
+const FILTER_TABS = ["All", "AI"];
 
 export default function FeaturedWork() {
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const filteredItems =
+    activeFilter === "AI"
+      ? featuredWork.items.filter((item) => item.tags.includes("AI"))
+      : featuredWork.items;
+
   return (
     <Section id="work">
       <FadeUp>
@@ -20,9 +30,17 @@ export default function FeaturedWork() {
         />
       </FadeUp>
 
+      <div className="flex justify-center mb-8">
+        <PillTabs
+          tabs={FILTER_TABS}
+          active={activeFilter}
+          onChange={setActiveFilter}
+        />
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         <Stagger staggerDelay={0.07}>
-          {featuredWork.items.map((item) => (
+          {filteredItems.map((item) => (
             <WorkCard key={item.slug} item={item} />
           ))}
         </Stagger>
