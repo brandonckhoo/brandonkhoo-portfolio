@@ -276,7 +276,7 @@ export const siteContent = {
         role: "Product Lead",
         metric: { label: "Activation lift", value: "+17%" },
         tags: ["AI", "LLM", "Evals", "Activation"],
-        image: "/session-replay.png",
+        image: "/case-studies/AI-powered summaries.png",
       },
       {
         slug: "amplitude-recommendations",
@@ -285,7 +285,7 @@ export const siteContent = {
         role: "Product Lead",
         metric: { label: "Engagement lift", value: "+20%" },
         tags: ["AI", "Personalization", "Real-time", "ML"],
-        image: "/cdp.png",
+        image: "/case-studies/Amplitude Recommendations.png",
       },
       {
         slug: "ai-audience-segmentation",
@@ -294,7 +294,7 @@ export const siteContent = {
         role: "Product Lead",
         metric: { label: "Targeting performance lift", value: "+15%" },
         tags: ["AI", "Segmentation", "LLM", "Activation"],
-        image: "/cdp.png",
+        image: "/case-studies/AI-Audience Segmentation.png",
       },
     ] as WorkCard[],
   },
