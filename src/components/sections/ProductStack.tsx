@@ -65,7 +65,7 @@ const categories: Category[] = [
     id: "delivery",
     label: "Delivery & Roadmapping",
     description: "Backlog management, sprint tracking, and prioritisation",
-    tools: [{ label: "Jira" }, { label: "Productboard" }],
+    tools: [{ label: "Jira" }, { label: "Productboard" }, { label: "Linear" }],
     accent: "rgba(217, 119, 6, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
