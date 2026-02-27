@@ -24,7 +24,7 @@ const categories: Category[] = [
     id: "ai",
     label: "AI & Prototyping",
     description: "Rapid AI-assisted research, ideation and prototyping",
-    tools: [{ label: "Claude" }, { label: "Cursor" }, { label: "Bolt" }, { label: "Lovable", badge: "L4 Platinum" }, { label: "Perplexity" }],
+    tools: [{ label: "Claude" }, { label: "Cursor" }, { label: "Bolt" }, { label: "Lovable", badge: "L4 Platinum" }, { label: "Perplexity" }, { label: "Manus" }, { label: "Wispr" }],
     accent: "rgba(124, 92, 219, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -80,7 +80,7 @@ const categories: Category[] = [
     id: "crm",
     label: "CRM & Growth Systems",
     description: "Pipeline management and revenue operations",
-    tools: [{ label: "Salesforce" }, { label: "HubSpot" }, { label: "GHL" }],
+    tools: [{ label: "Salesforce" }, { label: "HubSpot" }, { label: "GHL" }, { label: "Gong" }],
     accent: "rgba(0, 160, 122, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -93,7 +93,7 @@ const categories: Category[] = [
     id: "lifecycle",
     label: "Lifecycle & Support",
     description: "Onboarding flows, messaging automation, and in-app guidance",
-    tools: [{ label: "Braze" }, { label: "Intercom" }, { label: "Userflow" }],
+    tools: [{ label: "Braze" }, { label: "Intercom" }, { label: "Userflow" }, { label: "Zendesk" }],
     accent: "rgba(224, 61, 96, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
