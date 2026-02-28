@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="body" x1="10" y1="5" x2="90" y2="95" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A87CF5"/>
+      <stop offset="1" stop-color="#5B9DF5"/>
+    </linearGradient>
+    <linearGradient id="tuft" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#7B5CF3"/>
+      <stop offset="1" stop-color="#A87CF5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Body -->
+  <ellipse cx="50" cy="72" rx="26" ry="24" fill="url(#body)"/>
+
+  <!-- Head -->
+  <circle cx="50" cy="38" r="30" fill="url(#body)"/>
+
+  <!-- Ear tufts -->
+  <path d="M28 14 C25 5 33 1 36 9 C32 11 30 13 28 14Z" fill="#7B5CF3"/>
+  <path d="M72 14 C75 5 67 1 64 9 C68 11 70 13 72 14Z" fill="#7B5CF3"/>
+
+  <!-- Face oval -->
+  <ellipse cx="50" cy="40" rx="22" ry="20" fill="#EDE9FE"/>
+
+  <!-- Left eye -->
+  <circle cx="38" cy="36" r="10" fill="white"/>
+  <circle cx="38" cy="36" r="6.5" fill="#1A1917"/>
+  <circle cx="41" cy="33" r="2.2" fill="white"/>
+
+  <!-- Right eye -->
+  <circle cx="62" cy="36" r="10" fill="white"/>
+  <circle cx="62" cy="36" r="6.5" fill="#1A1917"/>
+  <circle cx="65" cy="33" r="2.2" fill="white"/>
+
+  <!-- Beak -->
+  <path d="M50 49 L44 57 L56 57 Z" fill="#F5A154"/>
+
+  <!-- Belly -->
+  <ellipse cx="50" cy="74" rx="15" ry="13" fill="rgba(255,255,255,0.18)"/>
+
+  <!-- Wings hint -->
+  <ellipse cx="26" cy="70" rx="7" ry="13" fill="#7B5CF3" opacity="0.5"/>
+  <ellipse cx="74" cy="70" rx="7" ry="13" fill="#7B5CF3" opacity="0.5"/>
+
+  <!-- Feet -->
+  <ellipse cx="37" cy="94" rx="9" ry="4" fill="#F5A154"/>
+  <ellipse cx="63" cy="94" rx="9" ry="4" fill="#F5A154"/>
+  <line x1="31" y1="92" x2="29" y2="97" stroke="#E08B3A" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="37" y1="91" x2="37" y2="97" stroke="#E08B3A" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="43" y1="92" x2="45" y2="97" stroke="#E08B3A" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="57" y1="92" x2="55" y2="97" stroke="#E08B3A" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="63" y1="91" x2="63" y2="97" stroke="#E08B3A" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="69" y1="92" x2="71" y2="97" stroke="#E08B3A" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
