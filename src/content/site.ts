@@ -415,8 +415,6 @@ export const siteContent = {
             primary: true,
           },
         ],
-        callout:
-          "OpenAI · Pinecone · LangSmith · Arize · production-grade RAG with full observability.",
         demonstrates: [
           "RAG pipeline: retrieves the 4 most relevant policy sections before every response",
           "LLM-as-judge scoring across relevance, accuracy, completeness, and citation quality",
@@ -984,8 +982,6 @@ export const sideProjectDetails: SideProjectDetail[] = [
         primary: true,
       },
     ],
-    callout:
-      "OpenAI · Pinecone · LangSmith · Arize · production-grade RAG with full observability.",
     whatIBuilt:
       "A production-grade internal helpdesk agent that answers employee policy questions using retrieval-augmented generation, routes support tickets to the right Slack channel, and logs bug reports directly to Linear. Built with a full observability stack so every response is scored by an LLM judge before the user sees it.",
     whyItMatters:
