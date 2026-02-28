@@ -402,6 +402,28 @@ export const siteContent = {
     subtitle: "Builder mode — shipping fast with Claude and Cursor over the weekend",
     items: [
       {
+        slug: "internal-helpdesk-agent",
+        title: "Internal Helpdesk Agent",
+        oneliner:
+          "Built a RAG-powered helpdesk that answers policy questions, routes support tickets, and logs bugs to Linear — with LLM-as-judge evaluation on every response.",
+        type: "demo",
+        image: "/helpdesk-agent.gif",
+        links: [
+          {
+            label: "Live demo",
+            href: "https://internal-helpdesk-agent.vercel.app/",
+            primary: true,
+          },
+        ],
+        callout:
+          "OpenAI · Pinecone · LangSmith · Arize — production-grade RAG with observability baked in.",
+        demonstrates: [
+          "RAG pipeline: retrieves the 4 most relevant policy sections before every response",
+          "LLM-as-judge scoring across relevance, accuracy, completeness, and citation quality",
+          "Tool use: Linear for bug logging, Slack for ticket routing",
+        ],
+      },
+      {
         slug: "alice-abm-prototype",
         title: "Alice ABM Prototype",
         oneliner:
@@ -949,6 +971,46 @@ export const workCaseStudies: WorkCaseStudy[] = [
 // ── Side Project Detail Content ───────────────────────────────────────────────
 
 export const sideProjectDetails: SideProjectDetail[] = [
+  {
+    slug: "internal-helpdesk-agent",
+    title: "Internal Helpdesk Agent",
+    oneliner:
+      "A RAG-powered helpdesk agent that answers policy questions, routes support tickets, and logs bugs to Linear — with real-time LLM eval on every response.",
+    type: "demo",
+    links: [
+      {
+        label: "Live demo",
+        href: "https://internal-helpdesk-agent.vercel.app/",
+        primary: true,
+      },
+    ],
+    callout:
+      "OpenAI · Pinecone · LangSmith · Arize — production-grade RAG with observability baked in.",
+    whatIBuilt:
+      "A production-grade internal helpdesk agent that answers employee policy questions using retrieval-augmented generation, routes support tickets to the right Slack channel, and logs bug reports directly to Linear. Built with a full observability stack so every response is scored by an LLM judge before the user sees it.",
+    whyItMatters:
+      "Most AI chatbots hallucinate because they rely on model weights alone. This agent is grounded — every response is based on retrieved policy documents, not model memory. The LLM-as-judge layer catches quality issues automatically, before they reach users. It's a working reference for how to build AI agents you can actually trust in a business context.",
+    howItWorks: [
+      "24 company policy sections indexed into Pinecone as vector embeddings",
+      "Search-first: retrieves the 4 most relevant sections before generating any response",
+      "LLM-as-judge scores each response across relevance (94%), accuracy (93%), completeness (88%), and citation quality (90%)",
+      "Tool calling routes tickets to Slack and logs bug/feature requests to Linear",
+      "Full observability via LangSmith and Arize — every call traced and scored in real time",
+    ],
+    stack: ["OpenAI", "Pinecone", "LangSmith", "Arize", "Next.js", "TypeScript", "Vercel"],
+    improvements: [
+      "User feedback loop to improve retrieval ranking over time",
+      "Multi-tenant support with per-company knowledge bases",
+      "Analytics dashboard for common query categories and escalation rates",
+    ],
+    productRationale:
+      "The hardest part of enterprise AI isn't the LLM — it's making output trustworthy enough for employees to rely on. RAG solves the hallucination problem. LLM-as-judge solves the quality visibility problem. Tool use solves the 'now what?' problem. This agent is a working proof-of-concept for all three.",
+    demonstrates: [
+      "RAG pipeline: retrieves the 4 most relevant policy sections before every response",
+      "LLM-as-judge scoring across relevance, accuracy, completeness, and citation quality",
+      "Tool use: Linear for bug logging, Slack for ticket routing",
+    ],
+  },
   {
     slug: "alice-abm-prototype",
     title: "Alice ABM Prototype",
