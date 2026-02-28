@@ -405,7 +405,7 @@ export const siteContent = {
         slug: "internal-helpdesk-agent",
         title: "Internal Helpdesk Agent",
         oneliner:
-          "Built a RAG-powered helpdesk that answers policy questions, routes support tickets, and logs bugs to Linear — with LLM-as-judge evaluation on every response.",
+          "Built a RAG powered internal helpdesk that answers policy questions, routes tickets to the right team, and files bugs to Linear. Every response scored by an LLM judge before users see it.",
         type: "demo",
         image: "/helpdesk-agent.gif",
         links: [
@@ -416,7 +416,7 @@ export const siteContent = {
           },
         ],
         callout:
-          "OpenAI · Pinecone · LangSmith · Arize — production-grade RAG with observability baked in.",
+          "OpenAI · Pinecone · LangSmith · Arize · production-grade RAG with full observability.",
         demonstrates: [
           "RAG pipeline: retrieves the 4 most relevant policy sections before every response",
           "LLM-as-judge scoring across relevance, accuracy, completeness, and citation quality",
@@ -975,7 +975,7 @@ export const sideProjectDetails: SideProjectDetail[] = [
     slug: "internal-helpdesk-agent",
     title: "Internal Helpdesk Agent",
     oneliner:
-      "A RAG-powered helpdesk agent that answers policy questions, routes support tickets, and logs bugs to Linear — with real-time LLM eval on every response.",
+      "A RAG powered internal helpdesk that answers policy questions, routes tickets to the right team, and files bugs to Linear. Every response scored by an LLM judge before users see it.",
     type: "demo",
     links: [
       {
@@ -985,7 +985,7 @@ export const sideProjectDetails: SideProjectDetail[] = [
       },
     ],
     callout:
-      "OpenAI · Pinecone · LangSmith · Arize — production-grade RAG with observability baked in.",
+      "OpenAI · Pinecone · LangSmith · Arize · production-grade RAG with full observability.",
     whatIBuilt:
       "A production-grade internal helpdesk agent that answers employee policy questions using retrieval-augmented generation, routes support tickets to the right Slack channel, and logs bug reports directly to Linear. Built with a full observability stack so every response is scored by an LLM judge before the user sees it.",
     whyItMatters:
