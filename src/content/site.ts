@@ -200,6 +200,7 @@ export const siteContent = {
       { label: "Gallery", href: "#gallery" },
       { label: "Blog", href: "#blog" },
       { label: "Resume", href: "#experience" },
+      { label: "Substack", href: "https://agentgoose.substack.com/" },
     ] as NavLink[],
     cta: { label: "Book a call →", href: "https://calendly.com/brandoncharleskhoo" } as NavLink,
   },

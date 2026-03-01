@@ -106,21 +106,33 @@ export default function Navbar() {
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
             {nav.links.map((link) => {
+              const isExternal = link.href.startsWith("http");
               const isActive = activeSection === link.href.replace("#", "");
-              return (
+              const className = cn(
+                "px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer",
+                isDark
+                  ? isActive
+                    ? "text-white font-medium"
+                    : "text-white/70 hover:text-white"
+                  : isActive
+                  ? "text-ink font-medium"
+                  : "text-ink-2 hover:text-ink"
+              );
+              return isExternal ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={className}
+                >
+                  {link.label}
+                </a>
+              ) : (
                 <button
                   key={link.href}
                   onClick={() => handleNavClick(link.href)}
-                  className={cn(
-                    "px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer",
-                    isDark
-                      ? isActive
-                        ? "text-white font-medium"
-                        : "text-white/70 hover:text-white"
-                      : isActive
-                      ? "text-ink font-medium"
-                      : "text-ink-2 hover:text-ink"
-                  )}
+                  className={className}
                 >
                   {link.label}
                 </button>
@@ -179,16 +191,31 @@ export default function Navbar() {
         )}
       >
         <div className="flex flex-col gap-2">
-          {nav.links.map((link, i) => (
-            <button
-              key={link.href}
-              onClick={() => handleNavClick(link.href)}
-              className="text-left py-4 text-3xl font-display text-ink border-b border-border last:border-0 cursor-pointer hover:opacity-60 transition-opacity"
-              style={{ transitionDelay: mobileOpen ? `${i * 40}ms` : "0ms" }}
-            >
-              {link.label}
-            </button>
-          ))}
+          {nav.links.map((link, i) => {
+            const isExternal = link.href.startsWith("http");
+            const className = "text-left py-4 text-3xl font-display text-ink border-b border-border last:border-0 cursor-pointer hover:opacity-60 transition-opacity";
+            return isExternal ? (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={className}
+                style={{ transitionDelay: mobileOpen ? `${i * 40}ms` : "0ms" }}
+              >
+                {link.label}
+              </a>
+            ) : (
+              <button
+                key={link.href}
+                onClick={() => handleNavClick(link.href)}
+                className={className}
+                style={{ transitionDelay: mobileOpen ? `${i * 40}ms` : "0ms" }}
+              >
+                {link.label}
+              </button>
+            );
+          })}
           <a
             href={nav.cta.href}
             target="_blank"
