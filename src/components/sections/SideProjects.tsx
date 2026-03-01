@@ -59,7 +59,7 @@ function SideProjectCard({ project }: { project: SideProject }) {
     >
       {/* Hero image */}
       {project.image ? (
-        <div className="relative w-full h-48 overflow-hidden">
+        <div className="relative w-full h-64 overflow-hidden">
           <Image
             src={project.image}
             alt={project.title}
