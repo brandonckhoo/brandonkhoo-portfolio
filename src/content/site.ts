@@ -74,7 +74,7 @@ export interface SideProject {
   slug: string;
   title: string;
   oneliner: string;
-  type: "prototype" | "game" | "demo";
+  type: "prototype" | "game" | "demo" | "tool";
   callout?: string;
   links?: SideProjectLink[];
   demonstrates?: string[];
@@ -402,6 +402,25 @@ export const siteContent = {
     title: "AI Side Projects",
     subtitle: "Builder mode — shipping fast with Claude and Cursor over the weekend",
     items: [
+      {
+        slug: "brandons-pm-os",
+        title: "Brandon's PM OS",
+        oneliner:
+          "An open-source personal operating system for Claude Code — built for PMs who use AI to work faster. Includes a full workspace structure, 4 custom PM slash commands, and 6 utility skills.",
+        type: "tool",
+        links: [
+          {
+            label: "GitHub",
+            href: "https://github.com/brandonckhoo/brandons-pm-os",
+            primary: true,
+          },
+        ],
+        demonstrates: [
+          "Custom slash commands: /standup, /weekly-update, /new-post, /ship-check",
+          "Claudeception: a self-improving skill that extracts reusable knowledge from every session",
+          "Full PM workspace: tasks, goals, projects, meetings, knowledge base, and MCP integrations",
+        ],
+      },
       {
         slug: "internal-helpdesk-agent",
         title: "Internal Helpdesk Agent",

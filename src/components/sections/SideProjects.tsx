@@ -16,12 +16,14 @@ const typeLabel: Record<string, string> = {
   prototype: "Prototype",
   game: "Game",
   demo: "Demo",
+  tool: "Open Source",
 };
 
 const typeAccent: Record<string, string> = {
   prototype: "var(--color-accent-blush)",
   game: "var(--color-accent-sage)",
   demo: "var(--color-accent-lavender)",
+  tool: "var(--color-accent-peach)",
 };
 
 export default function SideProjects() {
