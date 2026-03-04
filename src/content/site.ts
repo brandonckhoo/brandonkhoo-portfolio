@@ -403,6 +403,19 @@ export const siteContent = {
     subtitle: "Builder mode — shipping fast with Claude and Cursor over the weekend",
     items: [
       {
+        slug: "openclaw",
+        title: "OpenClaw",
+        oneliner:
+          "Open-source autonomous AI agent that runs locally and orchestrates a fleet of specialised agents across Marketing, Product, and Eng — all controlled via Telegram.",
+        type: "tool",
+        callout: "In progress",
+        demonstrates: [
+          "Multi-agent orchestration: specialised agents for Marketing, Product, and Eng running in parallel",
+          "Telegram as the control plane — trigger tasks, review outputs, and approve actions from your phone",
+          "Runs fully locally with no cloud dependency",
+        ],
+      },
+      {
         slug: "brandons-pm-os",
         title: "Brandon's PM OS",
         oneliner:
