@@ -3,6 +3,7 @@ import { Instrument_Serif, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { siteContent } from "@/content/site";
 import Navbar from "@/components/navigation/Navbar";
+import { PostHogProvider } from "@/components/PostHogProvider";
 
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
@@ -32,8 +33,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${instrumentSerif.variable} ${dmSans.variable}`}>
       <body className="font-body">
-        <Navbar />
-        {children}
+        <PostHogProvider>
+          <Navbar />
+          {children}
+        </PostHogProvider>
       </body>
     </html>
   );
