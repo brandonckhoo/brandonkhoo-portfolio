@@ -101,11 +101,10 @@ function SideProjectCard({ project }: { project: SideProject }) {
           {project.oneliner}
         </p>
 
-        {/* Callout (Cosmo Labs) */}
+        {/* Callout */}
         {project.callout && (
           <div className="mb-4 px-4 py-3 rounded-xl bg-surface-subtle border border-border text-sm text-ink-2 leading-relaxed">
-            <span className="font-medium text-ink">Retell AI · </span>
-            {project.callout.replace("Built with Retell AI voice agents to prototype and showcase agent behaviour in production-realistic scenarios.", "Retell AI voice agents used to prototype and showcase agent behaviour.")}
+            {project.callout}
           </div>
         )}
 
