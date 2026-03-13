@@ -201,6 +201,7 @@ export const siteContent = {
       { label: "Blog", href: "#blog" },
       { label: "Resume", href: "#experience" },
       { label: "Substack", href: "https://agentgoose.substack.com/" },
+      { label: "GitHub", href: "https://github.com/brandonckhoo" },
     ] as NavLink[],
     cta: { label: "Book a call →", href: "https://calendly.com/brandoncharleskhoo" } as NavLink,
   },
@@ -406,13 +407,12 @@ export const siteContent = {
         slug: "openclaw",
         title: "OpenClaw",
         oneliner:
-          "Open-source autonomous AI agent that runs locally and orchestrates a fleet of specialised agents across Marketing, Product, and Eng — all controlled via Telegram.",
+          "A personal AI chief-of-staff system with Mirana as the central orchestrator — connected to Google Calendar, Gmail, Discord, and Google Sheets, with a structured executive layer of CPO, CTO, CMO, and CRO agents reporting into a single command center.",
         type: "tool",
-        callout: "In progress",
         demonstrates: [
-          "Multi-agent orchestration: specialised agents for Marketing, Product, and Eng running in parallel",
-          "Telegram as the control plane — trigger tasks, review outputs, and approve actions from your phone",
-          "Runs fully locally with no cloud dependency",
+          "Core infrastructure: Google Calendar, Gmail, Discord, Google Sheets, and a local Mission Control dashboard all wired into one gateway",
+          "Executive operating layer: CPO, CTO, CMO, and CRO agents reporting into Mirana with reusable skills for newsletters, calendar support, and interview prep",
+          "Automation workflows: weekly property reporting across realestate.com.au, Google Sheets, and Discord with recurring ops support",
         ],
       },
       {
