@@ -404,6 +404,37 @@ export const siteContent = {
     subtitle: "Builder mode — shipping fast with Claude and Cursor over the weekend",
     items: [
       {
+        slug: "go1-prototype",
+        title: "Go1 Content Intelligence Prototype",
+        oneliner:
+          "A 4-screen interactive prototype showing how an AI layer (Morgan) can make recommendation decisions visible, explainable, and improvable — built as a take-home assignment for a Senior PM role at Go1.",
+        type: "prototype",
+        positioning:
+          "Interview assignment prototype for Go1's Content Intelligence & Discovery SPM role. Demonstrates PM thinking on recommendation explainability and learner-facing AI design.",
+        links: [
+          {
+            label: "Live prototype",
+            href: "/go1-prototype/",
+            primary: true,
+          },
+        ],
+        demonstrates: [
+          "Recommendation explainability: 'Why this was recommended' panel surfacing role match, team activity, and skill gap signals",
+          "Improvable feedback loop: dismiss flow trains Morgan and closes the intelligence loop",
+          "Morgan agent activity log: shows the learner what the AI did on their behalf — calendar blocks, Slack nudges, rec updates",
+        ],
+        trustAndControl: [
+          "Learner can edit their own goals to steer recommendations",
+          "Every recommendation surfaces its signals — no black-box outputs",
+          "Dismiss feedback is explicit and tied to a specific reason, not a thumbs-down",
+        ],
+        nextSteps: [
+          "Admin-facing counterpart: org-level curation with signal transparency",
+          "Metadata enrichment pipeline to power quality and freshness signals",
+          "Behavioural signal layer beyond enrolments: completion depth, re-opens, shares",
+        ],
+      },
+      {
         slug: "openclaw",
         title: "OpenClaw",
         oneliner:
@@ -1002,6 +1033,49 @@ export const workCaseStudies: WorkCaseStudy[] = [
 // ── Side Project Detail Content ───────────────────────────────────────────────
 
 export const sideProjectDetails: SideProjectDetail[] = [
+  {
+    slug: "go1-prototype",
+    title: "Go1 Content Intelligence Prototype",
+    oneliner:
+      "A 4-screen interactive prototype showing how an AI layer (Morgan) can make recommendation decisions visible, explainable, and improvable — built as a take-home assignment for a Senior PM role at Go1.",
+    type: "prototype",
+    links: [
+      {
+        label: "Live prototype",
+        href: "/go1-prototype/",
+        primary: true,
+      },
+    ],
+    whatIBuilt:
+      "A fully interactive 4-screen clickable prototype for Go1's SPM interview assignment. It demonstrates one high-value discovery experience: what happens when learners can see why content was recommended, give structured feedback, and watch the AI agent improve. Morgan — the intelligence layer — is the central character: she explains her reasoning, logs her actions, and lets learners steer her with editable goals.",
+    whyItMatters:
+      "Go1's core problem is that recommendation quality can't improve without a feedback loop — and that loop doesn't exist today. The burden of relevance sits with the learner. This prototype shows what it looks like to shift that burden to the system: transparent signals, improvable recommendations, and an agent that acts on behalf of the learner rather than waiting to be asked.",
+    howItWorks: [
+      "Screen 1: Learner homepage — assigned compliance card, recommendation rail with 'Why?' links, Morgan banner",
+      "Screen 2: 'Why this was recommended' panel — surfaces role match, team activity, and skill gap signals per card",
+      "Screen 3: Dismiss feedback — learner picks a reason ('not relevant', 'already know this', 'wrong level') to train Morgan",
+      "Screen 4: Morgan activity log — shows what the agent did today (calendar block, Slack nudge, rec update) and learner profile with editable goals",
+    ],
+    stack: ["HTML", "CSS", "JavaScript", "Vanilla (no framework)"],
+    improvements: [
+      "Admin-facing counterpart: org-level curation with signal transparency and confidence scores",
+      "Metadata enrichment pipeline to power freshness and quality signals",
+      "Behavioural signal layer beyond enrolments: completion depth, re-opens, in-content interactions",
+      "A/B test: does explainability improve completion rates or just satisfaction?",
+    ],
+    productRationale:
+      "The highest-value bet for Go1 isn't better search — it's making recommendations explainable enough that learners trust them, and improvable enough that the system gets better over time. This prototype makes the intelligence layer visible at the moment it matters: when a learner decides whether to engage or dismiss.",
+    demonstrates: [
+      "Recommendation explainability: 'Why this was recommended' panel surfacing role match, team activity, and skill gap signals",
+      "Improvable feedback loop: dismiss flow trains Morgan and closes the intelligence loop",
+      "Morgan agent activity log: shows the learner what the AI did on their behalf",
+    ],
+    trustAndControl: [
+      "Learner can edit their own goals to steer recommendations",
+      "Every recommendation surfaces its signals — no black-box outputs",
+      "Dismiss feedback is explicit and tied to a specific reason",
+    ],
+  },
   {
     slug: "internal-helpdesk-agent",
     title: "Internal Helpdesk Agent",
