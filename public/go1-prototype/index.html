@@ -758,12 +758,12 @@
           <div class="section-title">Recommended for your role</div>
           <div class="section-sub">Based on your role and what Account Executives on your team are completing</div>
         </div>
-        <span class="section-link" onclick="showWhyRecommended()">Why these? →</span>
+        <span class="section-link" onclick="showWhyRecommended(1)">Why these? →</span>
       </div>
 
       <div class="rec-rail">
         <!-- Card 1 -->
-        <div class="rec-card" onclick="showWhyRecommended()">
+        <div class="rec-card" onclick="showWhyRecommended(1)">
           <div class="rec-hero hero-sales">
             <div class="rec-hero-badge">Sales</div>
           </div>
@@ -783,7 +783,7 @@
         </div>
 
         <!-- Card 2 -->
-        <div class="rec-card" onclick="showWhyRecommended()">
+        <div class="rec-card" onclick="showWhyRecommended(2)">
           <div class="rec-hero hero-compliance">
             <div class="rec-hero-badge">Compliance</div>
           </div>
@@ -803,7 +803,7 @@
         </div>
 
         <!-- Card 3 -->
-        <div class="rec-card" onclick="showWhyRecommended()">
+        <div class="rec-card" onclick="showWhyRecommended(3)">
           <div class="rec-hero hero-leadership">
             <div class="rec-hero-badge">Leadership</div>
           </div>
@@ -905,41 +905,41 @@
         <div class="panel-body">
 
           <div class="s2-course-card">
-            <img class="s2-course-thumb-img" src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=120&q=80&fit=crop" alt="AI Sales Discovery Call Mastery" />
+            <img id="s2-thumb" class="s2-course-thumb-img" src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=120&q=80&fit=crop" alt="" />
             <div class="s2-course-info">
-              <div class="s2-course-provider">LinkedIn Learning</div>
-              <div class="s2-course-title">AI Sales Discovery Call Mastery</div>
-              <div class="s2-course-meta">2h 15min · Course</div>
+              <div id="s2-provider" class="s2-course-provider">LinkedIn Learning</div>
+              <div id="s2-title" class="s2-course-title">AI Sales Discovery Call Mastery</div>
+              <div id="s2-meta" class="s2-course-meta">2h 15min · Course</div>
             </div>
           </div>
 
           <div class="signals-label">Why it matched you</div>
 
-          <div class="signal-row">
-            <div class="signal-header">
-              <span class="signal-icon">●</span>
-              <span class="signal-name">Your role</span>
-              <span class="signal-pct">87% match</span>
+          <div id="s2-signals">
+            <div class="signal-row">
+              <div class="signal-header">
+                <span class="signal-icon">●</span>
+                <span class="signal-name">Your role</span>
+                <span class="signal-pct">87% match</span>
+              </div>
+              <div class="signal-desc">87 out of 100 Account Executives at companies like yours have done this course — it's a strong fit for your day-to-day</div>
             </div>
-            <div class="signal-desc">87 out of 100 Account Executives at companies like yours have done this course — it's a strong fit for your day-to-day</div>
-          </div>
-
-          <div class="signal-row">
-            <div class="signal-header">
-              <span class="signal-icon">○</span>
-              <span class="signal-name">Your team</span>
-              <span class="signal-pct">82% finished it</span>
+            <div class="signal-row">
+              <div class="signal-header">
+                <span class="signal-icon">○</span>
+                <span class="signal-name">Your team</span>
+                <span class="signal-pct">82% finished it</span>
+              </div>
+              <div class="signal-desc">Most people on your sales team who started this saw it through — that's well above average, which usually means it's worth the time</div>
             </div>
-            <div class="signal-desc">Most people on your sales team who started this saw it through — that's well above average, which usually means it's worth the time</div>
-          </div>
-
-          <div class="signal-row">
-            <div class="signal-header">
-              <span class="signal-icon">▌</span>
-              <span class="signal-name">Up to date</span>
-              <span class="freshness-chip">Updated 3 weeks ago</span>
+            <div class="signal-row">
+              <div class="signal-header">
+                <span class="signal-icon">▌</span>
+                <span class="signal-name">Up to date</span>
+                <span class="freshness-chip">Updated 3 weeks ago</span>
+              </div>
+              <div class="signal-desc">The course was refreshed recently, so the examples and techniques reflect how AI sales is actually working right now</div>
             </div>
-            <div class="signal-desc">The course was refreshed recently, so the examples and techniques reflect how AI sales is actually working right now</div>
           </div>
 
           <div class="override-row">
@@ -961,7 +961,7 @@
           <div class="panel-title">Help us improve your recommendations</div>
         </div>
         <div class="dismiss-body">
-          <div class="dismiss-question">Why are you dismissing "AI Sales Discovery Call Mastery"?</div>
+          <div id="dismiss-question" class="dismiss-question">Why are you dismissing "AI Sales Discovery Call Mastery"?</div>
 
           <div class="dismiss-options">
             <button class="dismiss-option" onclick="selectOption(this)">
@@ -998,12 +998,76 @@
 <div class="hint" id="hint">Click cards or "Why these? →" to explore all 4 screens</div>
 
 <script>
-  function showWhyRecommended() {
+  const cards = {
+    1: {
+      provider: 'LinkedIn Learning',
+      title: 'AI Sales Discovery Call Mastery',
+      meta: '2h 15min · Course',
+      img: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=120&q=80&fit=crop',
+      signals: [
+        { icon: '●', name: 'Your role', stat: '87% match', desc: '87 out of 100 Account Executives at companies like yours have done this course — it\'s a strong fit for your day-to-day' },
+        { icon: '○', name: 'Your team', stat: '82% finished it', desc: 'Most people on your sales team who started this saw it through — that\'s well above average, which usually means it\'s worth the time' },
+        { icon: '▌', name: 'Up to date', chip: 'Updated 3 weeks ago', desc: 'The course was refreshed recently, so the examples and techniques reflect how AI sales is actually working right now' },
+      ]
+    },
+    2: {
+      provider: 'Coursera for Business',
+      title: 'Handling AI Sales Objections',
+      meta: '1h 40min · Course',
+      img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=120&q=80&fit=crop',
+      signals: [
+        { icon: '●', name: 'Compliance deadline', stat: '21 days left', desc: 'Your product certification requires this module — completing it now keeps you on track before the Nov 30 deadline' },
+        { icon: '○', name: 'Your role', stat: '74% match', desc: '74 out of 100 Account Executives with an active product certification have completed this as part of their prep' },
+        { icon: '▌', name: 'Up to date', chip: 'Updated 6 weeks ago', desc: 'Covers the latest objection patterns around AI-assisted selling — relevant to the deals your team is running right now' },
+      ]
+    },
+    3: {
+      provider: 'Degreed',
+      title: 'Voice AI Demo Playbook',
+      meta: '45 min · Video',
+      img: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=120&q=80&fit=crop',
+      signals: [
+        { icon: '●', name: 'Your role', stat: '91% match', desc: 'Morgan matched this specifically to AEs selling Voice AI products — it\'s one of the highest role-match scores in your queue' },
+        { icon: '○', name: 'Short and high-rated', stat: '4.9 stars', desc: 'It\'s 45 minutes and rated in the top 5% of videos on the platform — high signal for a quick, useful watch' },
+        { icon: '▌', name: 'Up to date', chip: 'Updated 2 weeks ago', desc: 'The demo scripts were refreshed after the latest product release — what\'s in here matches what you\'re demoing today' },
+      ]
+    }
+  };
+
+  let currentCardTitle = '';
+
+  function showWhyRecommended(cardId) {
+    const card = cards[cardId];
+    currentCardTitle = card.title;
+
+    // Update course card
+    document.getElementById('s2-thumb').src = card.img;
+    document.getElementById('s2-provider').textContent = card.provider;
+    document.getElementById('s2-title').textContent = card.title;
+    document.getElementById('s2-meta').textContent = card.meta;
+
+    // Update signals
+    const signalContainer = document.getElementById('s2-signals');
+    signalContainer.innerHTML = card.signals.map(s => `
+      <div class="signal-row">
+        <div class="signal-header">
+          <span class="signal-icon">${s.icon}</span>
+          <span class="signal-name">${s.name}</span>
+          ${s.chip ? `<span class="freshness-chip">${s.chip}</span>` : `<span class="signal-pct">${s.stat}</span>`}
+        </div>
+        <div class="signal-desc">${s.desc}</div>
+      </div>
+    `).join('');
+
     document.getElementById('panel-why').classList.remove('hidden');
   }
+
   function showDismiss() {
+    document.getElementById('dismiss-question').textContent = `Why are you dismissing "${currentCardTitle}"?`;
+    document.querySelectorAll('.dismiss-option').forEach(o => o.classList.remove('selected'));
     document.getElementById('panel-dismiss').classList.remove('hidden');
   }
+
   function closePanel(id) {
     document.getElementById(id).classList.add('hidden');
   }
@@ -1019,7 +1083,6 @@
     document.querySelectorAll('.dismiss-option').forEach(o => o.classList.remove('selected'));
     el.classList.add('selected');
   }
-  // Fade hint after 5s
   setTimeout(() => {
     document.getElementById('hint').classList.add('fade');
   }, 2000);
