@@ -837,8 +837,8 @@
 <body>
 
 <div class="device">
-  <!-- SIDEBAR -->
-  <nav class="sidebar">
+  <!-- SIDEBAR (hidden until user enters Go1) -->
+  <nav class="sidebar hidden" id="go1-sidebar">
     <div class="sidebar-logo">go1</div>
     <div class="nav-item active"><span class="nav-icon">⊞</span> Home</div>
     <div class="nav-item"><span class="nav-icon">○</span> My Learning</div>
@@ -852,10 +852,13 @@
     <!-- ══════════════════════════════
          SCREEN 1 — Homepage
     ══════════════════════════════ -->
-    <div class="screen" id="screen-home">
-      <div>
-        <div class="page-title">Good morning, Sarah</div>
-        <div class="role-chip">Account Executive · Voice AI Sales</div>
+    <div class="screen hidden" id="screen-home">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+        <div>
+          <div class="page-title">Good morning, Sarah</div>
+          <div class="role-chip">Account Executive · Voice AI Sales</div>
+        </div>
+        <button onclick="goBackToSlack()" style="font-size:12px;color:#609da9;background:none;border:1px solid #e8eced;border-radius:8px;padding:6px 14px;cursor:pointer;font-family:inherit;white-space:nowrap;">← Back to Slack</button>
       </div>
 
       <!-- Morgan banner -->
@@ -869,7 +872,7 @@
           <div class="morgan-message">Hi Sarah, I'm Morgan — your AI learning agent. I found a 12pm window today for your highest-priority learning. Here's what I surfaced for you.</div>
           <div style="display:flex;gap:16px;margin-top:6px;">
             <div class="morgan-cta" style="margin-top:0;" onclick="event.stopPropagation();showMorganActivity()">View activity →</div>
-            <div class="morgan-cta" style="margin-top:0;color:#667070;" onclick="event.stopPropagation();showSlack()">See in Slack →</div>
+            <div class="morgan-cta" style="margin-top:0;color:#667070;" onclick="event.stopPropagation();openGoalsEditor()">Edit my goals →</div>
           </div>
         </div>
       </div>
@@ -980,7 +983,7 @@
     ══════════════════════════════ -->
     <div class="screen hidden" id="screen-morgan">
       <div class="panel-topbar" style="padding:0 0 18px; border:none; margin-bottom:0">
-        <button class="back-btn" onclick="goHome()">← Back</button>
+        <button class="back-btn" onclick="goBackFromMorgan()">← Back</button>
         <div class="panel-title" style="flex:1; text-align:center">Morgan Activity</div>
         <div style="width:44px"></div>
       </div>
@@ -1237,7 +1240,7 @@
     <!-- ══════════════════════════════
          SCREEN 5 — Slack view
     ══════════════════════════════ -->
-    <div class="screen hidden" id="screen-slack" style="background:#fff;padding:0;">
+    <div class="screen" id="screen-slack" style="background:#fff;padding:0;">
 
       <!-- Slack chrome -->
       <div style="display:flex;height:100%;">
@@ -1273,7 +1276,7 @@
               <div style="font-size:14px;font-weight:700;color:#1d1c1d;">Morgan</div>
               <div style="font-size:11px;color:#616061;">Go1 · Learning Agent · Active now</div>
             </div>
-            <button onclick="goHome()" style="margin-left:auto;font-size:12px;color:#609da9;background:none;border:1px solid #e8eced;border-radius:6px;padding:5px 12px;cursor:pointer;font-family:inherit;">← Back to Go1</button>
+            <button onclick="goToGo1()" style="margin-left:auto;font-size:12px;color:#609da9;background:none;border:1px solid #e8eced;border-radius:6px;padding:5px 12px;cursor:pointer;font-family:inherit;">Open Go1 portal →</button>
           </div>
 
           <!-- Message thread -->
@@ -1324,6 +1327,11 @@
                     <button onclick="showSlackSnooze()" style="background:#fff;color:#1d1c1d;font-size:12px;font-weight:500;padding:7px 14px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;">Snooze 1 hour</button>
                     <button onclick="showSlackDismiss()" style="background:#fff;color:#616061;font-size:12px;font-weight:500;padding:7px 14px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;">Not for me</button>
                   </div>
+                  <!-- Secondary actions -->
+                  <div style="display:flex;gap:16px;margin-top:10px;">
+                    <button onclick="showWhyRecommended(1)" style="background:none;border:none;font-size:11px;color:#609da9;cursor:pointer;font-family:inherit;padding:0;text-decoration:underline;text-underline-offset:2px;">Why this? →</button>
+                    <button onclick="goToGo1()" style="background:none;border:none;font-size:11px;color:#616061;cursor:pointer;font-family:inherit;padding:0;text-decoration:underline;text-underline-offset:2px;">View in Go1 portal →</button>
+                  </div>
                 </div>
 
                 <!-- Response states (hidden by default) -->
@@ -1357,7 +1365,7 @@
   </div><!-- /main -->
 </div><!-- /device -->
 
-<div class="hint" id="hint">Try "See in Slack →" in the Morgan banner — or click any card's "Why? →"</div>
+<div class="hint" id="hint">Click "Why this?" or "View in Go1 portal →" below the course card</div>
 
 <script>
   const cards = {
@@ -1439,19 +1447,29 @@
     document.getElementById('screen-home').classList.add('slide-left');
     document.getElementById('screen-morgan').classList.remove('hidden');
   }
-  function goHome() {
+  function goBackFromMorgan() {
     document.getElementById('screen-morgan').classList.add('hidden');
-    document.getElementById('screen-slack').classList.add('hidden');
     document.getElementById('screen-home').classList.remove('slide-left');
   }
+  function goToGo1() {
+    document.getElementById('screen-slack').classList.add('hidden');
+    document.getElementById('screen-home').classList.remove('hidden');
+    document.getElementById('screen-home').classList.remove('slide-left');
+    document.getElementById('go1-sidebar').classList.remove('hidden');
+  }
+  function goBackToSlack() {
+    document.getElementById('screen-home').classList.add('hidden');
+    document.getElementById('screen-morgan').classList.add('hidden');
+    document.getElementById('screen-slack').classList.remove('hidden');
+    document.getElementById('go1-sidebar').classList.add('hidden');
+  }
+  // Legacy alias — panels use this to return to their parent context
+  function goHome() { goBackToSlack(); }
   function selectOption(el) {
     document.querySelectorAll('.dismiss-option').forEach(o => o.classList.remove('selected'));
     el.classList.add('selected');
   }
-  function showSlack() {
-    document.getElementById('screen-home').classList.add('slide-left');
-    document.getElementById('screen-slack').classList.remove('hidden');
-  }
+  function showSlack() { goBackToSlack(); }
   function showSlackEnrolled() {
     document.getElementById('slack-enrolled').style.display = 'block';
     document.getElementById('slack-snoozed').style.display = 'none';
