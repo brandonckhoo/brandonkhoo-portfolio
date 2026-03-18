@@ -392,6 +392,8 @@
   }
   .btn-ghost { font-size: 12px; color: var(--gray-500); background: none; border: none; cursor: pointer; font-family: inherit; padding: 0; }
   .btn-ghost:hover { color: var(--charcoal); }
+  .why-link { font-size: 11px; color: var(--teal-light); background: none; border: none; cursor: pointer; font-family: inherit; font-weight: 600; padding: 0; white-space: nowrap; flex-shrink: 0; }
+  .why-link:hover { text-decoration: underline; }
   .btn-enrol {
     background: var(--teal);
     color: #fff;
@@ -758,12 +760,12 @@
           <div class="section-title">Recommended for your role</div>
           <div class="section-sub">Based on your role and what Account Executives on your team are completing</div>
         </div>
-        <span class="section-link" onclick="showWhyRecommended(1)">Why these? →</span>
+        <span class="section-link" style="opacity:0; pointer-events:none">Why these? →</span>
       </div>
 
       <div class="rec-rail">
         <!-- Card 1 -->
-        <div class="rec-card" onclick="showWhyRecommended(1)">
+        <div class="rec-card">
           <div class="rec-hero hero-sales">
             <div class="rec-hero-badge">Sales</div>
           </div>
@@ -771,19 +773,22 @@
             <div class="rec-provider">LinkedIn Learning</div>
             <div class="rec-title">AI Sales Discovery Call Mastery</div>
             <div class="rec-meta">2h 15min · Course · ★ 4.8</div>
-            <div class="why-badge why-badge-morgan">
-              <span class="why-badge-dot" style="background:#f5c842"></span>
-              Morgan has a 12pm block ready for this
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px;">
+              <div class="why-badge why-badge-morgan" style="margin-top:0">
+                <span class="why-badge-dot" style="background:#f5c842"></span>
+                Morgan has a 12pm block ready
+              </div>
+              <button class="why-link" onclick="showWhyRecommended(1)">Why? →</button>
             </div>
           </div>
           <div class="rec-footer">
-            <button class="btn-ghost" onclick="event.stopPropagation(); showDismiss()">Not interested</button>
-            <button class="btn-enrol" onclick="event.stopPropagation()">Enrol</button>
+            <button class="btn-ghost" onclick="showDismiss(1)">Not interested</button>
+            <button class="btn-enrol">Enrol</button>
           </div>
         </div>
 
         <!-- Card 2 -->
-        <div class="rec-card" onclick="showWhyRecommended(2)">
+        <div class="rec-card">
           <div class="rec-hero hero-compliance">
             <div class="rec-hero-badge">Compliance</div>
           </div>
@@ -791,19 +796,22 @@
             <div class="rec-provider">Coursera for Business</div>
             <div class="rec-title">Handling AI Sales Objections</div>
             <div class="rec-meta">1h 40min · Course · ★ 4.6</div>
-            <div class="why-badge why-badge-compliance">
-              <span class="why-badge-dot" style="background:#e89b3c"></span>
-              Product certification due in 21 days
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px;">
+              <div class="why-badge why-badge-compliance" style="margin-top:0">
+                <span class="why-badge-dot" style="background:#e89b3c"></span>
+                Certification due in 21 days
+              </div>
+              <button class="why-link" onclick="showWhyRecommended(2)">Why? →</button>
             </div>
           </div>
           <div class="rec-footer">
-            <button class="btn-ghost" onclick="event.stopPropagation(); showDismiss()">Not interested</button>
-            <button class="btn-enrol" onclick="event.stopPropagation()">Enrol</button>
+            <button class="btn-ghost" onclick="showDismiss(2)">Not interested</button>
+            <button class="btn-enrol">Enrol</button>
           </div>
         </div>
 
         <!-- Card 3 -->
-        <div class="rec-card" onclick="showWhyRecommended(3)">
+        <div class="rec-card">
           <div class="rec-hero hero-leadership">
             <div class="rec-hero-badge">Leadership</div>
           </div>
@@ -811,14 +819,17 @@
             <div class="rec-provider">Degreed</div>
             <div class="rec-title">Voice AI Demo Playbook</div>
             <div class="rec-meta">45 min · Video · ★ 4.9</div>
-            <div class="why-badge why-badge-morgan">
-              <span class="why-badge-dot" style="background:#f5c842"></span>
-              Morgan matched this to your AE role
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px;">
+              <div class="why-badge why-badge-morgan" style="margin-top:0">
+                <span class="why-badge-dot" style="background:#f5c842"></span>
+                Morgan matched this to your role
+              </div>
+              <button class="why-link" onclick="showWhyRecommended(3)">Why? →</button>
             </div>
           </div>
           <div class="rec-footer">
-            <button class="btn-ghost" onclick="event.stopPropagation(); showDismiss()">Not interested</button>
-            <button class="btn-enrol" onclick="event.stopPropagation()">Enrol</button>
+            <button class="btn-ghost" onclick="showDismiss(3)">Not interested</button>
+            <button class="btn-enrol">Enrol</button>
           </div>
         </div>
       </div>
@@ -945,6 +956,7 @@
           <div class="override-row">
             <div class="override-text">Not quite right? Tell Morgan and it will adjust what it surfaces for you next time.</div>
             <button class="btn-feedback" onclick="closePanel('panel-why'); showDismiss()">Give feedback</button>
+            <!-- currentCardTitle is already set from showWhyRecommended -->
           </div>
 
         </div>
@@ -1062,8 +1074,10 @@
     document.getElementById('panel-why').classList.remove('hidden');
   }
 
-  function showDismiss() {
-    document.getElementById('dismiss-question').textContent = `Why are you dismissing "${currentCardTitle}"?`;
+  function showDismiss(cardId) {
+    const title = cardId ? cards[cardId].title : currentCardTitle;
+    if (cardId) currentCardTitle = title;
+    document.getElementById('dismiss-question').textContent = `Why are you dismissing "${title}"?`;
     document.querySelectorAll('.dismiss-option').forEach(o => o.classList.remove('selected'));
     document.getElementById('panel-dismiss').classList.remove('hidden');
   }
