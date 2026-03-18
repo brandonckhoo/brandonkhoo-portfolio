@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Go1 — Learner Discovery Prototype</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal: #35656e;
+    --teal-dark: #2a4f57;
+    --teal-light: #609da9;
+    --cerulean-bg: #e8f4f6;
+    --charcoal: #394646;
+    --gray-700: #394646;
+    --gray-500: #667070;
+    --gray-300: #b0bcbc;
+    --gray-100: #e8eced;
+    --gray-50: #f4f6f6;
+    --bg: #faf9f4;
+    --bg-sand: #ede9e0;
+    --surface: #ffffff;
+    --border: rgba(57,70,70,0.12);
+    --yellow: #f5c842;
+    --yellow-soft: #fdf3c2;
+    --sage: #8aab96;
+    --sage-bg: #e8f5ee;
+    --amber-bg: #fef3ec;
+    --amber: #e89b3c;
+    --shadow-md: 0 4px 12px rgba(36,44,44,0.08);
+    --shadow-lg: 0 12px 32px rgba(36,44,44,0.10);
+    --r-sm: 8px;
+    --r-md: 12px;
+    --r-lg: 16px;
+    --r-xl: 24px;
+  }
+
+  body {
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 32px 16px;
+  }
+
+  /* Device shell */
+  .device {
+    width: 1180px;
+    height: 820px;
+    background: var(--bg);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    position: relative;
+    display: flex;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 200px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 24px 12px;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .sidebar-logo {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--teal);
+    padding: 0 8px 20px;
+    letter-spacing: -0.5px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: var(--r-sm);
+    font-size: 13px;
+    color: var(--gray-500);
+    cursor: pointer;
+    transition: background 0.15s;
+    font-weight: 500;
+    user-select: none;
+  }
+  .nav-item:hover { background: var(--gray-50); }
+  .nav-item.active {
+    background: var(--cerulean-bg);
+    color: var(--teal-dark);
+    border-left: 2px solid var(--teal);
+  }
+  .nav-icon { font-size: 15px; }
+
+  /* Main content */
+  .main {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Screens */
+  .screen {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    padding: 28px 32px;
+    background: var(--bg);
+    transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.3s ease;
+  }
+  .screen.hidden { transform: translateX(32px); opacity: 0; pointer-events: none; }
+  .screen.slide-left { transform: translateX(-32px); opacity: 0; pointer-events: none; }
+
+  /* Panel screens (overlay) */
+  .panel {
+    position: absolute;
+    inset: 0;
+    background: rgba(57,70,70,0.3);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    transition: opacity 0.25s ease;
+    z-index: 10;
+  }
+  .panel.hidden { opacity: 0; pointer-events: none; }
+  .panel-content {
+    width: 520px;
+    height: 100%;
+    background: var(--surface);
+    overflow-y: auto;
+    transform: translateX(0);
+    transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+    box-shadow: -8px 0 32px rgba(36,44,44,0.12);
+  }
+  .panel.hidden .panel-content { transform: translateX(40px); }
+
+  /* Top bar */
+  .topbar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 28px;
+    gap: 16px;
+  }
+  .page-title { font-size: 22px; font-weight: 700; color: var(--charcoal); }
+  .page-subtitle { font-size: 13px; color: var(--gray-500); margin-top: 2px; }
+
+  /* Role chip */
+  .role-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    background: var(--cerulean-bg);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--teal-dark);
+    margin-top: 4px;
+  }
+
+  /* Morgan banner */
+  .morgan-banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--yellow-soft);
+    border-radius: var(--r-lg);
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    cursor: pointer;
+    transition: box-shadow 0.15s;
+  }
+  .morgan-banner:hover { box-shadow: var(--shadow-md); }
+  .morgan-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--yellow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .morgan-banner-info { flex: 1; }
+  .morgan-banner-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .morgan-name { font-size: 14px; font-weight: 700; color: var(--charcoal); }
+  .morgan-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    background: var(--cerulean-bg);
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--teal);
+  }
+  .status-dot {
+    width: 5px; height: 5px; border-radius: 50%; background: var(--teal);
+  }
+  .morgan-message { font-size: 12px; color: var(--gray-500); line-height: 1.5; }
+  .morgan-cta { font-size: 12px; color: var(--teal-light); font-weight: 500; margin-top: 6px; }
+
+  /* Section header */
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .section-title { font-size: 15px; font-weight: 700; color: var(--charcoal); }
+  .section-sub { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+  .section-link {
+    font-size: 12px;
+    color: var(--teal-light);
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .section-link:hover { text-decoration: underline; }
+
+  /* Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-left: 8px;
+  }
+  .badge-amber { background: var(--amber-bg); color: #b54a0a; }
+  .badge-teal { background: var(--cerulean-bg); color: var(--teal-dark); }
+
+  /* Assigned card */
+  .assigned-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    margin-bottom: 32px;
+    max-width: 360px;
+  }
+  .assigned-hero {
+    width: 100%;
+    height: 160px;
+    background: linear-gradient(135deg, #2d5458 0%, #35656e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .assigned-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+  }
+  .hero-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.3px;
+  }
+  .assigned-body { padding: 14px 16px 16px; }
+  .assigned-provider { font-size: 11px; color: var(--gray-500); margin-bottom: 3px; }
+  .assigned-title { font-size: 14px; font-weight: 600; color: var(--charcoal); margin-bottom: 4px; }
+  .assigned-meta { font-size: 11px; color: var(--gray-500); margin-bottom: 4px; }
+  .due-date { font-size: 11px; color: #b54a0a; font-weight: 500; }
+  .btn-primary {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--teal);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 11px;
+    border-radius: var(--r-md);
+    border: none;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background 0.15s;
+    font-family: inherit;
+  }
+  .btn-primary:hover { background: var(--teal-dark); }
+
+  /* Rec cards */
+  .rec-rail {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .rec-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+  .rec-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .rec-hero {
+    height: 130px;
+    position: relative;
+    overflow: hidden;
+    background: var(--gray-100);
+  }
+  .rec-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .rec-hero-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+  .rec-body { padding: 12px 14px 14px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+  .rec-provider { font-size: 10px; color: var(--gray-500); }
+  .rec-title { font-size: 13px; font-weight: 600; color: var(--charcoal); line-height: 1.35; }
+  .rec-meta { font-size: 11px; color: var(--gray-500); }
+  .why-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 500;
+    margin-top: 2px;
+    line-height: 1.3;
+  }
+  .why-badge-morgan { background: var(--yellow-soft); color: #7a5c00; }
+  .why-badge-compliance { background: var(--amber-bg); color: #b54a0a; }
+  .why-badge-dot { width: 5px; height: 5px; border-radius: 50%; }
+  .rec-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+  }
+  .btn-ghost { font-size: 12px; color: var(--gray-500); background: none; border: none; cursor: pointer; font-family: inherit; padding: 0; }
+  .btn-ghost:hover { color: var(--charcoal); }
+  .btn-enrol {
+    background: var(--teal);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 16px;
+    border-radius: var(--r-md);
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  .btn-enrol:hover { background: var(--teal-dark); }
+
+  /* ── Screen 2: Why Recommended ── */
+  .panel-topbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .back-btn {
+    font-size: 13px;
+    color: var(--teal-light);
+    font-weight: 500;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: inherit;
+    padding: 0;
+  }
+  .back-btn:hover { text-decoration: underline; }
+  .panel-title { font-size: 15px; font-weight: 700; color: var(--charcoal); }
+  .panel-body { padding: 20px 24px; display: flex; flex-direction: column; gap: 20px; }
+
+  .s2-course-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 14px 16px;
+  }
+  .s2-course-thumb {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+  .s2-course-info { flex: 1; }
+  .s2-course-provider { font-size: 10px; color: var(--gray-500); }
+  .s2-course-title { font-size: 13px; font-weight: 600; color: var(--charcoal); margin: 2px 0; }
+  .s2-course-meta { font-size: 11px; color: var(--gray-500); }
+
+  .signals-label { font-size: 13px; font-weight: 600; color: var(--charcoal); }
+  .signal-row {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .signal-header { display: flex; align-items: center; gap: 8px; }
+  .signal-icon { font-size: 14px; }
+  .signal-name { font-size: 13px; font-weight: 600; color: var(--charcoal); }
+  .signal-pct { font-size: 13px; font-weight: 700; color: var(--teal); }
+  .signal-desc { font-size: 12px; color: var(--gray-500); line-height: 1.5; }
+  .freshness-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    background: var(--sage-bg);
+    color: #1a6b3a;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-left: 8px;
+  }
+
+  .override-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    background: var(--bg);
+    border-radius: var(--r-md);
+    padding: 14px 16px;
+  }
+  .override-text { font-size: 12px; color: var(--gray-500); line-height: 1.5; flex: 1; }
+  .btn-feedback {
+    background: var(--cerulean-bg);
+    color: var(--teal);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: var(--r-sm);
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+  .btn-feedback:hover { background: #d0e8ed; }
+
+  /* ── Screen 3: Dismiss Feedback ── */
+  .dismiss-panel .panel-content { width: 520px; }
+  .dismiss-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+  .dismiss-question { font-size: 13px; color: var(--gray-500); }
+  .dismiss-options { display: flex; flex-direction: column; gap: 8px; }
+  .dismiss-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    font-size: 13px;
+    color: var(--charcoal);
+    font-family: inherit;
+    text-align: left;
+    width: 100%;
+  }
+  .dismiss-option:hover { border-color: var(--teal); background: var(--cerulean-bg); }
+  .dismiss-option.selected { border-color: var(--teal); background: var(--cerulean-bg); }
+  .radio-dot {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--gray-300);
+    flex-shrink: 0;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .dismiss-option.selected .radio-dot,
+  .dismiss-option:hover .radio-dot { border-color: var(--teal); background: var(--teal); }
+  .morgan-train-note {
+    font-size: 12px;
+    color: var(--gray-500);
+    line-height: 1.6;
+    padding-top: 4px;
+  }
+  .dismiss-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 4px;
+  }
+  .btn-done {
+    background: var(--teal);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 24px;
+    border-radius: var(--r-md);
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  .btn-done:hover { background: var(--teal-dark); }
+  .btn-skip { font-size: 13px; color: var(--gray-500); background: none; border: none; cursor: pointer; font-family: inherit; }
+  .btn-skip:hover { color: var(--charcoal); }
+
+  /* ── Screen 4: Morgan Activity ── */
+  .morgan-hero-strip {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: var(--yellow-soft);
+    padding: 20px 24px;
+  }
+  .morgan-hero-avatar {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: var(--yellow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+  .morgan-hero-text { flex: 1; }
+  .morgan-hero-name { font-size: 15px; font-weight: 700; color: var(--charcoal); margin-bottom: 4px; }
+  .morgan-hero-desc { font-size: 12px; color: var(--gray-500); line-height: 1.5; }
+  .morgan-active-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    background: var(--cerulean-bg);
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--teal);
+    margin-top: 8px;
+  }
+
+  .activity-section { padding: 20px 24px; }
+  .activity-section-title { font-size: 13px; font-weight: 700; color: var(--charcoal); margin-bottom: 12px; }
+  .activity-list { display: flex; flex-direction: column; gap: 8px; }
+  .activity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 14px 16px;
+  }
+  .activity-icon {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+  .activity-icon-teal { background: var(--cerulean-bg); }
+  .activity-icon-yellow { background: var(--yellow-soft); }
+  .activity-icon-green { background: var(--sage-bg); }
+  .activity-icon-amber { background: var(--amber-bg); }
+  .activity-text { flex: 1; }
+  .activity-title { font-size: 13px; font-weight: 500; color: var(--charcoal); margin-bottom: 3px; line-height: 1.4; }
+  .activity-sub { font-size: 11px; color: var(--gray-500); line-height: 1.4; }
+
+  .manage-link {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: var(--teal-light);
+    font-weight: 500;
+    padding: 16px 24px;
+    cursor: pointer;
+    border-top: 1px solid var(--border);
+    margin-top: 4px;
+  }
+  .manage-link:hover { text-decoration: underline; }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 3px; }
+
+  /* Tooltip hint */
+  .hint {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(57,70,70,0.85);
+    color: #fff;
+    font-size: 11px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-family: inherit;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 1s ease 3s;
+  }
+  .hint.fade { opacity: 0; }
+
+  /* Course hero images using CSS gradients as fallback */
+  .hero-sales { background: linear-gradient(135deg, #1a3a4a 0%, #2d6a7a 100%); }
+  .hero-compliance { background: linear-gradient(135deg, #2d3a1a 0%, #4a6a2d 100%); }
+  .hero-leadership { background: linear-gradient(135deg, #2a1a3a 0%, #5a2d7a 100%); }
+  .hero-cert { background: linear-gradient(135deg, #2d5458 0%, #35656e 100%); }
+</style>
+</head>
+<body>
+
+<div class="device">
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+    <div class="sidebar-logo">go1</div>
+    <div class="nav-item active"><span class="nav-icon">⊞</span> Home</div>
+    <div class="nav-item"><span class="nav-icon">○</span> My Learning</div>
+    <div class="nav-item"><span class="nav-icon">↗</span> Explore</div>
+    <div class="nav-item"><span class="nav-icon">↑</span> Progress</div>
+  </nav>
+
+  <!-- MAIN AREA -->
+  <div class="main">
+
+    <!-- ══════════════════════════════
+         SCREEN 1 — Homepage
+    ══════════════════════════════ -->
+    <div class="screen" id="screen-home">
+      <div>
+        <div class="page-title">Good morning, Sarah</div>
+        <div class="role-chip">Account Executive · Voice AI Sales</div>
+      </div>
+
+      <!-- Morgan banner -->
+      <div class="morgan-banner" id="morgan-banner-link" onclick="showMorganActivity()" style="margin-top:20px">
+        <div class="morgan-avatar">🤖</div>
+        <div class="morgan-banner-info">
+          <div class="morgan-banner-top">
+            <span class="morgan-name">Morgan</span>
+            <span class="morgan-status"><span class="status-dot"></span> Active in Slack</span>
+          </div>
+          <div class="morgan-message">Hi Sarah, I found a 12pm window today for your highest-priority learning. Here is what I surfaced for you.</div>
+          <div class="morgan-cta">View Morgan activity →</div>
+        </div>
+      </div>
+
+      <!-- Assigned to you -->
+      <div class="section-header">
+        <div>
+          <div class="section-title">Assigned to you <span class="badge badge-amber">1 due this month</span></div>
+        </div>
+      </div>
+
+      <div class="assigned-card">
+        <div class="assigned-hero hero-cert">
+          <div class="hero-badge">Certification</div>
+        </div>
+        <div class="assigned-body">
+          <div class="assigned-provider">Go1 Certification</div>
+          <div class="assigned-title">Voice AI Platform Certification</div>
+          <div class="assigned-meta">30 min · Course · ★ 4.8</div>
+          <div class="due-date">Due Nov 30</div>
+          <button class="btn-primary">Start course</button>
+        </div>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="section-header">
+        <div>
+          <div class="section-title">Recommended for your role</div>
+          <div class="section-sub">Based on your role and what Account Executives on your team are completing</div>
+        </div>
+        <span class="section-link" onclick="showWhyRecommended()">Why these? →</span>
+      </div>
+
+      <div class="rec-rail">
+        <!-- Card 1 -->
+        <div class="rec-card" onclick="showWhyRecommended()">
+          <div class="rec-hero hero-sales">
+            <div class="rec-hero-badge">Sales</div>
+          </div>
+          <div class="rec-body">
+            <div class="rec-provider">LinkedIn Learning</div>
+            <div class="rec-title">AI Sales Discovery Call Mastery</div>
+            <div class="rec-meta">2h 15min · Course · ★ 4.8</div>
+            <div class="why-badge why-badge-morgan">
+              <span class="why-badge-dot" style="background:#f5c842"></span>
+              Morgan has a 12pm block ready for this
+            </div>
+          </div>
+          <div class="rec-footer">
+            <button class="btn-ghost" onclick="event.stopPropagation(); showDismiss()">Not interested</button>
+            <button class="btn-enrol" onclick="event.stopPropagation()">Enrol</button>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="rec-card" onclick="showWhyRecommended()">
+          <div class="rec-hero hero-compliance">
+            <div class="rec-hero-badge">Compliance</div>
+          </div>
+          <div class="rec-body">
+            <div class="rec-provider">Coursera for Business</div>
+            <div class="rec-title">Handling AI Sales Objections</div>
+            <div class="rec-meta">1h 40min · Course · ★ 4.6</div>
+            <div class="why-badge why-badge-compliance">
+              <span class="why-badge-dot" style="background:#e89b3c"></span>
+              Product certification due in 21 days
+            </div>
+          </div>
+          <div class="rec-footer">
+            <button class="btn-ghost" onclick="event.stopPropagation(); showDismiss()">Not interested</button>
+            <button class="btn-enrol" onclick="event.stopPropagation()">Enrol</button>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="rec-card" onclick="showWhyRecommended()">
+          <div class="rec-hero hero-leadership">
+            <div class="rec-hero-badge">Leadership</div>
+          </div>
+          <div class="rec-body">
+            <div class="rec-provider">Degreed</div>
+            <div class="rec-title">Voice AI Demo Playbook</div>
+            <div class="rec-meta">45 min · Video · ★ 4.9</div>
+            <div class="why-badge why-badge-morgan">
+              <span class="why-badge-dot" style="background:#f5c842"></span>
+              Morgan matched this to your AE role
+            </div>
+          </div>
+          <div class="rec-footer">
+            <button class="btn-ghost" onclick="event.stopPropagation(); showDismiss()">Not interested</button>
+            <button class="btn-enrol" onclick="event.stopPropagation()">Enrol</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         SCREEN 4 — Morgan Activity
+    ══════════════════════════════ -->
+    <div class="screen hidden" id="screen-morgan">
+      <div class="panel-topbar" style="padding:0 0 18px; border:none; margin-bottom:0">
+        <button class="back-btn" onclick="goHome()">← Back</button>
+        <div class="panel-title" style="flex:1; text-align:center">Morgan Activity</div>
+        <div style="width:44px"></div>
+      </div>
+
+      <div class="morgan-hero-strip" style="margin: 0 -32px; padding: 20px 32px;">
+        <div class="morgan-hero-avatar">🤖</div>
+        <div class="morgan-hero-text">
+          <div class="morgan-hero-name">Morgan</div>
+          <div class="morgan-hero-desc">Your AI learning agent — active in Slack and monitoring your learning moments.</div>
+          <div class="morgan-active-chip"><span class="status-dot"></span> Active</div>
+        </div>
+      </div>
+
+      <div class="activity-section">
+        <div class="activity-section-title">What Morgan did for you today</div>
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-icon activity-icon-teal">📅</div>
+            <div class="activity-text">
+              <div class="activity-title">Blocked 12:00–12:45pm on your calendar</div>
+              <div class="activity-sub">For AI Sales Discovery Call Mastery · 15 min ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon activity-icon-yellow">💬</div>
+            <div class="activity-text">
+              <div class="activity-title">Sent a Slack nudge about your certification deadline</div>
+              <div class="activity-sub">Voice AI Platform Certification due Nov 30 · 3 hours ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon activity-icon-green">↻</div>
+            <div class="activity-text">
+              <div class="activity-title">Refreshed your recommendation rail</div>
+              <div class="activity-sub">87% of AEs in your org completed AI Sales Discovery Call Mastery · Yesterday</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="activity-section" style="padding-top:0">
+        <div class="activity-section-title">Coming up</div>
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-icon activity-icon-amber">⏰</div>
+            <div class="activity-text">
+              <div class="activity-title">Certification deadline reminder in 2 days</div>
+              <div class="activity-sub">Morgan will nudge you Nov 28 via Slack before Voice AI Platform Certification is due</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon activity-icon-teal">📊</div>
+            <div class="activity-text">
+              <div class="activity-title">Weekly learning summary on Friday</div>
+              <div class="activity-sub">Morgan will recap your progress and suggest what to prioritise next week</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="manage-link">Manage Morgan's notifications →</div>
+    </div>
+
+    <!-- ══════════════════════════════
+         PANEL — Why Recommended (Screen 2)
+    ══════════════════════════════ -->
+    <div class="panel hidden" id="panel-why">
+      <div class="panel-content">
+        <div class="panel-topbar">
+          <button class="back-btn" onclick="closePanel('panel-why')">← Back</button>
+          <div class="panel-title">Why this was recommended</div>
+        </div>
+        <div class="panel-body">
+
+          <div class="s2-course-card">
+            <div class="s2-course-thumb" style="background: linear-gradient(135deg,#1a3a4a,#2d6a7a)"></div>
+            <div class="s2-course-info">
+              <div class="s2-course-provider">LinkedIn Learning</div>
+              <div class="s2-course-title">AI Sales Discovery Call Mastery</div>
+              <div class="s2-course-meta">2h 15min · Course</div>
+            </div>
+          </div>
+
+          <div class="signals-label">Intelligence signals</div>
+
+          <div class="signal-row">
+            <div class="signal-header">
+              <span class="signal-icon">●</span>
+              <span class="signal-name">Role match</span>
+              <span class="signal-pct">87%</span>
+            </div>
+            <div class="signal-desc">87 out of 100 Account Executives in similar orgs have completed or bookmarked this content</div>
+          </div>
+
+          <div class="signal-row">
+            <div class="signal-header">
+              <span class="signal-icon">○</span>
+              <span class="signal-name">Peer completion</span>
+              <span class="signal-pct">82%</span>
+            </div>
+            <div class="signal-desc">82% of people in your sales team who started this completed at least 50% — above the platform average</div>
+          </div>
+
+          <div class="signal-row">
+            <div class="signal-header">
+              <span class="signal-icon">▌</span>
+              <span class="signal-name">Content freshness</span>
+              <span class="freshness-chip">Updated 3 weeks ago</span>
+            </div>
+            <div class="signal-desc">Content metadata verified by Go1 enrichment pipeline. Provider last updated course materials recently.</div>
+          </div>
+
+          <div class="override-row">
+            <div class="override-text">Not what you expected? Tell Morgan — your feedback directly improves what gets surfaced next.</div>
+            <button class="btn-feedback" onclick="closePanel('panel-why'); showDismiss()">Give feedback</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         PANEL — Dismiss Feedback (Screen 3)
+    ══════════════════════════════ -->
+    <div class="panel hidden dismiss-panel" id="panel-dismiss">
+      <div class="panel-content">
+        <div class="panel-topbar">
+          <button class="back-btn" onclick="closePanel('panel-dismiss')">← Back</button>
+          <div class="panel-title">Help us improve your recommendations</div>
+        </div>
+        <div class="dismiss-body">
+          <div class="dismiss-question">Why are you dismissing "AI Sales Discovery Call Mastery"?</div>
+
+          <div class="dismiss-options">
+            <button class="dismiss-option" onclick="selectOption(this)">
+              <div class="radio-dot"></div>
+              Already know this topic
+            </button>
+            <button class="dismiss-option" onclick="selectOption(this)">
+              <div class="radio-dot"></div>
+              Not relevant to my role right now
+            </button>
+            <button class="dismiss-option" onclick="selectOption(this)">
+              <div class="radio-dot"></div>
+              Too long for right now
+            </button>
+            <button class="dismiss-option" onclick="selectOption(this)">
+              <div class="radio-dot"></div>
+              Just browsing
+            </button>
+          </div>
+
+          <div class="morgan-train-note">Your feedback trains Morgan. The more you share, the better Morgan gets at finding your next best learning moment.</div>
+
+          <div class="dismiss-footer">
+            <button class="btn-done" onclick="closePanel('panel-dismiss')">Done</button>
+            <button class="btn-skip" onclick="closePanel('panel-dismiss')">Skip</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /device -->
+
+<div class="hint" id="hint">Click cards or "Why these? →" to explore all 4 screens</div>
+
+<script>
+  function showWhyRecommended() {
+    document.getElementById('panel-why').classList.remove('hidden');
+  }
+  function showDismiss() {
+    document.getElementById('panel-dismiss').classList.remove('hidden');
+  }
+  function closePanel(id) {
+    document.getElementById(id).classList.add('hidden');
+  }
+  function showMorganActivity() {
+    document.getElementById('screen-home').classList.add('slide-left');
+    document.getElementById('screen-morgan').classList.remove('hidden');
+  }
+  function goHome() {
+    document.getElementById('screen-morgan').classList.add('hidden');
+    document.getElementById('screen-home').classList.remove('slide-left');
+  }
+  function selectOption(el) {
+    document.querySelectorAll('.dismiss-option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+  // Fade hint after 5s
+  setTimeout(() => {
+    document.getElementById('hint').classList.add('fade');
+  }, 2000);
+</script>
+</body>
+</html>
