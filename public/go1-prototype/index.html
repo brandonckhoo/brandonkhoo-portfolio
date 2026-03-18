@@ -635,6 +635,20 @@
   .activity-title { font-size: 13px; font-weight: 500; color: var(--charcoal); margin-bottom: 3px; line-height: 1.4; }
   .activity-sub { font-size: 11px; color: var(--gray-500); line-height: 1.4; }
 
+  /* Learner profile signal cards */
+  .learner-signal-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .learner-signal-label { font-size: 10px; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
+  .learner-signal-value { font-size: 13px; font-weight: 700; color: var(--charcoal); }
+  .learner-signal-sub { font-size: 11px; color: var(--gray-500); }
+
   .manage-link {
     display: block;
     text-align: center;
@@ -851,6 +865,36 @@
           <div class="morgan-hero-name">Morgan</div>
           <div class="morgan-hero-desc">Your AI learning agent — active in Slack and monitoring your learning moments.</div>
           <div class="morgan-active-chip"><span class="status-dot"></span> Active</div>
+        </div>
+      </div>
+
+      <!-- What Morgan knows about you -->
+      <div class="activity-section" style="padding-bottom:0">
+        <div class="activity-section-title">What Morgan knows about you</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">
+          <div class="learner-signal-card">
+            <div class="learner-signal-label">Your role</div>
+            <div class="learner-signal-value">Account Executive</div>
+            <div class="learner-signal-sub">Voice AI Sales · Revenue team</div>
+          </div>
+          <div class="learner-signal-card">
+            <div class="learner-signal-label">Compliance obligations</div>
+            <div class="learner-signal-value" style="color:#b54a0a">1 due soon</div>
+            <div class="learner-signal-sub">Voice AI Platform Certification · Nov 30</div>
+          </div>
+          <div class="learner-signal-card">
+            <div class="learner-signal-label">Your team's focus</div>
+            <div class="learner-signal-value">AI-assisted selling</div>
+            <div class="learner-signal-sub">12 teammates active this month</div>
+          </div>
+          <div class="learner-signal-card">
+            <div class="learner-signal-label">Your learning this quarter</div>
+            <div class="learner-signal-value">3 courses completed</div>
+            <div class="learner-signal-sub">Avg. 82% completion rate</div>
+          </div>
+        </div>
+        <div style="background:var(--cerulean-bg);border-radius:var(--r-md);padding:12px 14px;margin-bottom:20px;font-size:12px;color:var(--gray-500);line-height:1.6;">
+          <span style="font-weight:600;color:var(--teal)">Morgan's read on you:</span> You're an AE selling Voice AI products with a certification deadline coming up. Your team is actively building AI sales skills. Morgan prioritises content that closes skill gaps your peers have already acted on.
         </div>
       </div>
 
