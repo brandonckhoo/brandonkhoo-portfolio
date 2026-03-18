@@ -407,10 +407,10 @@ export const siteContent = {
         slug: "go1-prototype",
         title: "Go1 Content Intelligence Prototype",
         oneliner:
-          "A 4-screen interactive prototype showing how an AI layer (Morgan) can make recommendation decisions visible, explainable, and improvable — built as a take-home assignment for a Senior PM role at Go1.",
+          "A 4-screen interactive prototype showing how an AI layer (Morgan) can make learning recommendations visible, explainable, and improvable for Go1's learner discovery experience.",
         type: "prototype",
         positioning:
-          "Interview assignment prototype for Go1's Content Intelligence & Discovery SPM role. Demonstrates PM thinking on recommendation explainability and learner-facing AI design.",
+          "Product prototype exploring Go1's content intelligence layer — recommendation explainability, learner-facing AI design, and the feedback loop that makes it improvable over time.",
         links: [
           {
             label: "Live prototype",
@@ -1047,7 +1047,7 @@ export const sideProjectDetails: SideProjectDetail[] = [
       },
     ],
     whatIBuilt:
-      "A fully interactive 4-screen clickable prototype for Go1's SPM interview assignment. It demonstrates one high-value discovery experience: what happens when learners can see why content was recommended, give structured feedback, and watch the AI agent improve. Morgan — the intelligence layer — is the central character: she explains her reasoning, logs her actions, and lets learners steer her with editable goals.",
+      "A fully interactive 4-screen clickable prototype exploring one high-value discovery experience for Go1: what happens when learners can see why content was recommended, give structured feedback, and watch the AI agent improve. Morgan — the intelligence layer — is the central character: she explains her reasoning, logs her actions, and lets learners steer her with editable goals.",
     whyItMatters:
       "Go1's core problem is that recommendation quality can't improve without a feedback loop — and that loop doesn't exist today. The burden of relevance sits with the learner. This prototype shows what it looks like to shift that burden to the system: transparent signals, improvable recommendations, and an agent that acts on behalf of the learner rather than waiting to be asked.",
     howItWorks: [
