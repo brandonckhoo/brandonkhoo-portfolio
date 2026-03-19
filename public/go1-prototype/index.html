@@ -666,27 +666,50 @@
   .goals-modal-backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(57,70,70,0.4);
+    background: rgba(0,0,0,0.55);
     z-index: 20;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     transition: opacity 0.2s;
   }
   .goals-modal-backdrop.hidden { opacity: 0; pointer-events: none; }
   .goals-modal {
-    width: 100%;
+    width: 520px;
+    max-height: 80%;
+    overflow-y: auto;
     background: var(--surface);
-    border-radius: var(--r-xl) var(--r-xl) 0 0;
-    padding: 24px 24px 32px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    transform: translateY(0);
-    transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+    transform: scale(1);
+    transition: transform 0.2s cubic-bezier(0.25,0.46,0.45,0.94);
   }
-  .goals-modal-backdrop.hidden .goals-modal { transform: translateY(40px); }
-  .goals-modal-handle { width: 36px; height: 4px; background: var(--gray-100); border-radius: 2px; margin: 0 auto 4px; }
-  .goals-modal-title { font-size: 16px; font-weight: 700; color: var(--charcoal); }
+  .goals-modal-backdrop.hidden .goals-modal { transform: scale(0.95); }
+  /* Slack-style modal header */
+  .goals-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .goals-modal-header-title {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 14px; font-weight: 700; color: var(--charcoal);
+  }
+  .goals-modal-header-title img { width: 20px; height: 20px; border-radius: 4px; object-fit: cover; object-position: center 5%; }
+  .goals-modal-close {
+    background: none; border: none; cursor: pointer;
+    font-size: 18px; color: var(--gray-500); line-height: 1;
+    padding: 2px 4px; border-radius: 4px;
+    font-family: inherit;
+  }
+  .goals-modal-close:hover { background: var(--gray-100); }
+  .goals-modal-body { padding: 20px 20px 0; display: flex; flex-direction: column; gap: 16px; }
+  .goals-modal-handle { display: none; }
+  .goals-modal-title { font-size: 18px; font-weight: 700; color: var(--charcoal); }
   .goals-modal-sub { font-size: 12px; color: var(--gray-500); line-height: 1.5; margin-top: -8px; }
   .goals-options { display: flex; flex-direction: column; gap: 8px; }
   .goal-option {
@@ -717,7 +740,7 @@
     transition: all 0.15s;
   }
   .goal-option.selected .goal-check { background: var(--teal); border-color: var(--teal); }
-  .goals-modal-footer { display: flex; gap: 10px; }
+  .goals-modal-footer { display: flex; gap: 10px; padding-bottom: 20px; }
   .btn-save-goals {
     flex: 1;
     background: var(--teal);
@@ -737,12 +760,63 @@
     color: var(--gray-500);
     font-size: 13px;
     font-weight: 500;
-    padding: 12px 20px;
+    padding: 12px 24px;
     border-radius: var(--r-md);
     border: 1px solid var(--border);
     cursor: pointer;
+    flex-shrink: 0;
     font-family: inherit;
   }
+
+  /* Goals 2-step */
+  .goals-step { display: flex; flex-direction: column; gap: 14px; }
+  .goals-step.hidden { display: none; }
+  .goals-progress { display: flex; gap: 6px; margin-bottom: 4px; }
+  .goals-progress-dot { height: 3px; border-radius: 2px; flex: 1; background: var(--gray-100); }
+  .goals-progress-dot.active { background: var(--teal); }
+  .goals-skill-search {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 9px 12px;
+    font-size: 13px;
+    color: var(--charcoal);
+    font-family: inherit;
+    outline: none;
+    background: var(--bg);
+  }
+  .goals-skill-search:focus { border-color: var(--teal); }
+  .skill-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-chip-goal {
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1.5px solid var(--border);
+    background: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-700);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .skill-chip-goal::before { content: '+'; font-size: 13px; color: var(--gray-500); }
+  .skill-chip-goal.selected { background: var(--teal); border-color: var(--teal); color: #fff; }
+  .skill-chip-goal.selected::before { content: '✓'; color: #fff; }
+  .goals-plan-card {
+    border-radius: var(--r-md);
+    background: #fff;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .goals-plan-title { font-size: 14px; font-weight: 700; color: var(--charcoal); }
+  .goals-plan-section { font-size: 11px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+  .goals-plan-focus { font-size: 12px; color: var(--charcoal); padding: 8px 10px; background: var(--bg); border-radius: var(--r-sm); }
+  .goals-plan-outcomes { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .goals-plan-outcomes li { font-size: 12px; color: var(--charcoal); display: flex; gap: 8px; line-height: 1.4; }
+  .goals-plan-outcomes li::before { content: '✓'; color: var(--teal); font-weight: 700; flex-shrink: 0; }
+  .goals-plan-disclaimer { font-size: 11px; color: var(--gray-500); }
+  .goals-try-link { text-align: center; font-size: 12px; color: var(--gray-500); }
+  .goals-try-link span { color: var(--teal); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
 
   /* Toast */
   .morgan-toast {
@@ -819,7 +893,7 @@
     gap: 6px;
     margin-bottom: 4px;
   }
-  .ci-signal-name { font-size: 12px; font-weight: 600; color: var(--charcoal); }
+  .ci-signal-name { font-size: 13px; font-weight: 600; color: var(--charcoal); }
   .ci-signal-badge {
     margin-left: auto;
     font-size: 10px;
@@ -829,7 +903,7 @@
     background: var(--sage-bg);
     color: #1a6b3a;
   }
-  .ci-signal-desc { font-size: 11px; color: var(--gray-500); line-height: 1.5; }
+  .ci-signal-desc { font-size: 12px; color: var(--gray-500); line-height: 1.5; }
   .ci-pipeline-note {
     font-size: 10px;
     color: var(--gray-500);
@@ -859,6 +933,18 @@
     letter-spacing: 0.01em;
   }
   .proto-label strong { color: var(--yellow); }
+  .skill-chip {
+    background: #f8f8f8; color: #1d1c1d; font-size: 11px; font-weight: 500;
+    padding: 5px 10px; border-radius: 999px; border: 1px solid #ddd;
+    cursor: pointer; font-family: inherit; transition: all 0.15s;
+  }
+  .skill-chip.selected {
+    background: #e8f4f6; color: #35656e; border-color: #35656e; font-weight: 600;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
 
   /* Scrollbar styling */
   ::-webkit-scrollbar { width: 5px; }
@@ -937,14 +1023,14 @@
       </div>
 
       <!-- Morgan banner -->
-      <div class="morgan-banner" id="morgan-banner-link" onclick="showMorganActivity()" style="margin-top:20px">
+      <div class="morgan-banner" id="morgan-banner-link" onclick="showMorganActivity()" style="margin-top:20px;display:none">
         <div class="morgan-avatar"><img src="morgan.png" alt="Morgan" /></div>
         <div class="morgan-banner-info">
           <div class="morgan-banner-top">
             <span class="morgan-name">Morgan</span>
             <span class="morgan-status"><span class="status-dot"></span> Active in Slack</span>
           </div>
-          <div class="morgan-message">Hi Sarah, I'm Morgan — your AI learning agent. I found a 12pm window today for your highest-priority learning. Here's what I surfaced for you.</div>
+          <div class="morgan-message">Hi Sarah, I'm Morgan, your Go1 learning agent. I found a 12pm window today for your highest-priority learning. Here's what I surfaced for you.</div>
           <div style="display:flex;gap:16px;margin-top:6px;">
             <div class="morgan-cta" style="margin-top:0;" onclick="event.stopPropagation();showMorganActivity()">View activity →</div>
             <div class="morgan-cta" style="margin-top:0;color:#667070;" onclick="event.stopPropagation();openGoalsEditor()">Edit my goals →</div>
@@ -1067,7 +1153,7 @@
         <div class="morgan-hero-avatar"><img src="morgan.png" alt="Morgan" /></div>
         <div class="morgan-hero-text">
           <div class="morgan-hero-name">Morgan</div>
-          <div class="morgan-hero-desc">Your AI learning agent — active in Slack and monitoring your learning moments.</div>
+          <div class="morgan-hero-desc">Your AI learning agent, active in Slack and monitoring your learning moments.</div>
           <div class="morgan-active-chip"><span class="status-dot"></span> Active</div>
         </div>
       </div>
@@ -1187,10 +1273,27 @@
               <div id="s2-provider" class="s2-course-provider">LinkedIn Learning</div>
               <div id="s2-title" class="s2-course-title">AI Sales Discovery Call Mastery</div>
               <div id="s2-meta" class="s2-course-meta">2h 15min · Course</div>
+              <div id="s2-rating" style="display:flex;align-items:center;gap:4px;margin-top:4px;">
+                <span style="font-size:12px;color:#f5a623;font-weight:700;">4.7</span>
+                <span style="font-size:11px;color:#f5a623;">★★★★★</span>
+                <span style="font-size:11px;color:#999;">(2,400 learners)</span>
+              </div>
             </div>
           </div>
 
-          <div class="signals-label">Why it matched you</div>
+          <!-- Skills you'll develop -->
+          <div style="margin-bottom:16px;">
+            <div style="font-size:11px;font-weight:700;color:#999;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">Skills you'll develop</div>
+            <div id="s2-skills" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+          </div>
+
+          <!-- What you'll learn -->
+          <div style="background:#f8f9fa;border-radius:8px;padding:12px 14px;margin-bottom:16px;">
+            <div style="font-size:12px;font-weight:700;color:var(--charcoal);margin-bottom:8px;">What you'll learn</div>
+            <ul id="s2-outcomes" style="margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:6px;"></ul>
+          </div>
+
+          <div class="signals-label">Why Morgan recommended this</div>
 
           <div id="s2-signals">
             <div class="signal-row">
@@ -1199,7 +1302,7 @@
                 <span class="signal-name">Your role</span>
                 <span class="signal-pct">87% match</span>
               </div>
-              <div class="signal-desc">87 out of 100 Account Executives at companies like yours have done this course — it's a strong fit for your day-to-day</div>
+              <div class="signal-desc">87 out of 100 Account Executives at companies like yours have done this course. It's a strong fit for your day-to-day</div>
             </div>
             <div class="signal-row">
               <div class="signal-header">
@@ -1207,7 +1310,7 @@
                 <span class="signal-name">Your team</span>
                 <span class="signal-pct">82% finished it</span>
               </div>
-              <div class="signal-desc">Most people on your sales team who started this saw it through — that's well above average, which usually means it's worth the time</div>
+              <div class="signal-desc">Most people on your sales team who started this saw it through. That's well above average, which usually means it's worth the time</div>
             </div>
             <div class="signal-row">
               <div class="signal-header">
@@ -1228,7 +1331,7 @@
 
           <div id="s2-content-signals"></div>
 
-          <div class="ci-pipeline-note">Go1 reviews every course in the library — checking that content matches what it claims to cover and scoring it based on how learners actually perform.</div>
+          <div class="ci-pipeline-note">Go1 reviews every course in the library, checking that content matches what it claims to cover and scoring it based on how learners actually perform.</div>
 
           <div class="override-row">
             <div class="override-text">Not quite right? Tell Morgan and it will adjust what it surfaces for you next time.</div>
@@ -1258,23 +1361,31 @@
             </button>
             <button class="dismiss-option" onclick="selectOption(this)">
               <div class="radio-dot"></div>
-              Not relevant to my role right now
+              Not relevant to my role
             </button>
             <button class="dismiss-option" onclick="selectOption(this)">
               <div class="radio-dot"></div>
-              Too long for right now
+              Too advanced for me
             </button>
             <button class="dismiss-option" onclick="selectOption(this)">
               <div class="radio-dot"></div>
-              Just browsing
+              Too basic for me
+            </button>
+            <button class="dismiss-option" onclick="selectOption(this)">
+              <div class="radio-dot"></div>
+              Content seems outdated
+            </button>
+            <button class="dismiss-option" onclick="selectOption(this)">
+              <div class="radio-dot"></div>
+              Not the right time — remind me later
             </button>
           </div>
 
           <div class="morgan-train-note">Your feedback trains Morgan. The more you share, the better Morgan gets at finding your next best learning moment.</div>
 
           <div class="dismiss-footer">
-            <button class="btn-done" onclick="closePanel('panel-dismiss')">Done</button>
-            <button class="btn-skip" onclick="closePanel('panel-dismiss')">Skip</button>
+            <button class="btn-done" onclick="submitDismiss()">Done</button>
+            <button class="btn-skip" onclick="submitDismiss()">Skip</button>
           </div>
         </div>
       </div>
@@ -1283,49 +1394,157 @@
     <!-- Goals editor modal -->
     <div class="goals-modal-backdrop hidden" id="goals-modal">
       <div class="goals-modal">
-        <div class="goals-modal-handle"></div>
-        <div class="goals-modal-title">What do you want to focus on?</div>
-        <div class="goals-modal-sub">Morgan uses your goals to prioritise what it surfaces. You can change these anytime and your recommendations update immediately.</div>
-        <div class="goals-options">
-          <button class="goal-option selected" onclick="toggleGoal(this)">
-            <div class="goal-check">✓</div>
-            🎯 Close more enterprise deals
-          </button>
-          <button class="goal-option selected" onclick="toggleGoal(this)">
-            <div class="goal-check">✓</div>
-            📋 Complete Voice AI certification before Nov 30
-          </button>
-          <button class="goal-option selected" onclick="toggleGoal(this)">
-            <div class="goal-check">✓</div>
-            🗣️ Improve my demo and discovery technique
-          </button>
-          <button class="goal-option" onclick="toggleGoal(this)">
-            <div class="goal-check"></div>
-            💼 Build skills to move into a team lead role
-          </button>
-          <button class="goal-option" onclick="toggleGoal(this)">
-            <div class="goal-check"></div>
-            🤝 Get better at negotiation and objection handling
-          </button>
-          <button class="goal-option" onclick="toggleGoal(this)">
-            <div class="goal-check"></div>
-            🔧 Stay up to date on Voice AI product changes
-          </button>
+
+        <!-- Slack-style modal header -->
+        <div class="goals-modal-header">
+          <div class="goals-modal-header-title">
+            <img src="morgan.png" alt="Morgan" />
+            Morgan
+          </div>
+          <button class="goals-modal-close" onclick="closeGoalsEditor()">✕</button>
         </div>
-        <div class="goals-modal-footer">
-          <button class="btn-cancel-goals" onclick="closeGoalsEditor()">Cancel</button>
-          <button class="btn-save-goals" onclick="saveGoals()">Save — Morgan will update your recommendations</button>
+
+        <div class="goals-modal-body">
+        <div class="goals-modal-handle"></div>
+
+        <!-- Progress dots -->
+        <div class="goals-progress">
+          <div class="goals-progress-dot active" id="gdot-1"></div>
+          <div class="goals-progress-dot" id="gdot-2"></div>
+        </div>
+
+        <!-- Step 1: Skill chips -->
+        <div class="goals-step" id="goals-step-1">
+          <div class="goals-modal-title">Which skills do you want to develop?</div>
+          <div class="goals-modal-sub">Morgan uses these to prioritise what it surfaces. Change them anytime.</div>
+          <div style="position:relative;">
+            <input class="goals-skill-search" type="text" placeholder="Add a skill" id="goals-skill-input" oninput="filterSkills()" onkeydown="addCustomSkill(event)" />
+            <div id="skill-add-suggestion" style="display:none;position:absolute;top:100%;left:0;right:0;margin-top:4px;background:#fff;border:1.5px solid var(--teal);border-radius:var(--r-sm);padding:9px 12px;font-size:13px;color:var(--teal);font-weight:600;cursor:pointer;z-index:10;" onclick="addSkillFromSuggestion()"></div>
+          </div>
+          <div id="custom-skills-row" style="display:none;margin-bottom:4px;">
+            <div style="font-size:11px;color:var(--gray-500);margin-bottom:8px;">Added by you</div>
+            <div class="skill-chips" id="custom-skill-chips"></div>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--gray-500);margin-bottom:8px;">Popular skills for your role</div>
+            <div class="skill-chips">
+              <button class="skill-chip-goal selected" onclick="toggleGoalChip(this)">AI Sales</button>
+              <button class="skill-chip-goal selected" onclick="toggleGoalChip(this)">Demo Delivery</button>
+              <button class="skill-chip-goal selected" onclick="toggleGoalChip(this)">Objection Handling</button>
+              <button class="skill-chip-goal" onclick="toggleGoalChip(this)">Pipeline Management</button>
+              <button class="skill-chip-goal" onclick="toggleGoalChip(this)">Negotiation</button>
+              <button class="skill-chip-goal" onclick="toggleGoalChip(this)">Product Knowledge</button>
+              <button class="skill-chip-goal" onclick="toggleGoalChip(this)">Team Leadership</button>
+              <button class="skill-chip-goal" onclick="toggleGoalChip(this)">Voice AI</button>
+            </div>
+          </div>
+          <div class="goals-modal-footer">
+            <button class="btn-save-goals" onclick="goalsToStep2()">Continue →</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Plan preview -->
+        <div class="goals-step hidden" id="goals-step-2">
+          <div class="goals-modal-title">Here's your personalised learning plan</div>
+          <div class="goals-modal-sub">We'll pick the best content for you from our library of 100,000+ courses.</div>
+          <div class="goals-plan-card">
+            <div class="goals-plan-title" id="goals-plan-name" style="font-size:13px;margin-bottom:4px;">Building AI Sales Excellence</div>
+            <div style="border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 14px;">
+              <div class="goals-plan-section" style="margin-bottom:6px;">Plan focus</div>
+              <div id="goals-plan-focus" style="font-size:13px;color:var(--charcoal);">AI Sales · Demo Delivery · Objection Handling</div>
+            </div>
+            <div style="border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 14px;">
+              <div class="goals-plan-section" style="margin-bottom:10px;">What you'll learn and achieve</div>
+              <ul class="goals-plan-outcomes">
+                <li>Master AI-powered sales techniques to close more enterprise deals faster.</li>
+                <li>Build a repeatable demo and discovery framework tailored to Voice AI buyers.</li>
+                <li>Handle objections with confidence using patterns from top performers on your team.</li>
+              </ul>
+            </div>
+            <div class="goals-plan-disclaimer">This is powered by AI and may make mistakes.</div>
+          </div>
+          <div class="goals-modal-footer" style="padding-bottom:0;">
+            <button class="btn-save-goals" onclick="saveGoals()">Get started with this plan</button>
+          </div>
+          <div class="goals-try-link" style="padding-bottom:20px;margin-top:6px;"><span onclick="goalsBackToStep1()">Not what you're looking for? Try a different goal.</span></div>
+        </div>
+
+        </div><!-- /goals-modal-body -->
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         PANEL — Morgan Capabilities
+    ══════════════════════════════ -->
+    <div class="panel hidden" id="panel-morgan-capabilities">
+      <div class="panel-content">
+        <div class="panel-topbar">
+          <button class="back-btn" onclick="closePanel('panel-morgan-capabilities')">← Back</button>
+          <div class="panel-title">What Morgan does</div>
+        </div>
+        <div class="panel-body" style="gap:0;padding-top:4px;">
+
+          <div style="display:flex;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--border);">
+            <div style="width:36px;height:36px;border-radius:10px;background:var(--cerulean-bg);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🎯</div>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--charcoal);margin-bottom:2px;">Surfaces relevant courses</div>
+              <div style="font-size:12px;color:var(--gray-500);line-height:1.5;">Picks from 100,000+ courses based on your role, team, and compliance deadlines. No searching required.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--border);">
+            <div style="width:36px;height:36px;border-radius:10px;background:#fff3e0;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📋</div>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--charcoal);margin-bottom:2px;">Tracks compliance deadlines</div>
+              <div style="font-size:12px;color:var(--gray-500);line-height:1.5;">Monitors your certification and compliance requirements. Sends reminders before deadlines and surfaces prep content at the right time.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--border);">
+            <div style="width:36px;height:36px;border-radius:10px;background:#e8f5ee;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📅</div>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--charcoal);margin-bottom:2px;">Finds time in your calendar</div>
+              <div style="font-size:12px;color:var(--gray-500);line-height:1.5;">Looks for gaps in your schedule and suggests the best moment to learn. One tap to block time without leaving Slack.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--border);">
+            <div style="width:36px;height:36px;border-radius:10px;background:var(--ede7f6, #ede7f6);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔁</div>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--charcoal);margin-bottom:2px;">Gets smarter over time</div>
+              <div style="font-size:12px;color:var(--gray-500);line-height:1.5;">Every time you complete, skip, or rate a course, Morgan updates what it surfaces. Your feedback directly shapes your next picks.</div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:12px;padding:16px 0;">
+            <div style="width:36px;height:36px;border-radius:10px;background:#fce4ec;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔒</div>
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--charcoal);margin-bottom:2px;">Only reaches out when it matters</div>
+              <div style="font-size:12px;color:var(--gray-500);line-height:1.5;">Morgan won't spam you. It only sends a message when there's a deadline, a new high-priority pick, or a learning moment worth acting on.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--bg);border-radius:10px;padding:14px 16px;margin-top:4px;">
+            <div style="font-size:11px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Try asking Morgan</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="font-size:12px;color:var(--teal);cursor:pointer;">"What should I learn this week?"</div>
+              <div style="font-size:12px;color:var(--teal);cursor:pointer;">"What's due for my certification?"</div>
+              <div style="font-size:12px;color:var(--teal);cursor:pointer;">"Find me something short I can do today"</div>
+              <div style="font-size:12px;color:var(--teal);cursor:pointer;">"What are my teammates learning?"</div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
 
     <!-- Morgan update toast -->
-    <div class="morgan-toast" id="morgan-toast">✓ Morgan updated — your recommendations will reflect your new goals</div>
+    <div class="morgan-toast" id="morgan-toast">✓ Morgan updated. Your recommendations will reflect your new goals</div>
 
     <!-- ══════════════════════════════
          SCREEN 5 — Slack view
     ══════════════════════════════ -->
-    <div class="screen" id="screen-slack" style="background:#fff;padding:0;">
+    <div class="screen" id="screen-slack" style="background:#fff;padding:0;position:relative;">
 
       <!-- Slack chrome -->
       <div style="display:flex;height:100%;">
@@ -1415,7 +1634,7 @@
           <div style="flex:1;overflow-y:auto;padding:20px;">
 
             <!-- Day 1 intro message -->
-            <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;opacity:0.4;">
+            <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;">
               <div style="width:32px;height:32px;border-radius:6px;background:#fdf3c2;overflow:hidden;flex-shrink:0;">
                 <img src="morgan.png" style="width:38px;height:38px;object-fit:cover;object-position:center 8%;margin-top:1px;margin-left:-3px;" alt="" />
               </div>
@@ -1425,32 +1644,47 @@
                   <span style="font-size:10px;background:#e8eced;color:#616061;font-weight:600;padding:1px 6px;border-radius:4px;letter-spacing:0.02em;">APP</span>
                   <span style="font-size:11px;color:#616061;">Monday at 9:02 AM</span>
                 </div>
-                <div style="font-size:13px;color:#1d1c1d;line-height:1.6;">Hi Sarah 👋 Welcome to Acme Corp — I'm Morgan, your Go1 learning agent. I'll be in your corner here in Slack, surfacing the right learning at the right moment so you don't have to go looking for it.</div>
-                <div style="font-size:13px;color:#1d1c1d;line-height:1.6;margin-top:6px;">Your L&D team has set me up based on your role as an Account Executive on the Voice AI Sales team. I'll handle compliance deadlines, skill gaps, and cert prep — and I'll only reach out when it's worth your time.</div>
-                <div style="margin-top:8px;font-size:12px;color:#609da9;cursor:pointer;text-decoration:underline;text-underline-offset:2px;">What can Morgan do? →</div>
+                <div style="font-size:13px;color:#1d1c1d;line-height:1.6;">Hi Sarah 👋 Welcome to Acme Corp. I'm Morgan, your Go1 learning agent. I'll be in your corner here in Slack, surfacing the right learning at the right moment so you don't have to go looking for it.</div>
+                <div style="font-size:13px;color:#1d1c1d;line-height:1.6;margin-top:6px;">Your L&D team has set me up based on your role as an Account Executive on the Voice AI Sales team. I'll handle compliance deadlines, skill gaps, and certification prep. I'll only reach out when it's worth your time.</div>
+                <div style="margin-top:8px;font-size:12px;color:#609da9;cursor:pointer;text-decoration:underline;text-underline-offset:2px;" onclick="showMorganCapabilities()">What can Morgan do? →</div>
+              </div>
+            </div>
+
+            <!-- Skills capture message (hidden: admin-set goals, no upfront user input needed) -->
+            <div style="display:none;align-items:flex-start;gap:10px;margin-bottom:20px;">
+              <div style="width:32px;height:32px;border-radius:6px;background:#fdf3c2;overflow:hidden;flex-shrink:0;">
+                <img src="morgan.png" style="width:38px;height:38px;object-fit:cover;object-position:center 8%;margin-top:1px;margin-left:-3px;" alt="" />
+              </div>
+              <div style="flex:1;">
+                <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px;">
+                  <span style="font-size:13px;font-weight:700;color:#1d1c1d;">Morgan</span>
+                  <span style="font-size:10px;background:#e8eced;color:#616061;font-weight:600;padding:1px 6px;border-radius:4px;">APP</span>
+                  <span style="font-size:11px;color:#616061;">Monday at 9:03 AM</span>
+                </div>
+                <div style="font-size:13px;color:#1d1c1d;line-height:1.6;margin-bottom:10px;">One quick question to sharpen your picks. What skills are you working on right now?</div>
+                <div id="skill-selector" style="margin-bottom:8px;">
+                  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
+                    <button onclick="toggleSkill(this)" class="skill-chip">AI Prospecting</button>
+                    <button onclick="toggleSkill(this)" class="skill-chip selected">Objection Handling</button>
+                    <button onclick="toggleSkill(this)" class="skill-chip selected">Demo Delivery</button>
+                    <button onclick="toggleSkill(this)" class="skill-chip">Pipeline Management</button>
+                    <button onclick="toggleSkill(this)" class="skill-chip">Product Knowledge</button>
+                    <button onclick="toggleSkill(this)" class="skill-chip">Negotiation</button>
+                  </div>
+                  <div style="display:flex;gap:8px;">
+                    <button onclick="saveSkills()" style="background:#35656e;color:#fff;font-size:12px;font-weight:600;padding:6px 14px;border-radius:6px;border:none;cursor:pointer;font-family:inherit;">Save my goals →</button>
+                    <button onclick="skipSkills()" style="background:none;color:#999;font-size:12px;border:none;cursor:pointer;font-family:inherit;padding:6px 0;">Skip</button>
+                  </div>
+                </div>
+                <div id="skill-saved" style="display:none;font-size:12px;color:#2bac76;font-weight:600;display:none;align-items:center;gap:10px;">
+                  <span>✓ Got it. I'll factor those skills into your picks.</span>
+                  <span style="color:#609da9;cursor:pointer;text-decoration:underline;text-underline-offset:2px;font-weight:500;" onclick="openGoalsEditor()">Edit →</span>
+                </div>
               </div>
             </div>
 
             <!-- Divider -->
-            <div style="text-align:center;font-size:11px;color:#999;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
-              <div style="flex:1;height:1px;background:#e8eced;"></div>
-              Yesterday
-              <div style="flex:1;height:1px;background:#e8eced;"></div>
-            </div>
-
-            <!-- Compliance nudge -->
-            <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;opacity:0.5;">
-              <div style="width:32px;height:32px;border-radius:6px;background:#fdf3c2;overflow:hidden;flex-shrink:0;">
-                <img src="morgan.png" style="width:38px;height:38px;object-fit:cover;object-position:center 8%;margin-top:1px;margin-left:-3px;" alt="" />
-              </div>
-              <div>
-                <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px;">
-                  <span style="font-size:13px;font-weight:700;color:#1d1c1d;">Morgan</span>
-                  <span style="font-size:11px;color:#616061;">Yesterday at 4:30 PM</span>
-                </div>
-                <div style="font-size:13px;color:#1d1c1d;line-height:1.5;">Hi Sarah 👋 You have the Voice AI Platform Certification due Nov 30. I'll send you a reminder closer to the date and block some prep time.</div>
-              </div>
-            </div>
+            <!-- Compliance nudge hidden -->
 
             <!-- Divider -->
             <div style="text-align:center;font-size:11px;color:#999;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
@@ -1459,8 +1693,8 @@
               <div style="flex:1;height:1px;background:#e8eced;"></div>
             </div>
 
-            <!-- Today's nudge -->
-            <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;">
+            <!-- Morgan: 3 proactive picks (Today) -->
+            <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;position:relative;">
               <div style="width:32px;height:32px;border-radius:6px;background:#fdf3c2;overflow:hidden;flex-shrink:0;">
                 <img src="morgan.png" style="width:38px;height:38px;object-fit:cover;object-position:center 8%;margin-top:1px;margin-left:-3px;" alt="" />
               </div>
@@ -1469,48 +1703,173 @@
                   <span style="font-size:13px;font-weight:700;color:#1d1c1d;">Morgan</span>
                   <span style="font-size:11px;color:#616061;">Today at 11:47 AM</span>
                 </div>
-                <div style="font-size:13px;color:#1d1c1d;line-height:1.6;margin-bottom:10px;">Hi Sarah — I found a gap in your calendar at 12pm today and blocked it for your top learning pick. 87% of AEs in similar roles have completed this one. It's 2h 15min but you only need the first module to hit your cert prep goal.</div>
+                <div style="font-size:13px;color:#1d1c1d;line-height:1.6;margin-bottom:6px;">Hi Sarah. Here are your top picks based on your role and goals.</div>
+                <div style="font-size:12px;margin-bottom:10px;"><span style="color:#609da9;cursor:pointer;text-decoration:underline;text-underline-offset:2px;" onclick="openGoalsEditor()">Refine my goals →</span></div>
 
-                <!-- Slack attachment card -->
-                <div style="border-left:4px solid #35656e;background:#f8f8f8;border-radius:0 8px 8px 0;padding:12px 14px;max-width:440px;">
-                  <div style="font-size:11px;color:#616061;font-weight:600;margin-bottom:6px;">go1.com</div>
-                  <div style="display:flex;gap:12px;align-items:flex-start;">
-                    <img src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=120&q=80&fit=crop" style="width:72px;height:54px;border-radius:6px;object-fit:cover;flex-shrink:0;" alt="" />
-                    <div>
-                      <div style="font-size:13px;font-weight:700;color:#1264a3;margin-bottom:3px;">AI Sales Discovery Call Mastery</div>
-                      <div style="font-size:12px;color:#616061;margin-bottom:6px;">LinkedIn Learning · 2h 15min · Course</div>
-                      <div style="display:inline-flex;align-items:center;gap:4px;background:#fdf3c2;padding:3px 8px;border-radius:999px;font-size:10px;font-weight:600;color:#7a5c00;">
-                        ◆ Morgan blocked 12pm for this
+                <!-- 3 cards side by side -->
+                <div style="border-left:4px solid #35656e;background:#f8f8f8;border-radius:0 8px 8px 0;max-width:500px;overflow:hidden;">
+                  <!-- Goals-updated banner (hidden until goals saved) -->
+                  <div id="picks-updated-banner" style="display:none;background:#f0fff4;border-bottom:1px solid #c3e6cb;padding:6px 12px;font-size:11px;color:#27ae60;font-weight:600;">
+                    ✓ Updated based on your new goals
+                  </div>
+                  <div style="padding:8px 12px 6px;display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-size:11px;color:#616061;font-weight:600;">go1.com · Top picks for you</span>
+                    <span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;color:#609da9;font-weight:600;background:#e8f4f6;padding:2px 7px;border-radius:999px;">✦ AI suggested</span>
+                  </div>
+
+                  <!-- Card grid -->
+                  <div style="display:flex;gap:8px;padding:0 12px 10px;">
+
+                    <!-- Card 1 -->
+                    <div style="flex:1;min-width:0;background:#fff;border-radius:6px;border:1px solid #e8eced;overflow:hidden;">
+                      <div style="position:relative;cursor:pointer;" onclick="showPreview(1)">
+                        <img src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=300&q=80&fit=crop" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" alt="" />
+                        <div style="position:absolute;top:5px;left:5px;background:#35656e;color:#fff;font-size:8px;font-weight:700;padding:2px 5px;border-radius:2px;letter-spacing:0.04em;">TOP</div>
+                        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                          <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.85);display:flex;align-items:center;justify-content:center;font-size:11px;color:#35656e;">▶</div>
+                        </div>
+                      </div>
+                      <div style="padding:7px 8px;">
+                        <div style="font-size:11px;font-weight:700;color:#1264a3;line-height:1.3;margin-bottom:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">AI Sales Discovery Call Mastery</div>
+                        <div style="font-size:10px;color:#616061;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">LinkedIn · 2h 15min</div>
+                        <div style="font-size:10px;color:#f5a623;margin-bottom:6px;">★★★★★ <span style="color:#999;">4.7</span></div>
+                        <button onclick="showPreview(1)" style="width:100%;background:#fff;color:#35656e;font-size:10px;font-weight:600;padding:4px 0;border-radius:4px;border:1px solid #35656e;cursor:pointer;font-family:inherit;margin-bottom:4px;">▶ Preview</button>
+                        <button onclick="showSlackEnrolled()" style="width:100%;background:#35656e;color:#fff;font-size:10px;font-weight:600;padding:4px 0;border-radius:4px;border:none;cursor:pointer;font-family:inherit;">Start →</button>
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:5px;">
+                          <span onclick="showWhyRecommended(1)" style="font-size:9px;color:#609da9;cursor:pointer;text-decoration:underline;text-underline-offset:2px;">Why this?</span>
+                          <div style="display:flex;gap:4px;">
+                            <button onclick="slackThumbsFeedback(this,'up',1)" style="background:none;border:1px solid #e8eced;border-radius:4px;padding:1px 5px;font-size:10px;cursor:pointer;color:#616061;" title="Good pick">👍</button>
+                            <button onclick="slackThumbsFeedback(this,'down',1)" style="background:none;border:1px solid #e8eced;border-radius:4px;padding:1px 5px;font-size:10px;cursor:pointer;color:#616061;" title="Not for me">👎</button>
+                          </div>
+                        </div>
                       </div>
                     </div>
+
+                    <!-- Card 2 -->
+                    <div style="flex:1;min-width:0;background:#fff;border-radius:6px;border:1px solid #e8eced;overflow:hidden;">
+                      <div style="position:relative;cursor:pointer;" onclick="showPreview(2)">
+                        <img id="slack-card2-img" src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&q=80&fit=crop" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" alt="" />
+                        <div style="position:absolute;top:5px;left:5px;background:rgba(0,0,0,0.45);color:#fff;font-size:8px;font-weight:700;padding:2px 5px;border-radius:2px;">#2</div>
+                        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                          <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.85);display:flex;align-items:center;justify-content:center;font-size:11px;color:#35656e;">▶</div>
+                        </div>
+                      </div>
+                      <div style="padding:7px 8px;">
+                        <div id="slack-card2-title" style="font-size:11px;font-weight:700;color:#1264a3;line-height:1.3;margin-bottom:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">Handling AI Sales Objections</div>
+                        <div id="slack-card2-meta" style="font-size:10px;color:#616061;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Coursera · 1h 40min</div>
+                        <div id="slack-card2-stars" style="font-size:10px;color:#f5a623;margin-bottom:6px;">★★★★½ <span style="color:#999;">4.5</span></div>
+                        <button onclick="showPreview(2)" style="width:100%;background:#fff;color:#35656e;font-size:10px;font-weight:600;padding:4px 0;border-radius:4px;border:1px solid #35656e;cursor:pointer;font-family:inherit;margin-bottom:4px;">▶ Preview</button>
+                        <button onclick="showSlackEnrolled()" style="width:100%;background:#35656e;color:#fff;font-size:10px;font-weight:600;padding:4px 0;border-radius:4px;border:none;cursor:pointer;font-family:inherit;">Start →</button>
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:5px;">
+                          <span onclick="showWhyRecommended(2)" style="font-size:9px;color:#609da9;cursor:pointer;text-decoration:underline;text-underline-offset:2px;">Why this?</span>
+                          <div style="display:flex;gap:4px;">
+                            <button onclick="slackThumbsFeedback(this,'up',2)" style="background:none;border:1px solid #e8eced;border-radius:4px;padding:1px 5px;font-size:10px;cursor:pointer;color:#616061;" title="Good pick">👍</button>
+                            <button onclick="slackThumbsFeedback(this,'down',2)" style="background:none;border:1px solid #e8eced;border-radius:4px;padding:1px 5px;font-size:10px;cursor:pointer;color:#616061;" title="Not for me">👎</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div style="flex:1;min-width:0;background:#fff;border-radius:6px;border:1px solid #e8eced;overflow:hidden;">
+                      <div style="position:relative;cursor:pointer;" onclick="showPreview(3)">
+                        <img id="slack-card3-img" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=300&q=80&fit=crop" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" alt="" />
+                        <div style="position:absolute;top:5px;left:5px;background:rgba(0,0,0,0.45);color:#fff;font-size:8px;font-weight:700;padding:2px 5px;border-radius:2px;">#3</div>
+                        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                          <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.85);display:flex;align-items:center;justify-content:center;font-size:11px;color:#35656e;">▶</div>
+                        </div>
+                      </div>
+                      <div style="padding:7px 8px;">
+                        <div id="slack-card3-title" style="font-size:11px;font-weight:700;color:#1264a3;line-height:1.3;margin-bottom:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">Voice AI Demo Playbook</div>
+                        <div id="slack-card3-meta" style="font-size:10px;color:#616061;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Degreed · 45 min</div>
+                        <div id="slack-card3-stars" style="font-size:10px;color:#f5a623;margin-bottom:6px;">★★★★★ <span style="color:#999;">4.9</span></div>
+                        <button onclick="showPreview(3)" style="width:100%;background:#fff;color:#35656e;font-size:10px;font-weight:600;padding:4px 0;border-radius:4px;border:1px solid #35656e;cursor:pointer;font-family:inherit;margin-bottom:4px;">▶ Preview</button>
+                        <button onclick="showSlackEnrolled()" style="width:100%;background:#35656e;color:#fff;font-size:10px;font-weight:600;padding:4px 0;border-radius:4px;border:none;cursor:pointer;font-family:inherit;">Start →</button>
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:5px;">
+                          <span onclick="showWhyRecommended(3)" style="font-size:9px;color:#609da9;cursor:pointer;text-decoration:underline;text-underline-offset:2px;">Why this?</span>
+                          <div style="display:flex;gap:4px;">
+                            <button onclick="slackThumbsFeedback(this,'up',3)" style="background:none;border:1px solid #e8eced;border-radius:4px;padding:1px 5px;font-size:10px;cursor:pointer;color:#616061;" title="Good pick">👍</button>
+                            <button onclick="slackThumbsFeedback(this,'down',3)" style="background:none;border:1px solid #e8eced;border-radius:4px;padding:1px 5px;font-size:10px;cursor:pointer;color:#616061;" title="Not for me">👎</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
-                  <!-- Action buttons -->
-                  <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
-                    <button onclick="showSlackEnrolled()" style="background:#35656e;color:#fff;font-size:12px;font-weight:600;padding:7px 14px;border-radius:6px;border:none;cursor:pointer;font-family:inherit;">Start learning →</button>
-                    <button onclick="showSlackSnooze()" style="background:#fff;color:#1d1c1d;font-size:12px;font-weight:500;padding:7px 14px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;">Snooze 1 hour</button>
-                    <button onclick="showSlackDismiss()" style="background:#fff;color:#616061;font-size:12px;font-weight:500;padding:7px 14px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;">Not for me</button>
+
+                  <!-- AI disclaimer -->
+                  <div style="padding:2px 12px 14px;">
+                    <span style="font-size:10px;color:#999;">✦ Suggested by Morgan · This is powered by AI and may make mistakes.</span>
                   </div>
-                  <!-- Secondary actions -->
-                  <div style="display:flex;gap:16px;margin-top:10px;">
-                    <button onclick="showWhyRecommended(1)" style="background:none;border:none;font-size:11px;color:#609da9;cursor:pointer;font-family:inherit;padding:0;text-decoration:underline;text-underline-offset:2px;">Why this? →</button>
-                    <button onclick="goToGo1()" style="background:none;border:none;font-size:11px;color:#616061;cursor:pointer;font-family:inherit;padding:0;text-decoration:underline;text-underline-offset:2px;">View in Go1 portal →</button>
-                  </div>
+
                 </div>
 
-                <!-- Response states (hidden by default) -->
-                <div id="slack-enrolled" style="display:none;margin-top:10px;font-size:12px;color:#2bac76;font-weight:600;">✓ Great — opening in Go1. Your 12pm block is confirmed.</div>
-                <div id="slack-snoozed" style="display:none;margin-top:10px;font-size:12px;color:#616061;">⏰ Got it — I'll nudge you again at 12:47pm.</div>
+                <!-- Calendar scheduling offer -->
+                <div id="calendar-offer" style="display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;">
+                  <span style="font-size:12px;color:#616061;">◷ Want me to find time in your calendar for your top pick?</span>
+                  <button onclick="showCalendarSlot()" style="background:#fff;color:#35656e;font-size:12px;font-weight:600;padding:4px 10px;border-radius:6px;border:1px solid #35656e;cursor:pointer;font-family:inherit;">Find a slot →</button>
+                  <button onclick="declineCalendar()" style="background:none;color:#999;font-size:12px;border:none;cursor:pointer;font-family:inherit;padding:4px 0;">No thanks</button>
+                </div>
+
+                <!-- Calendar slot picker -->
+                <div id="calendar-slot" style="display:none;margin-top:10px;border:1px solid #e8eced;border-radius:8px;padding:12px 14px;max-width:360px;background:#fff;">
+                  <div style="font-size:11px;font-weight:700;color:#616061;margin-bottom:8px;">Tuesday · Today</div>
+                  <div style="display:flex;gap:10px;align-items:stretch;margin-bottom:6px;">
+                    <div style="font-size:11px;color:#999;width:44px;flex-shrink:0;padding-top:2px;">11:00</div>
+                    <div style="flex:1;background:#e8f0fe;border-radius:4px;padding:6px 8px;font-size:11px;color:#1a73e8;font-weight:600;">1:1 with Alex</div>
+                  </div>
+                  <div style="display:flex;gap:10px;align-items:stretch;margin-bottom:10px;">
+                    <div style="font-size:11px;color:#999;width:44px;flex-shrink:0;padding-top:2px;">12:00</div>
+                    <div style="flex:1;background:#fdf3c2;border-radius:4px;padding:6px 8px;font-size:11px;color:#7a5c00;font-weight:600;border:1px dashed #f5c842;">30 min free</div>
+                  </div>
+                  <div id="calendar-confirm" style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <button onclick="confirmBlock()" style="background:#35656e;color:#fff;font-size:12px;font-weight:600;padding:7px 14px;border-radius:6px;border:none;cursor:pointer;font-family:inherit;">Block 12pm ✓</button>
+                    <button onclick="findAnotherTime()" style="background:#fff;color:#1d1c1d;font-size:12px;font-weight:500;padding:7px 14px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;">Find another time</button>
+                    <button onclick="skipBlock()" style="background:#fff;color:#616061;font-size:12px;font-weight:500;padding:7px 14px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;">I'll handle it</button>
+                  </div>
+                  <div id="calendar-booked" style="display:none;font-size:12px;color:#2bac76;font-weight:600;margin-top:6px;">✓ 12pm blocked. You'll get a reminder 10 min before.</div>
+                  <div id="calendar-rescheduled" style="display:none;font-size:12px;color:#616061;margin-top:6px;">Got it. I'll look for a slot tomorrow and come back to you.</div>
+                  <div id="calendar-skipped" style="display:none;font-size:12px;color:#616061;margin-top:6px;">No problem. Good luck scheduling it.</div>
+                </div>
+                <div id="calendar-declined" style="display:none;font-size:12px;color:#616061;margin-top:6px;">No problem. I'll remind you again tomorrow.</div>
+
+                <!-- Response states -->
+                <div id="slack-enrolled" style="display:none;margin-top:10px;font-size:12px;color:#2bac76;font-weight:600;">✓ Opening in Go1.</div>
+                <div id="slack-snoozed" style="display:none;margin-top:10px;font-size:12px;color:#616061;">⏰ Got it. I'll come back tomorrow with a fresh set.</div>
                 <div id="slack-dismissed" style="display:none;margin-top:10px;">
-                  <div style="font-size:12px;color:#616061;margin-bottom:8px;">No problem — quick question so I can find something better:</div>
+                  <div style="font-size:12px;color:#616061;margin-bottom:8px;">No problem. Quick question so I can find something better:</div>
                   <div style="display:flex;gap:6px;flex-wrap:wrap;">
                     <button onclick="showSlackFeedbackDone(this)" style="background:#f8f8f8;color:#1d1c1d;font-size:11px;padding:5px 10px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;">Already know this</button>
-                    <button onclick="showSlackFeedbackDone(this)" style="background:#f8f8f8;color:#1d1c1d;font-size:11px;padding:5px 10px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;">Not relevant right now</button>
-                    <button onclick="showSlackFeedbackDone(this)" style="background:#f8f8f8;color:#1d1c1d;font-size:11px;padding:5px 10px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;">Too long</button>
-                    <button onclick="showSlackFeedbackDone(this)" style="background:#f8f8f8;color:#1d1c1d;font-size:11px;padding:5px 10px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;">Just busy today</button>
+                    <button onclick="showSlackFeedbackDone(this)" style="background:#f8f8f8;color:#1d1c1d;font-size:11px;padding:5px 10px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;">Not relevant to my role</button>
+                    <button onclick="showSlackFeedbackDone(this)" style="background:#f8f8f8;color:#1d1c1d;font-size:11px;padding:5px 10px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;">Too advanced for me</button>
+                    <button onclick="showSlackFeedbackDone(this)" style="background:#f8f8f8;color:#1d1c1d;font-size:11px;padding:5px 10px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;">Too basic for me</button>
+                    <button onclick="showSlackFeedbackDone(this)" style="background:#f8f8f8;color:#1d1c1d;font-size:11px;padding:5px 10px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;">Remind me later</button>
                   </div>
-                  <div id="slack-feedback-done" style="display:none;margin-top:8px;font-size:12px;color:#616061;">Thanks — I'll adjust what I surface tomorrow. 👍</div>
+                  <div id="slack-feedback-done" style="display:none;margin-top:8px;font-size:12px;color:#616061;">Thanks. I'll adjust what I surface tomorrow. 👍</div>
                 </div>
+              </div>
+            </div>
 
+            <!-- Course preview overlay (shown over Slack screen) -->
+            <div id="course-preview-overlay" style="display:none;position:absolute;inset:0;background:rgba(0,0,0,0.55);z-index:100;align-items:center;justify-content:center;padding:24px;">
+              <div style="background:#fff;border-radius:12px;overflow:hidden;width:100%;max-width:380px;box-shadow:0 16px 48px rgba(0,0,0,0.25);">
+                <div style="position:relative;">
+                  <img id="preview-img" src="" style="width:100%;height:180px;object-fit:cover;display:block;" alt="" />
+                  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                    <div style="width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:center;font-size:18px;color:#35656e;animation:pulse 2s infinite;">▶</div>
+                  </div>
+                  <button onclick="closePreview()" style="position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,0.5);color:#fff;font-size:14px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;">✕</button>
+                  <div style="position:absolute;bottom:8px;left:8px;background:rgba(0,0,0,0.65);color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;" id="preview-duration">2h 15min</div>
+                </div>
+                <div style="padding:14px 16px;">
+                  <div id="preview-provider" style="font-size:11px;color:#999;font-weight:600;margin-bottom:4px;"></div>
+                  <div id="preview-title" style="font-size:14px;font-weight:700;color:#1d1c1d;margin-bottom:8px;line-height:1.3;"></div>
+                  <ul id="preview-bullets" style="margin:0 0 12px;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:5px;"></ul>
+                  <div style="display:flex;gap:8px;">
+                    <button onclick="showSlackEnrolled();closePreview();" style="flex:1;background:#35656e;color:#fff;font-size:12px;font-weight:600;padding:8px 0;border-radius:6px;border:none;cursor:pointer;font-family:inherit;">Start learning →</button>
+                    <button onclick="closePreview()" style="background:#fff;color:#616061;font-size:12px;font-weight:500;padding:8px 14px;border-radius:6px;border:1px solid #ddd;cursor:pointer;font-family:inherit;">Close</button>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -1528,7 +1887,6 @@
   </div><!-- /main -->
 </div><!-- /device -->
 
-<div class="proto-label">Prototype · <strong>Roadmap Bet 2: Role-based recommendation rails</strong> · Days 30–90 · Visible → Explainable → Improvable</div>
 <div class="hint" id="hint">Click "Why this?" or "View in Go1 portal →" below the course card</div>
 
 <script>
@@ -1538,14 +1896,21 @@
       title: 'AI Sales Discovery Call Mastery',
       meta: '2h 15min · Course',
       img: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=120&q=80&fit=crop',
+      rating: '4.7', learnerCount: '2,400',
+      skills: ['AI Discovery Calls', 'Objection Handling', 'Demo Technique', 'Active Listening'],
+      outcomes: [
+        'Run discovery calls that uncover real buyer needs using AI-assisted frameworks',
+        'Handle objections from buyers skeptical of AI-powered sales tools',
+        'Structure demos that connect product capabilities to the buyer\'s workflow',
+      ],
       signals: [
-        { icon: '●', name: 'Your role', stat: '87% match', desc: '87 out of 100 Account Executives at companies like yours have done this course — it\'s a strong fit for your day-to-day' },
-        { icon: '○', name: 'Your team', stat: '82% finished it', desc: 'Most people on your sales team who started this saw it through — that\'s well above average, which usually means it\'s worth the time' },
-        { icon: '▌', name: 'Up to date', chip: 'Updated 3 weeks ago', desc: 'The course was refreshed recently, so the examples and techniques reflect how AI sales is actually working right now' },
+        { icon: '●', name: 'Your role', stat: '87% match', desc: '87 out of 100 Account Executives at companies like yours have done this course. It\'s a strong fit for your day-to-day.' },
+        { icon: '○', name: 'Your team', stat: '82% finished it', desc: 'Most people on your sales team who started this saw it through. That\'s well above average, which usually means it\'s worth the time.' },
+        { icon: '▌', name: 'Up to date', chip: 'Updated 3 weeks ago', desc: 'The course was refreshed recently, so the examples and techniques reflect how AI sales is actually working right now.' },
       ],
       contentSignals: [
-        { name: 'Most people finish it', badge: '91% completion', desc: 'Out of 2,400 learners who started this, 91% completed it — well above average. That\'s usually a good sign the content is worth the time.' },
-        { name: 'Covers what it says', badge: 'Go1 verified', desc: 'Go1 checked that this course actually teaches what it claims. No filler — the skills described in the title are the skills you walk away with.' },
+        { name: 'Most people finish it', badge: '91% completion', desc: 'Out of 2,400 learners who started this, 91% completed it, well above average. That\'s usually a good sign the content is worth the time.' },
+        { name: 'Covers what it says', badge: 'Go1 verified', desc: 'Go1 checked that this course actually teaches what it claims. No filler. The skills described in the title are the skills you walk away with.' },
       ]
     },
     2: {
@@ -1553,13 +1918,20 @@
       title: 'Handling AI Sales Objections',
       meta: '1h 40min · Course',
       img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=120&q=80&fit=crop',
+      rating: '4.5', learnerCount: '1,180',
+      skills: ['Objection Handling', 'AI Product Positioning', 'Cert Prep', 'Negotiation'],
+      outcomes: [
+        'Identify and address the most common objections to AI-assisted selling',
+        'Frame your product\'s AI features in terms buyers trust and understand',
+        'Complete the required module for your Voice AI Platform Certification',
+      ],
       signals: [
-        { icon: '●', name: 'Compliance deadline', stat: '21 days left', desc: 'Your product certification requires this module — completing it now keeps you on track before the Nov 30 deadline' },
-        { icon: '○', name: 'Your role', stat: '74% match', desc: '74 out of 100 Account Executives with an active product certification have completed this as part of their prep' },
-        { icon: '▌', name: 'Up to date', chip: 'Updated 6 weeks ago', desc: 'Covers the latest objection patterns around AI-assisted selling — relevant to the deals your team is running right now' },
+        { icon: '●', name: 'Compliance deadline', stat: '21 days left', desc: 'Your product certification requires this module. Completing it now keeps you on track before the Nov 30 deadline.' },
+        { icon: '○', name: 'Your role', stat: '74% match', desc: '74 out of 100 Account Executives with an active product certification have completed this as part of their prep.' },
+        { icon: '▌', name: 'Up to date', chip: 'Updated 6 weeks ago', desc: 'Covers the latest objection patterns around AI-assisted selling, relevant to the deals your team is running right now.' },
       ],
       contentSignals: [
-        { name: 'Most people finish it', badge: '86% completion', desc: 'Most learners in similar roles complete this course. A note: engagement tends to drop in module 4 — worth pushing through it.' },
+        { name: 'Most people finish it', badge: '86% completion', desc: 'Most learners in similar roles complete this course. A note: engagement tends to drop in module 4. Worth pushing through it.' },
         { name: 'Matches your cert requirements', badge: 'Go1 verified', desc: 'Go1 confirmed this course covers the specific topics required for your Voice AI Platform Certification. No gaps.' },
       ]
     },
@@ -1568,19 +1940,53 @@
       title: 'Voice AI Demo Playbook',
       meta: '45 min · Video',
       img: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=120&q=80&fit=crop',
+      rating: '4.9', learnerCount: '847',
+      skills: ['Live Demo Delivery', 'Voice AI Products', 'Storytelling', 'Buyer Engagement'],
+      outcomes: [
+        'Deliver a compelling Voice AI demo tailored to the buyer\'s specific use case',
+        'Use the latest demo scripts built around the current product release',
+        'Handle live questions without losing momentum in the demo flow',
+      ],
       signals: [
-        { icon: '●', name: 'Your role', stat: '91% match', desc: 'Morgan matched this specifically to AEs selling Voice AI products — it\'s one of the highest role-match scores in your queue' },
-        { icon: '○', name: 'Short and high-rated', stat: '4.9 stars', desc: 'It\'s 45 minutes and rated in the top 5% of videos on the platform — high signal for a quick, useful watch' },
-        { icon: '▌', name: 'Up to date', chip: 'Updated 2 weeks ago', desc: 'The demo scripts were refreshed after the latest product release — what\'s in here matches what you\'re demoing today' },
+        { icon: '●', name: 'Your role', stat: '91% match', desc: 'Morgan matched this specifically to AEs selling Voice AI products. It\'s one of the highest role-match scores in your queue.' },
+        { icon: '○', name: 'Short and high-rated', stat: '4.9 stars', desc: 'It\'s 45 minutes and rated in the top 5% of videos on the platform. High signal for a quick, useful watch.' },
+        { icon: '▌', name: 'Up to date', chip: 'Updated 2 weeks ago', desc: 'The demo scripts were refreshed after the latest product release. What\'s in here matches what you\'re demoing today.' },
       ],
       contentSignals: [
-        { name: 'Learners keep watching', badge: '94% completion', desc: 'Learners finish this video at 3× the platform average — one of the highest engagement rates in the catalog. Short and hard to stop.' },
+        { name: 'Learners keep watching', badge: '94% completion', desc: 'Learners finish this video at 3x the platform average. One of the highest engagement rates in the catalog. Short and hard to stop.' },
         { name: 'Covers what it says', badge: 'Go1 verified', desc: 'Go1 confirmed the demo techniques shown here match what Voice AI AEs are actually doing in the field. No outdated scripts.' },
       ]
     }
   };
 
   let currentCardTitle = '';
+  let lastFeedbackRow = null;
+
+  function showMorganCapabilities() {
+    document.getElementById('panel-morgan-capabilities').classList.remove('hidden');
+  }
+
+  function slackThumbsFeedback(btn, direction, cardId) {
+    const row = btn.parentElement;
+    if (direction === 'up') {
+      row.innerHTML = '<span style="font-size:9px;color:#2bac76;font-weight:600;">✓ Thanks for the feedback</span>';
+    } else {
+      lastFeedbackRow = row;
+      showDismiss(cardId);
+    }
+  }
+
+  function submitDismiss() {
+    closePanel('panel-dismiss');
+    if (lastFeedbackRow) {
+      lastFeedbackRow.innerHTML = '<span style="font-size:9px;color:#616061;font-weight:500;">✓ Got it. Morgan will adjust.</span>';
+      lastFeedbackRow = null;
+    }
+  }
+
+  function slackDismissReason(btn) {
+    btn.closest('div[style*="width:100%"]').innerHTML = '<span style="font-size:9px;color:#2bac76;font-weight:600;">✓ Got it. Morgan will adjust.</span>';
+  }
 
   function showWhyRecommended(cardId) {
     const card = cards[cardId];
@@ -1591,6 +1997,23 @@
     document.getElementById('s2-provider').textContent = card.provider;
     document.getElementById('s2-title').textContent = card.title;
     document.getElementById('s2-meta').textContent = card.meta;
+
+    // Update rating
+    document.getElementById('s2-rating').innerHTML = `
+      <span style="font-size:12px;color:#f5a623;font-weight:700;">${card.rating}</span>
+      <span style="font-size:11px;color:#f5a623;">★★★★★</span>
+      <span style="font-size:11px;color:#999;">(${card.learnerCount} learners)</span>
+    `;
+
+    // Update skill tags
+    document.getElementById('s2-skills').innerHTML = card.skills.map(s =>
+      `<span style="display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;border:1px solid var(--border);background:var(--go1-bg);font-size:11px;font-weight:500;color:var(--charcoal);">${s}</span>`
+    ).join('');
+
+    // Update outcomes
+    document.getElementById('s2-outcomes').innerHTML = card.outcomes.map(o =>
+      `<li style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--charcoal);line-height:1.5;"><span style="color:var(--teal);font-weight:700;flex-shrink:0;margin-top:1px;">✓</span>${o}</li>`
+    ).join('');
 
     // Update learner signals
     const signalContainer = document.getElementById('s2-signals');
@@ -1651,6 +2074,68 @@
     document.getElementById('screen-slack').classList.remove('hidden');
     document.getElementById('go1-sidebar').classList.add('hidden');
   }
+  let carouselIndex = 0;
+  function updateCarousel() {
+    document.getElementById('carousel-track').style.transform = `translateX(-${carouselIndex * 100}%)`;
+    document.getElementById('carousel-counter').textContent = `${carouselIndex + 1} / 3`;
+    document.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      d.style.background = i === carouselIndex ? '#35656e' : '#e8eced';
+    });
+  }
+  function carouselNext() { carouselIndex = (carouselIndex + 1) % 3; updateCarousel(); }
+  function carouselPrev() { carouselIndex = (carouselIndex + 2) % 3; updateCarousel(); }
+
+  function toggleSkill(btn) {
+    const active = btn.classList.contains('selected');
+    btn.classList.toggle('selected', !active);
+    btn.style.background = active ? '#f8f8f8' : '#e8f4f6';
+    btn.style.borderColor = active ? '#ddd' : '#35656e';
+    btn.style.color = active ? '#1d1c1d' : '#35656e';
+    btn.style.fontWeight = active ? '500' : '600';
+  }
+  function saveSkills() {
+    document.getElementById('skill-selector').style.display = 'none';
+    document.getElementById('skill-saved').style.display = 'flex';
+  }
+  function skipSkills() {
+    document.getElementById('skill-selector').style.display = 'none';
+  }
+
+  function showPreview(cardId) {
+    const c = cards[cardId];
+    document.getElementById('preview-img').src = c.img;
+    document.getElementById('preview-provider').textContent = c.provider;
+    document.getElementById('preview-title').textContent = c.title;
+    document.getElementById('preview-duration').textContent = c.meta;
+    document.getElementById('preview-bullets').innerHTML = c.outcomes.map(o =>
+      `<li style="display:flex;gap:7px;align-items:flex-start;font-size:12px;color:#394646;line-height:1.45;"><span style="color:#35656e;font-weight:700;flex-shrink:0;margin-top:1px;">✓</span>${o}</li>`
+    ).join('');
+    const overlay = document.getElementById('course-preview-overlay');
+    overlay.style.display = 'flex';
+  }
+  function closePreview() {
+    document.getElementById('course-preview-overlay').style.display = 'none';
+  }
+  function showCalendarSlot() {
+    document.getElementById('calendar-offer').style.display = 'none';
+    document.getElementById('calendar-slot').style.display = 'block';
+  }
+  function declineCalendar() {
+    document.getElementById('calendar-offer').style.display = 'none';
+    document.getElementById('calendar-declined').style.display = 'block';
+  }
+  function confirmBlock() {
+    document.getElementById('calendar-confirm').style.display = 'none';
+    document.getElementById('calendar-booked').style.display = 'block';
+  }
+  function findAnotherTime() {
+    document.getElementById('calendar-confirm').style.display = 'none';
+    document.getElementById('calendar-rescheduled').style.display = 'block';
+  }
+  function skipBlock() {
+    document.getElementById('calendar-confirm').style.display = 'none';
+    document.getElementById('calendar-skipped').style.display = 'block';
+  }
   // Legacy alias — panels use this to return to their parent context
   function goHome() { goBackToSlack(); }
   function selectOption(el) {
@@ -1681,6 +2166,11 @@
   }
 
   function openGoalsEditor() {
+    // Always start on step 1
+    document.getElementById('goals-step-1').classList.remove('hidden');
+    document.getElementById('goals-step-2').classList.add('hidden');
+    document.getElementById('gdot-1').classList.add('active');
+    document.getElementById('gdot-2').classList.remove('active');
     document.getElementById('goals-modal').classList.remove('hidden');
   }
   function closeGoalsEditor() {
@@ -1690,9 +2180,105 @@
     el.classList.toggle('selected');
     el.querySelector('.goal-check').textContent = el.classList.contains('selected') ? '✓' : '';
   }
+  function toggleGoalChip(el) {
+    el.classList.toggle('selected');
+  }
+  function filterSkills() {
+    const input = document.getElementById('goals-skill-input');
+    const val = input.value.trim().toLowerCase();
+    const suggestion = document.getElementById('skill-add-suggestion');
+    const popularChips = document.querySelectorAll('#goals-step-1 .skill-chips:not(#custom-skill-chips) .skill-chip-goal');
+
+    if (!val) {
+      popularChips.forEach(c => c.style.display = '');
+      suggestion.style.display = 'none';
+      return;
+    }
+
+    let hasMatch = false;
+    popularChips.forEach(chip => {
+      const match = chip.textContent.toLowerCase().includes(val);
+      chip.style.display = match ? '' : 'none';
+      if (match) hasMatch = true;
+    });
+
+    // Also check custom chips for duplicates
+    const customChips = document.querySelectorAll('#custom-skill-chips .skill-chip-goal');
+    customChips.forEach(chip => {
+      if (chip.textContent.toLowerCase() === val) hasMatch = true;
+    });
+
+    if (!hasMatch) {
+      suggestion.textContent = `+ Add "${input.value.trim()}"`;
+      suggestion.style.display = 'block';
+    } else {
+      suggestion.style.display = 'none';
+    }
+  }
+
+  function addSkillFromSuggestion() {
+    const input = document.getElementById('goals-skill-input');
+    const val = input.value.trim();
+    if (!val) return;
+    _createCustomChip(val);
+    input.value = '';
+    filterSkills();
+  }
+
+  function addCustomSkill(e) {
+    if (e.key !== 'Enter') return;
+    const input = document.getElementById('goals-skill-input');
+    const val = input.value.trim();
+    if (!val) return;
+    const suggestion = document.getElementById('skill-add-suggestion');
+    if (suggestion.style.display !== 'none') {
+      _createCustomChip(val);
+    }
+    input.value = '';
+    filterSkills();
+  }
+
+  function _createCustomChip(val) {
+    const container = document.getElementById('custom-skill-chips');
+    const row = document.getElementById('custom-skills-row');
+    const chip = document.createElement('button');
+    chip.className = 'skill-chip-goal selected';
+    chip.textContent = val;
+    chip.onclick = function() { toggleGoalChip(this); };
+    container.appendChild(chip);
+    row.style.display = 'block';
+  }
+  function goalsToStep2() {
+    // Build plan focus from selected chips
+    const chips = document.querySelectorAll('.skill-chip-goal.selected');
+    const labels = Array.from(chips).map(c => c.textContent.replace(/^[+✓]\s*/, '').trim());
+    if (labels.length === 0) { alert('Select at least one skill.'); return; }
+    document.getElementById('goals-plan-focus').textContent = labels.join(' · ');
+    document.getElementById('goals-step-1').classList.add('hidden');
+    document.getElementById('goals-step-2').classList.remove('hidden');
+    document.getElementById('gdot-1').classList.remove('active');
+    document.getElementById('gdot-2').classList.add('active');
+  }
+  function goalsBackToStep1() {
+    document.getElementById('goals-step-2').classList.add('hidden');
+    document.getElementById('goals-step-1').classList.remove('hidden');
+    document.getElementById('gdot-1').classList.add('active');
+    document.getElementById('gdot-2').classList.remove('active');
+  }
   function saveGoals() {
     closeGoalsEditor();
-    // Show toast
+    // Swap cards 2 & 3 to reflect updated goals
+    document.getElementById('slack-card2-title').textContent = 'Negotiation Skills for Enterprise Sales';
+    document.getElementById('slack-card2-meta').textContent = 'LinkedIn Learning · 1h 20min';
+    document.getElementById('slack-card2-stars').innerHTML = '★★★★★ <span style="color:#999;">4.7</span>';
+    document.getElementById('slack-card2-img').src = 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=300&q=80&fit=crop';
+    document.getElementById('slack-card3-title').textContent = 'Pipeline Management for High-Growth Teams';
+    document.getElementById('slack-card3-meta').textContent = 'Coursera · 55min';
+    document.getElementById('slack-card3-stars').innerHTML = '★★★★½ <span style="color:#999;">4.6</span>';
+    document.getElementById('slack-card3-img').src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80&fit=crop';
+    // Show updated banner
+    const banner = document.getElementById('picks-updated-banner');
+    if (banner) banner.style.display = 'block';
     const toast = document.getElementById('morgan-toast');
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 3500);
