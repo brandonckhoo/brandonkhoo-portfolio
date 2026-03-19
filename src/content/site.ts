@@ -493,7 +493,7 @@ export const siteContent = {
         slug: "alice-abm-prototype",
         title: "Alice ABM Prototype",
         oneliner:
-          "Built an end-to-end account-based workflow prototype showing how 11x Alice could move from target accounts to pipeline — with tighter control, better coordination, and measurable outcomes.",
+          "Built an end-to-end account-based workflow prototype showing how 11x Alice could move from target accounts to pipeline, with tighter control, better coordination, and measurable outcomes.",
         type: "prototype",
         image: "/alice-abm.png",
         positioning:
