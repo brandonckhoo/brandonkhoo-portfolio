@@ -1056,6 +1056,7 @@ export const sideProjectDetails: SideProjectDetail[] = [
       {
         label: "GitHub",
         href: "https://github.com/brandonckhoo/brandonckhoo",
+        primary: false,
       },
     ],
     whatIBuilt:
