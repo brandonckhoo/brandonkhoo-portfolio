@@ -407,7 +407,7 @@ export const siteContent = {
         slug: "go1-prototype",
         title: "Go1 Content Intelligence Prototype",
         oneliner:
-          "A 4-screen interactive prototype showing how an AI layer (Morgan) can make learning recommendations visible, explainable, and improvable for Go1's learner discovery experience.",
+          "Interactive prototype showing how an AI layer (Morgan) makes learning recommendations visible, explainable, and improvable, surfacing role signals, a dismiss feedback loop, and an agent activity log showing Morgan nudging learners in Slack.",
         type: "prototype",
         positioning:
           "Product prototype exploring Go1's content intelligence layer — recommendation explainability, learner-facing AI design, and the feedback loop that makes it improvable over time.",
@@ -416,6 +416,10 @@ export const siteContent = {
             label: "Live prototype",
             href: "/go1-prototype/",
             primary: true,
+          },
+          {
+            label: "GitHub",
+            href: "https://github.com/brandonckhoo/brandonckhoo",
           },
         ],
         demonstrates: [
@@ -1037,13 +1041,17 @@ export const sideProjectDetails: SideProjectDetail[] = [
     slug: "go1-prototype",
     title: "Go1 Content Intelligence Prototype",
     oneliner:
-      "A 4-screen interactive prototype showing how an AI layer (Morgan) can make recommendation decisions visible, explainable, and improvable — built as a take-home assignment for a Senior PM role at Go1.",
+      "Interactive prototype showing how an AI layer (Morgan) makes learning recommendations visible, explainable, and improvable, surfacing role signals, a dismiss feedback loop, and an agent activity log visible in Slack.",
     type: "prototype",
     links: [
       {
         label: "Live prototype",
         href: "/go1-prototype/",
         primary: true,
+      },
+      {
+        label: "GitHub",
+        href: "https://github.com/brandonckhoo/brandonckhoo",
       },
     ],
     whatIBuilt:
