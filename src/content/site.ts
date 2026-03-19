@@ -504,6 +504,10 @@ export const siteContent = {
             href: "https://alice-abm-prototype.vercel.app/",
             primary: true,
           },
+          {
+            label: "GitHub",
+            href: "https://github.com/brandonckhoo/brandonckhoo",
+          },
         ],
         demonstrates: [
           "Account selection and prioritisation based on ICP and intent signals",
@@ -1133,6 +1137,10 @@ export const sideProjectDetails: SideProjectDetail[] = [
         label: "Live demo",
         href: "https://alice-abm-prototype.vercel.app/",
         primary: true,
+      },
+      {
+        label: "GitHub",
+        href: "https://github.com/brandonckhoo/brandonckhoo",
       },
     ],
     whatIBuilt:
