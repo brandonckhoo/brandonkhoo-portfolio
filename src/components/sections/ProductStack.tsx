@@ -144,6 +144,20 @@ const categories: Category[] = [
     ),
   },
   {
+    id: "research",
+    label: "User Research",
+    description: "Participant recruitment, interviews, and research incentives",
+    tools: [{ label: "User Interviews" }, { label: "Tremendous" }, { label: "SurveyMonkey" }, { label: "Typeform" }, { label: "Qualtrics" }],
+    accent: "rgba(0, 160, 122, 0.75)",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <circle cx="9" cy="6" r="3" stroke="currentColor" strokeWidth="1.4" />
+        <path d="M3 15c0-3.31 2.69-6 6-6s6 2.69 6 6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+        <path d="M12 10l1.5 1.5L16 9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
     id: "deployment",
     label: "Deployment",
     description: "Frontend hosting, CI/CD, and zero-config previews",
