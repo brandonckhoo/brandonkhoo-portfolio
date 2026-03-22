@@ -80,7 +80,7 @@ const categories: Category[] = [
     id: "crm",
     label: "CRM & Growth Systems",
     description: "Pipeline management and revenue operations",
-    tools: [{ label: "Salesforce" }, { label: "HubSpot" }, { label: "GHL" }, { label: "Gong" }],
+    tools: [{ label: "Salesforce" }, { label: "HubSpot" }, { label: "GHL" }, { label: "Gong" }, { label: "Stripe" }],
     accent: "rgba(0, 160, 122, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
