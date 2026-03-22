@@ -24,7 +24,7 @@ const categories: Category[] = [
     id: "ai",
     label: "AI & Prototyping",
     description: "Rapid AI-assisted research, ideation and prototyping",
-    tools: [{ label: "Claude" }, { label: "Cursor" }, { label: "Bolt" }, { label: "Lovable", badge: "L4 Platinum" }, { label: "Perplexity" }, { label: "Manus" }, { label: "Wispr" }],
+    tools: [{ label: "Claude" }, { label: "Cursor" }, { label: "Bolt" }, { label: "Lovable", badge: "L4 Platinum" }, { label: "Perplexity" }, { label: "Manus" }, { label: "Wispr" }, { label: "nano Banana 2" }, { label: "Google Stitch" }],
     accent: "rgba(124, 92, 219, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
