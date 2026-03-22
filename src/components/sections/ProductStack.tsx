@@ -147,7 +147,7 @@ const categories: Category[] = [
     id: "deployment",
     label: "Deployment",
     description: "Frontend hosting, CI/CD, and zero-config previews",
-    tools: [{ label: "Vercel" }],
+    tools: [{ label: "Vercel" }, { label: "GitHub" }],
     accent: "rgba(124, 92, 219, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
