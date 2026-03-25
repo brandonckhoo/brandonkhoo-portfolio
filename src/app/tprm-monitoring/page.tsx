@@ -843,7 +843,7 @@ function DetailPanel({ vendor, onClose }: { vendor: Vendor; onClose: () => void 
   ]
 
   return (
-    <div className="w-[520px] flex-shrink-0 bg-white border-l border-slate-200 flex flex-col h-full overflow-hidden">
+    <div className="w-[680px] flex-shrink-0 bg-white border-l border-slate-200 flex flex-col h-full overflow-hidden">
       {/* Header */}
       <div className="px-5 py-4 border-b border-slate-200">
         <div className="flex items-start justify-between gap-3">
@@ -905,7 +905,7 @@ function DetailPanel({ vendor, onClose }: { vendor: Vendor; onClose: () => void 
 
       {/* Action bar */}
       <div className="px-4 py-3 border-t border-slate-200 bg-slate-50 flex items-center gap-2">
-        <button className="flex-1 px-3 py-2 bg-[#4362f5] text-white text-[12px] font-semibold rounded hover:bg-indigo-700 transition-colors">
+        <button className="px-3 py-2 bg-[#4362f5] text-white text-[12px] font-semibold rounded hover:bg-indigo-700 transition-colors whitespace-nowrap">
           Create Assessment
         </button>
         <button className="px-3 py-2 text-[12px] font-medium text-slate-700 bg-white border border-slate-200 rounded hover:bg-slate-50 transition-colors whitespace-nowrap">
