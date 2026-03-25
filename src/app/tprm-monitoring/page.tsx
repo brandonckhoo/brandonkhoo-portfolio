@@ -1169,7 +1169,7 @@ function AuditTab({ vendor }: { vendor: Vendor }) {
       <table className="w-full">
         <thead>
           <tr className="border-b border-slate-100">
-            <th className="pb-2 pr-3 text-left text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Actor</th>
+            <th className="pb-2 pr-3 text-left text-[10px] font-semibold text-slate-400 uppercase tracking-wider w-20">Actor</th>
             <th className="pb-2 pr-3 text-left text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Action</th>
             <th className="pb-2 text-left text-[10px] font-semibold text-slate-400 uppercase tracking-wider whitespace-nowrap">Timestamp</th>
           </tr>
@@ -1177,8 +1177,8 @@ function AuditTab({ vendor }: { vendor: Vendor }) {
         <tbody className="divide-y divide-slate-100">
           {vendor.auditLog.map(e => (
             <tr key={e.id}>
-              <td className="py-2.5 pr-3">
-                <span className={cls('text-[12px] font-medium', e.actorType === 'system' ? 'text-slate-400' : 'text-indigo-700')}>
+              <td className="py-2.5 pr-3 w-20">
+                <span className={cls('text-[12px] font-medium block truncate', e.actorType === 'system' ? 'text-slate-400' : 'text-indigo-700')}>
                   {e.actor}
                 </span>
               </td>
