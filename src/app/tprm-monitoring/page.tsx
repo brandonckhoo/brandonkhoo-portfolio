@@ -1277,7 +1277,7 @@ export default function TPRMMonitoringPage() {
                 <div>
                   <h1 className="text-[20px] font-bold text-slate-900 tracking-tight">Continuous Monitoring</h1>
                   <p className="text-[13px] text-slate-500 mt-0.5">
-                    Real-time risk signal feed across 41 monitored vendors. Last refreshed Mar 22, 2026 at 09:15 AM.
+                    Real-time risk signal feed across 41 monitored vendors. Last refreshed Mar 26, 2026 at 08:42 AM.
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
