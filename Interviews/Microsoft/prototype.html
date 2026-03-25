@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StoreCraft — AI Product Mockups</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+  .slide-in-right {
+    animation: slideInRight 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to   { transform: translateX(0);    opacity: 1; }
+  }
+
+  .fade-up {
+    animation: fadeUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .progress-animate {
+    animation: progressFill 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  @keyframes progressFill {
+    0%   { width: 0%; }
+    60%  { width: 75%; }
+    100% { width: 92%; }
+  }
+
+  .pulse-glow {
+    animation: pulseGlow 1.8s ease-in-out infinite;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.7; }
+    50%       { opacity: 1; }
+  }
+
+  .toast-in {
+    animation: toastIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes toastIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+
+  .scene-card:hover .scene-overlay { opacity: 1; }
+  .scene-overlay { opacity: 0; transition: opacity 0.2s; }
+
+  /* Compare slider */
+  #compareSlider { cursor: ew-resize; user-select: none; }
+  .compare-left  { position: absolute; inset: 0; }
+  .compare-right {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    overflow: hidden;
+    transition: width 0.05s;
+  }
+  .compare-divider {
+    position: absolute; top: 0; bottom: 0;
+    width: 2px; background: white;
+    display: flex; align-items: center; justify-content: center;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 0 4px rgba(0,0,0,0.3));
+    z-index: 10;
+  }
+  .compare-handle {
+    width: 32px; height: 32px;
+    background: white; border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Custom scrollbar */
+  .panel-scroll { overflow-y: auto; }
+  .panel-scroll::-webkit-scrollbar { width: 4px; }
+  .panel-scroll::-webkit-scrollbar-track { background: transparent; }
+  .panel-scroll::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 4px; }
+</style>
+</head>
+<body class="bg-gray-100 h-screen overflow-hidden">
+
+<!-- Layout -->
+<div class="flex h-screen overflow-hidden relative">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="w-60 bg-white border-r border-gray-100 flex flex-col flex-shrink-0 z-10">
+    <!-- Logo -->
+    <div class="px-5 py-4 border-b border-gray-100">
+      <div class="flex items-center gap-2.5">
+        <div class="w-7 h-7 bg-gray-900 rounded-lg flex items-center justify-center text-white text-xs font-bold">S</div>
+        <span class="font-semibold text-gray-900 text-sm">StoreCraft</span>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="p-3 flex-1 space-y-0.5">
+      <a id="nav-home" class="nav-item flex items-center gap-3 px-3 py-2 text-gray-500 rounded-lg hover:bg-gray-50 cursor-pointer text-sm transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        Home
+      </a>
+      <a class="nav-item flex items-center gap-3 px-3 py-2 text-gray-500 rounded-lg hover:bg-gray-50 cursor-pointer text-sm transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+        Orders
+      </a>
+      <a id="nav-products" class="nav-item flex items-center gap-3 px-3 py-2 bg-gray-100 text-gray-900 rounded-lg cursor-pointer text-sm font-medium transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+        Products
+      </a>
+      <a class="nav-item flex items-center gap-3 px-3 py-2 text-gray-500 rounded-lg hover:bg-gray-50 cursor-pointer text-sm transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        Pages
+      </a>
+      <a class="nav-item flex items-center gap-3 px-3 py-2 text-gray-500 rounded-lg hover:bg-gray-50 cursor-pointer text-sm transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        Media
+      </a>
+      <a class="nav-item flex items-center gap-3 px-3 py-2 text-gray-500 rounded-lg hover:bg-gray-50 cursor-pointer text-sm transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+        Design
+      </a>
+      <a class="nav-item flex items-center gap-3 px-3 py-2 text-gray-500 rounded-lg hover:bg-gray-50 cursor-pointer text-sm transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        Analytics
+      </a>
+      <a class="nav-item flex items-center gap-3 px-3 py-2 text-gray-500 rounded-lg hover:bg-gray-50 cursor-pointer text-sm transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/></svg>
+        Settings
+      </a>
+    </nav>
+
+    <!-- User -->
+    <div class="p-4 border-t border-gray-100">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center text-amber-700 text-xs font-semibold">M</div>
+        <div>
+          <div class="text-xs font-semibold text-gray-900">Maya's Candles</div>
+          <div class="text-xs text-gray-400">Free plan</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <div id="mainContent" class="flex-1 flex flex-col overflow-hidden min-w-0"></div>
+
+  <!-- ── PANEL ── -->
+  <div id="panel" class="hidden w-80 bg-white border-l border-gray-100 shadow-2xl flex flex-col flex-shrink-0 z-20 slide-in-right" style="min-width:320px;max-width:320px;"></div>
+
+</div>
+
+<!-- Toast -->
+<div id="toast" class="hidden fixed bottom-6 right-6 bg-gray-900 text-white rounded-2xl shadow-2xl px-4 py-3.5 flex items-center gap-3 z-50 toast-in" style="min-width:280px;">
+  <div class="w-7 h-7 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+  </div>
+  <div>
+    <div class="font-semibold text-sm">Amber & Cedar Candle published</div>
+    <div class="text-xs text-gray-400 mt-0.5">6 photos are ready on the product page.</div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────
+const S = {
+  screen: 'products',    // 'products' | 'detail'
+  step: null,            // panel step
+  placement: null,
+  direction: null,
+  variation: 0,
+  enhanced: 0,
+  allEnhanced: false,
+  uploadCount: 1,
+};
+
+// ─────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────
+const SCENES = [
+  { id: 'cozy',     name: 'Cozy bedroom',    desc: 'Warm, soft textures',     bg: 'linear-gradient(155deg,#1e0a00 0%,#5c3010 35%,#9b6030 65%,#d4986a 100%)' },
+  { id: 'spa',      name: 'Spa shelf',        desc: 'Clean, minimal backdrop', bg: 'linear-gradient(155deg,#e8f4f2 0%,#cce4e0 50%,#aacfca 100%)' },
+  { id: 'rainy',    name: 'Rainy window',     desc: 'Moody, atmospheric',      bg: 'linear-gradient(155deg,#08111e 0%,#182f45 40%,#274d68 70%,#3a6880 100%)' },
+  { id: 'giftable', name: 'Gift setting',     desc: 'Warm, gifting context',   bg: 'linear-gradient(155deg,#1e0e00 0%,#5a2e10 40%,#966040 70%,#c8906a 100%)' },
+];
+
+const VARIATIONS = ['Natural light','Warm & intimate','Cool & moody','Soft & dreamy'];
+const VAR_OVERLAYS = [
+  'rgba(255,255,255,0)',
+  'rgba(255,190,80,0.12)',
+  'rgba(0,20,50,0.25)',
+  'rgba(200,210,255,0.1)',
+];
+
+const PRODUCTS = [
+  { name:'Amber & Cedar Candle', price:'$28.00', status:'Published', count:6, enhanced:'0/6', editedAgo:'2h ago'  },
+  { name:'Lavender Dream',       price:'$26.00', status:'Published', count:5, enhanced:'3/5', editedAgo:'1d ago'  },
+  { name:'Vanilla Bean',         price:'$24.00', status:'Draft',     count:4, enhanced:null,  editedAgo:'3h ago'  },
+  { name:'Rose & Oud',           price:'$34.00', status:'Published', count:6, enhanced:'2/6', editedAgo:'5d ago'  },
+  { name:'Eucalyptus Mint',      price:'$26.00', status:'Draft',     count:5, enhanced:null,  editedAgo:'12h ago' },
+  { name:'Fireside Glow',        price:'$30.00', status:'Published', count:7, enhanced:'5/7', editedAgo:'1w ago'  },
+  { name:'Coconut Breeze',       price:'$22.00', status:'Published', count:4, enhanced:null,  editedAgo:'2d ago'  },
+  { name:'Sandalwood Dusk',      price:'$32.00', status:'Draft',     count:5, enhanced:null,  editedAgo:'4h ago'  },
+  { name:'Midnight Jasmine',     price:'$29.00', status:'Published', count:6, enhanced:'1/6', editedAgo:'3d ago'  },
+];
+
+// ─────────────────────────────────────────
+// SVG HELPERS
+// ─────────────────────────────────────────
+function candleSVG(jarFill='#f5f0e8', size=80, lit=true) {
+  const s = size;
+  const cx = s/2, botY = s*0.96, jarH = s*0.44, jarTop = botY - jarH;
+  const jarW = s*0.46, jarX = cx - jarW/2;
+  const labelH = jarH*0.38, labelY = jarTop + jarH*0.3;
+  const wickX = cx, wickY = jarTop - s*0.03, wickH = s*0.1;
+  const flameY = wickY - s*0.09;
+  return `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="${jarX}" y="${jarTop}" width="${jarW}" height="${jarH}" rx="${s*0.07}" fill="${jarFill}" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+    <rect x="${jarX}" y="${labelY}" width="${jarW}" height="${labelH}" fill="rgba(180,140,90,0.45)" rx="${s*0.02}"/>
+    <rect x="${jarX+jarW*0.18}" y="${labelY+labelH*0.25}" width="${jarW*0.64}" height="${s*0.025}" rx="${s*0.012}" fill="rgba(100,60,20,0.55)"/>
+    <rect x="${jarX+jarW*0.26}" y="${labelY+labelH*0.55}" width="${jarW*0.48}" height="${s*0.02}" rx="${s*0.01}" fill="rgba(100,60,20,0.38)"/>
+    <rect x="${wickX-s*0.018}" y="${wickY - wickH}" width="${s*0.036}" height="${wickH}" rx="${s*0.018}" fill="#4a3020"/>
+    ${lit ? `
+    <ellipse cx="${wickX}" cy="${flameY}" rx="${s*0.048}" ry="${s*0.09}" fill="rgba(255,200,0,0.9)"/>
+    <ellipse cx="${wickX}" cy="${flameY + s*0.02}" rx="${s*0.03}" ry="${s*0.055}" fill="rgba(255,120,0,0.95)"/>
+    <ellipse cx="${wickX}" cy="${flameY + s*0.04}" rx="${s*0.018}" ry="${s*0.032}" fill="rgba(255,60,0,0.9)"/>
+    ` : ''}
+  </svg>`;
+}
+
+function starIcon(cls='w-4 h-4') {
+  return `<svg class="${cls}" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>`;
+}
+
+function checkIcon(cls='w-4 h-4') {
+  return `<svg class="${cls}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>`;
+}
+
+function panelHeader(showClose=true) {
+  return `
+    <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100 flex-shrink-0">
+      <div class="flex items-center gap-2">
+        <span class="text-blue-500">${starIcon('w-4 h-4')}</span>
+        <span class="font-semibold text-gray-900 text-sm">AI Product Mockups</span>
+      </div>
+      ${showClose ? `<button onclick="closePanel()" class="text-gray-400 hover:text-gray-700 transition-colors rounded-md p-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>` : ''}
+    </div>`;
+}
+
+function progressDots(active) {
+  // active = 1, 2, or 3
+  return `<div class="flex items-center justify-center gap-1.5 py-3 border-b border-gray-100 flex-shrink-0">
+    ${[1,2,3].map(n => `<div class="h-1 rounded-full transition-all ${n <= active ? 'bg-blue-500 w-8' : 'bg-gray-200 w-8'}"></div>`).join('')}
+  </div>`;
+}
+
+// ─────────────────────────────────────────
+// CANDLE SVG ILLUSTRATIONS
+// ─────────────────────────────────────────
+// jar: main body color, jarD: darker side/shadow, wax: wax surface, label/labelText: label colors, flame, glass: bool
+const CANDLE_THEMES = [
+  { bg:'#f4f2ee', jar:'#e8e4dc', jarD:'#ccc8c0', wax:'#f4f0e4', label:'#c8a060', labelText:'#3a2a10', flame:'#f97316', glass:false }, // Amber & Cedar — cream ceramic, kraft label
+  { bg:'#f2f0f8', jar:'#9878c8', jarD:'#7858a8', wax:'#e8e0f8', label:'#ffffff', labelText:'#3c2060', flame:'#c084fc', glass:false }, // Lavender Dream — purple matte
+  { bg:'#f5f5f2', jar:'rgba(210,205,195,0.5)', jarD:'rgba(160,155,140,0.65)', wax:'#f8f4ec', label:'#ffffff', labelText:'#404040', flame:'#fbbf24', glass:true  }, // Vanilla Bean — clear glass
+  { bg:'#f0ebe4', jar:'#7c3818', jarD:'#581808', wax:'#e4c080', label:'#d4a040', labelText:'#2c1408', flame:'#fb923c', glass:true  }, // Rose & Oud — deep amber glass
+  { bg:'#eff5f0', jar:'#8ab898', jarD:'#688878', wax:'#e4f0e4', label:'#ffffff', labelText:'#243828', flame:'#34d399', glass:false }, // Eucalyptus Mint — sage green matte
+  { bg:'#eeece8', jar:'#241e1a', jarD:'#0e0a08', wax:'#e4d0b0', label:'#b87830', labelText:'#f8eed8', flame:'#f97316', glass:false }, // Fireside Glow — black matte, copper label
+  { bg:'#f4f4f0', jar:'#eceae4', jarD:'#d0cec8', wax:'#f8f4ec', label:'#ffffff', labelText:'#404040', flame:'#fbbf24', glass:false }, // Coconut Breeze — white ceramic
+  { bg:'#f2ede6', jar:'#9c6440', jarD:'#783820', wax:'#dfc090', label:'#f4ece0', labelText:'#3c2010', flame:'#fb923c', glass:false }, // Sandalwood Dusk — terracotta
+  { bg:'#eceaf4', jar:'#38286c', jarD:'#22184c', wax:'#a898e0', label:'#5848a8', labelText:'#eeeaff', flame:'#a78bfa', glass:false }, // Midnight Jasmine — deep indigo
+];
+
+// Photorealistic candle images — one per product, matched by scent/aesthetic
+const CANDLE_PHOTOS = [
+  'https://images.unsplash.com/photo-1773527142335-3c3ab755509c?w=800&h=800&fit=crop&auto=format', // Amber & Cedar — glass jar soy candle with wooden lid
+  'https://images.unsplash.com/photo-1716662978426-1826599fcfea?w=800&h=800&fit=crop&auto=format', // Lavender Dream — lit candle in glass jar
+  'https://images.unsplash.com/photo-1760804876235-42ba2ac060f5?w=800&h=800&fit=crop&auto=format', // Vanilla Bean — white frosted candle jar, clean grey bg
+  'https://images.unsplash.com/photo-1567549017270-868c6e10055b?w=800&h=800&fit=crop&auto=format', // Rose & Oud — candle in brass tray, warm honey tones
+  'https://images.unsplash.com/photo-1736124708873-2cf5a128c6db?w=800&h=800&fit=crop&auto=format', // Eucalyptus Mint — white ceramic candle holder
+  'https://images.unsplash.com/photo-1611522564552-fe83c5bb3e77?w=800&h=800&fit=crop&auto=format', // Fireside Glow — candle in glass vessel
+  'https://images.unsplash.com/photo-1675194946046-53c9a38cecc0?w=800&h=800&fit=crop&auto=format', // Coconut Breeze — two candles, clean surface
+  'https://images.unsplash.com/photo-1712148273523-f2eb850f7fc2?w=800&h=800&fit=crop&auto=format', // Sandalwood Dusk — lit candle, warm ambiance
+  'https://images.unsplash.com/photo-1718881742886-d0a697345ab1?w=800&h=800&fit=crop&auto=format', // Midnight Jasmine — lit candle on table
+];
+
+function getCandleSvg(i) {
+  return CANDLE_PHOTOS[i % CANDLE_PHOTOS.length];
+}
+
+// ─────────────────────────────────────────
+// SCREENS
+// ─────────────────────────────────────────
+function renderProducts() {
+  const imgUrls = PRODUCTS.map((_, i) => getCandleSvg(i));
+
+  document.getElementById('mainContent').innerHTML = `
+    <div class="flex-1 flex flex-col overflow-hidden">
+      <!-- Header -->
+      <div class="flex items-center justify-between px-8 py-5 border-b border-gray-200 bg-white flex-shrink-0">
+        <div>
+          <h1 class="text-xl font-semibold text-gray-900">Products</h1>
+          <p class="text-sm text-gray-400 mt-0.5">9 products · Maya's Candles</p>
+        </div>
+        <button class="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800">Add product</button>
+      </div>
+
+      <!-- Grid -->
+      <div class="flex-1 overflow-y-auto p-8">
+        <div class="grid grid-cols-3 gap-5">
+          ${PRODUCTS.map((p,i) => `
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer overflow-hidden group" onclick="goToDetail()">
+              <!-- Image area -->
+              <div class="relative w-full aspect-square bg-[#f0eeeb] overflow-hidden">
+                <img src="${imgUrls[i]}" alt="${p.name}"
+                     class="w-full h-full object-contain p-4 transition-transform duration-300 group-hover:scale-105"
+                     onerror="this.style.display='none'"/>
+                <!-- Status badge — top right -->
+                <div class="absolute top-3 right-3">
+                  <span class="text-xs px-2.5 py-1 rounded-full font-medium ${p.status==='Draft' ? 'bg-gray-700 text-white' : 'bg-white/90 text-gray-700 border border-gray-200'}">
+                    ${p.status}
+                  </span>
+                </div>
+                <!-- Bottom row: enhanced left, photos right -->
+                <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                  ${p.enhanced ? `<span class="text-xs px-2 py-0.5 rounded-full bg-white/90 text-blue-600 flex items-center gap-1 font-medium border border-blue-100">
+                    ${starIcon('w-3 h-3')} ${p.enhanced} enhanced
+                  </span>` : '<span></span>'}
+                  <span class="text-xs px-2 py-0.5 rounded-full bg-white/90 text-gray-500 border border-gray-100">${p.count} photos</span>
+                </div>
+              </div>
+              <!-- Info -->
+              <div class="px-4 py-3">
+                <div class="flex items-start justify-between gap-2">
+                  <span class="font-semibold text-gray-900 text-base leading-snug">${p.name}</span>
+                  <span class="font-semibold text-gray-900 text-base flex-shrink-0">${p.price}</span>
+                </div>
+                <div class="text-xs text-gray-400 mt-1">Edited ${p.editedAgo}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderDetail() {
+  const isAllEnhanced = S.allEnhanced;
+  const enhancedCount = S.enhanced;
+  const total = 6;
+  const panelOpen = !!S.step;
+  const sceneBg = S.direction ? SCENES.find(s=>s.id===S.direction)?.bg : null;
+
+  document.getElementById('mainContent').innerHTML = `
+    <div class="flex-1 flex flex-col overflow-hidden ${panelOpen ? '' : ''}">
+      <!-- Header -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-white flex-shrink-0">
+        <div class="flex items-center gap-2">
+          <button onclick="goToProducts()" class="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            Products
+          </button>
+          <span class="text-gray-200 text-lg">/</span>
+          <span class="text-sm font-medium text-gray-900">Amber & Cedar Candle</span>
+        </div>
+        <div class="flex items-center gap-3">
+          ${enhancedCount > 0 ? `
+            <div class="flex items-center gap-1.5 text-blue-600 text-sm font-medium">
+              ${starIcon('w-4 h-4')} ${enhancedCount}/${total} enhanced
+            </div>` : ''}
+          ${S.published ? `
+            <button onclick="goToProducts()" class="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 flex items-center gap-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+              Back to Products
+            </button>
+          ` : `
+            <button class="border border-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50">Preview</button>
+            <button onclick="handlePublish()" class="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800">Publish</button>
+          `}
+        </div>
+      </div>
+
+      <!-- Product card -->
+      <div class="flex-1 overflow-y-auto p-8 flex items-start justify-center">
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden w-full max-w-2xl">
+          <!-- Browser bar -->
+          <div class="flex items-center gap-2 px-4 py-3 border-b border-gray-100 bg-gray-50">
+            <div class="flex gap-1.5">
+              <div class="w-3 h-3 bg-red-300 rounded-full"></div>
+              <div class="w-3 h-3 bg-yellow-300 rounded-full"></div>
+              <div class="w-3 h-3 bg-green-300 rounded-full"></div>
+            </div>
+            <div class="flex-1 mx-2 bg-white rounded-md px-3 py-1 text-xs text-gray-400 border border-gray-100">mayascandles.com/products/amber-cedar</div>
+          </div>
+
+          <!-- Product layout -->
+          <div class="p-6 flex gap-5">
+            <!-- Thumbnails -->
+            <div class="flex flex-col gap-2 flex-shrink-0">
+              ${Array.from({length:total},(_,i) => `
+                <div class="w-14 h-14 rounded-lg border-2 overflow-hidden relative ${i===0?'border-gray-800':'border-gray-100'}"
+                     style="background:${isAllEnhanced && sceneBg ? '' : 'linear-gradient(135deg,#f8f4ee,#ede8df)'};${isAllEnhanced && sceneBg ? 'background:'+sceneBg : ''}">
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    ${candleSVG(isAllEnhanced?'#cce0f0':'#f5f0e8', 44)}
+                  </div>
+                  ${isAllEnhanced ? `
+                    <div class="absolute top-0.5 right-0.5 w-4 h-4 bg-green-500 rounded-full flex items-center justify-center">
+                      ${checkIcon('w-2.5 h-2.5 text-white')}
+                    </div>` : ''}
+                </div>`).join('')}
+            </div>
+
+            <!-- Hero image -->
+            <div class="flex-1 min-w-0 relative">
+              <div class="w-full h-72 rounded-xl overflow-hidden relative"
+                   style="${isAllEnhanced && sceneBg ? 'background:'+sceneBg : 'background:linear-gradient(135deg,#f8f4ee,#ede8df)'}">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  ${candleSVG(isAllEnhanced?'#cce0f0':'#f5f0e8', 160)}
+                </div>
+
+                ${isAllEnhanced ? `
+                  <!-- Enhanced badge -->
+                  <div class="absolute top-3 left-3">
+                    <button onclick="openPanel('quality')" class="bg-white bg-opacity-90 backdrop-blur-sm text-gray-800 text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 font-medium shadow-sm hover:bg-opacity-100">
+                      ${starIcon('w-3 h-3 text-blue-500')} Enhanced · Change
+                    </button>
+                  </div>` : `
+                  <!-- AI CTA — top left -->
+                  <div class="absolute top-3 left-3">
+                    <button onclick="openPanel('upload')"
+                      class="bg-white text-gray-900 px-3.5 py-2 rounded-xl flex items-center gap-2 shadow-lg font-medium text-sm hover:bg-gray-50 transition-all hover:scale-105 active:scale-100">
+                      ${starIcon('w-4 h-4 text-blue-500')}
+                      Enhance photos with AI
+                    </button>
+                  </div>`}
+              </div>
+            </div>
+
+            <!-- Info -->
+            <div class="w-48 flex-shrink-0">
+              <p class="text-xs text-gray-400 uppercase tracking-widest font-medium">Maya's Candles</p>
+              <h2 class="text-base font-bold text-gray-900 mt-1.5 leading-tight">Amber & Cedar Candle</h2>
+              <p class="text-lg font-semibold text-gray-900 mt-2">$28.00</p>
+              <p class="text-xs text-gray-500 mt-2.5 leading-relaxed">Hand-poured soy wax with warm amber, cedarwood & vanilla. Burns ~45 hours.</p>
+              <div class="mt-3 space-y-2">
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <div class="w-4 h-4 rounded-full border-2 border-gray-300"></div>
+                  <span class="text-xs text-gray-600">8 oz / 227g</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <div class="w-4 h-4 rounded-full border-2 border-gray-300"></div>
+                  <span class="text-xs text-gray-600">100% soy wax</span>
+                </label>
+              </div>
+              <button class="w-full mt-4 bg-gray-100 text-gray-500 py-2 rounded-lg text-xs font-medium">Add to cart</button>
+              <p class="text-xs text-gray-400 mt-1.5 text-center">Preview only</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ─────────────────────────────────────────
+// PANEL STEPS
+// ─────────────────────────────────────────
+function renderPanel() {
+  const panel = document.getElementById('panel');
+  if (!S.step) { panel.classList.add('hidden'); return; }
+  panel.classList.remove('hidden');
+
+  const steps = {
+    upload:     stepUpload,
+    quality:    stepQuality,
+    placement:  stepPlacement,
+    directions: stepDirections,
+    generating: stepGenerating,
+    results:    stepResults,
+    compare:    stepCompare,
+    apply:      stepApply,
+    applyAll:   stepApplyAll,
+  };
+
+  panel.innerHTML = (steps[S.step] || (() => ''))();
+}
+
+function stepUpload() {
+  const photos = S.uploadedPhotos || [];
+  const count = photos.length;
+  const max = 10;
+
+  // Empty state vs has photos
+  if (count === 0) {
+    return panelHeader() + progressDots(1) + `
+      <div class="flex-1 panel-scroll p-5 fade-up">
+        <h3 class="font-semibold text-gray-900 text-base">Upload product photos</h3>
+        <p class="text-sm text-gray-500 mt-1 mb-4">Add up to 10 photos. More angles help the AI keep your product accurate.</p>
+
+        <!-- Drop zone -->
+        <button onclick="triggerFileInput()"
+          class="w-full border-2 border-dashed border-gray-200 rounded-2xl flex flex-col items-center justify-center gap-3 py-12 hover:border-blue-400 hover:bg-blue-50/50 transition-all group">
+          <div class="w-12 h-12 rounded-full bg-gray-100 group-hover:bg-blue-100 flex items-center justify-center transition-colors">
+            <svg class="w-6 h-6 text-gray-400 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <div class="text-center">
+            <p class="text-sm font-semibold text-gray-700 group-hover:text-blue-600 transition-colors">Click to upload photos</p>
+            <p class="text-xs text-gray-400 mt-1">PNG, JPG up to 10 photos</p>
+          </div>
+        </button>
+
+        <!-- Hidden file input -->
+        <input type="file" id="photoFileInput" accept="image/*" multiple class="hidden"
+               onchange="handleFileUpload(this)"/>
+      </div>
+      <div class="p-5 border-t border-gray-100 flex-shrink-0">
+        <button onclick="triggerFileInput()"
+          class="w-full bg-gray-900 text-white py-3 rounded-xl font-semibold text-sm hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+          Select photos
+        </button>
+      </div>`;
+  }
+
+  // Has photos — show grid
+  return panelHeader() + progressDots(1) + `
+    <div class="flex-1 panel-scroll p-5 fade-up">
+      <h3 class="font-semibold text-gray-900 text-base">Upload product photos</h3>
+      <p class="text-sm text-gray-500 mt-1 mb-4">More angles help the AI keep your product accurate in mockups.</p>
+
+      <!-- Hidden file input -->
+      <input type="file" id="photoFileInput" accept="image/*" multiple class="hidden"
+             onchange="handleFileUpload(this)"/>
+
+      <!-- Photo grid -->
+      <div class="grid grid-cols-3 gap-2">
+        ${photos.map((src, i) => `
+          <div class="aspect-square rounded-xl overflow-hidden relative border border-gray-200">
+            <img src="${src}" class="w-full h-full object-cover"/>
+            <div class="absolute top-1 left-1 w-5 h-5 bg-gray-900/80 rounded-full flex items-center justify-center text-white text-xs font-bold">${i+1}</div>
+            <button onclick="removePhoto(${i})" class="absolute top-1 right-1 w-5 h-5 bg-black/50 rounded-full flex items-center justify-center hover:bg-black/70">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>`).join('')}
+
+        ${count < max ? `
+          <button onclick="triggerFileInput()"
+            class="aspect-square rounded-xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center gap-1 hover:border-blue-400 hover:bg-blue-50/50 transition-colors">
+            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span class="text-xs text-gray-400">Add photo</span>
+          </button>` : ''}
+      </div>
+
+      <p class="text-xs text-gray-400 mt-3 text-center">${count}/${max} images uploaded</p>
+    </div>
+    <div class="p-5 border-t border-gray-100 flex-shrink-0">
+      <button onclick="go('quality')"
+        class="w-full bg-gray-900 text-white py-3 rounded-xl font-semibold text-sm hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
+        Analyze photo
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>`;
+}
+
+function stepQuality() {
+  return panelHeader() + progressDots(1) + `
+    <div class="flex-1 panel-scroll p-5 fade-up">
+      <button onclick="go('upload')" class="flex items-center gap-1 text-gray-400 hover:text-gray-700 text-xs mb-5 transition-colors">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <h3 class="font-semibold text-gray-900 text-base">Your photo looks great</h3>
+      <p class="text-sm text-gray-500 mt-1">We'll keep your candle's shape and label accurate in every mockup.</p>
+
+      <div class="mt-4 rounded-2xl overflow-hidden h-44 flex items-center justify-center bg-gradient-to-br from-amber-50 to-orange-50">
+        ${candleSVG('#f5f0e8', 110)}
+      </div>
+
+      <div class="mt-4 space-y-2">
+        ${[
+          ['We detected a', 'candle'],
+          ['Photo is bright with clear label', null],
+          ['Ready for mockup generation', null],
+        ].map(([text, bold]) => `
+          <div class="flex items-center gap-3 bg-green-50 rounded-xl px-4 py-3">
+            <span class="text-green-500 flex-shrink-0">${checkIcon('w-4 h-4')}</span>
+            <span class="text-sm text-gray-700">${text}${bold ? ` <strong>${bold}</strong>` : ''}</span>
+          </div>`).join('')}
+      </div>
+    </div>
+    <div class="p-5 border-t border-gray-100 flex-shrink-0 space-y-2">
+      <button onclick="go('placement')" class="w-full bg-gray-900 text-white py-3 rounded-xl font-semibold text-sm hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
+        Continue
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+      <button onclick="closePanel()" class="w-full text-gray-400 text-sm py-2 hover:text-gray-600 transition-colors">Use a different photo</button>
+    </div>`;
+}
+
+function stepPlacement() {
+  const placements = [
+    { id:'pdp',  label:'Product detail page', hint:'Product is the hero' },
+    { id:'hero', label:'Homepage hero',        hint:'Wide, atmospheric' },
+    { id:'tile', label:'Collection tile',      hint:'Square, clean' },
+  ];
+  return panelHeader() + progressDots(2) + `
+    <div class="flex-1 panel-scroll p-5 fade-up">
+      <button onclick="go('quality')" class="flex items-center gap-1 text-gray-400 hover:text-gray-700 text-xs mb-5 transition-colors">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <h3 class="font-semibold text-gray-900 text-base">Where will this image be used?</h3>
+      <p class="text-sm text-gray-500 mt-1 mb-4">We'll tailor the scene composition for your placement.</p>
+
+      <div class="space-y-2">
+        ${placements.map(p => `
+          <button onclick="selectPlacement('${p.id}')"
+            class="w-full text-left px-4 py-3.5 rounded-xl border-2 transition-all
+              ${S.placement===p.id ? 'border-gray-900 bg-gray-900' : 'border-gray-200 hover:border-gray-300 bg-white'}">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-sm font-semibold ${S.placement===p.id ? 'text-white' : 'text-gray-900'}">${p.label}</div>
+                <div class="text-xs ${S.placement===p.id ? 'text-gray-400' : 'text-gray-400'} mt-0.5">${p.hint}</div>
+              </div>
+              ${S.placement===p.id ? `<span class="text-white">${checkIcon('w-4 h-4')}</span>` : ''}
+            </div>
+          </button>`).join('')}
+      </div>
+
+      ${S.placement ? `
+        <div class="mt-4 bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 fade-up">
+          <p class="text-xs text-blue-700">We'll suggest scenes optimised for ${S.placement==='pdp'?'product detail pages':S.placement==='hero'?'homepage heroes':'collection tiles'}.</p>
+        </div>` : ''}
+    </div>
+    <div class="p-5 border-t border-gray-100 flex-shrink-0">
+      <button onclick="${S.placement ? "go('directions')" : ''}"
+        class="w-full py-3 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2
+          ${S.placement ? 'bg-gray-900 text-white hover:bg-gray-800' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}">
+        See scene directions
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>`;
+}
+
+function stepDirections() {
+  return panelHeader() + progressDots(3) + `
+    <div class="flex-1 panel-scroll p-5 fade-up">
+      <button onclick="go('placement')" class="flex items-center gap-1 text-gray-400 hover:text-gray-700 text-xs mb-5 transition-colors">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <h3 class="font-semibold text-gray-900 text-base">Choose a direction</h3>
+      <p class="text-sm text-gray-500 mt-1 mb-4">Each keeps your candle visible and realistic. Picked for your placement.</p>
+
+      <div class="grid grid-cols-2 gap-3">
+        ${SCENES.map(sc => `
+          <button onclick="selectDirection('${sc.id}')"
+            class="relative rounded-xl overflow-hidden border-2 transition-all text-left
+              ${S.direction===sc.id ? 'border-blue-500 shadow-lg' : 'border-transparent hover:border-gray-200'}">
+            <div class="h-28 relative" style="background:${sc.bg}">
+              <div class="absolute inset-0 flex items-end justify-center pb-1">
+                ${candleSVG(sc.id==='spa'?'#f0f4f0':'#e8f0f5', 52)}
+              </div>
+              ${S.direction===sc.id ? `
+                <div class="absolute top-2 right-2 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center shadow">
+                  ${checkIcon('w-3 h-3 text-white')}
+                </div>` : ''}
+            </div>
+            <div class="px-2.5 py-2 bg-white">
+              <div class="text-xs font-semibold text-gray-900">${sc.name}</div>
+              <div class="text-xs text-gray-400">${sc.desc}</div>
+            </div>
+          </button>`).join('')}
+      </div>
+    </div>
+    <div class="p-5 border-t border-gray-100 flex-shrink-0">
+      <button onclick="${S.direction ? "go('generating')" : ''}"
+        class="w-full py-3 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2
+          ${S.direction ? 'bg-gray-900 text-white hover:bg-gray-800' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}">
+        ${starIcon('w-4 h-4')}
+        Create with my product
+      </button>
+    </div>`;
+}
+
+function stepGenerating() {
+  // auto-advance
+  setTimeout(() => go('results'), 2600);
+
+  const scene = SCENES.find(s=>s.id===S.direction);
+  return panelHeader(false) + `
+    <div class="flex-1 flex flex-col items-center justify-center p-8 text-center fade-up">
+      <div class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center mb-6 pulse-glow">
+        <span class="text-blue-500">${starIcon('w-8 h-8')}</span>
+      </div>
+      <h3 class="font-semibold text-gray-900 text-base">Creating your mockups</h3>
+      <p class="text-sm text-gray-500 mt-2 max-w-56">Keeping your candle label and shape clear while placing it in "${scene?.name || 'your scene'}".</p>
+      <div class="mt-8 w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
+        <div class="h-full bg-blue-500 rounded-full progress-animate"></div>
+      </div>
+      <p class="text-xs text-gray-400 mt-3">Almost ready…</p>
+    </div>`;
+}
+
+function stepResults() {
+  const scene = SCENES.find(s=>s.id===S.direction);
+  const bg = scene?.bg || SCENES[0].bg;
+  const candleC = scene?.id==='spa' ? '#e8f4f0' : '#d0e8f8';
+
+  return panelHeader() + `
+    <div class="flex-1 panel-scroll p-5 fade-up">
+      <button onclick="go('directions')" class="flex items-center gap-1 text-gray-400 hover:text-gray-700 text-xs mb-5 transition-colors">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <h3 class="font-semibold text-gray-900 text-base">Your mockups are ready</h3>
+      <p class="text-sm text-gray-500 mt-1 mb-4">Pick the one that feels right for your product page.</p>
+
+      <div class="grid grid-cols-2 gap-2.5">
+        ${VARIATIONS.map((v,i) => `
+          <button onclick="selectVariation(${i})"
+            class="relative rounded-xl overflow-hidden border-2 transition-all
+              ${S.variation===i ? 'border-blue-500 shadow-lg' : 'border-transparent hover:border-gray-200'}">
+            <div class="h-28 relative" style="background:${bg}">
+              <div class="absolute inset-0" style="background:${VAR_OVERLAYS[i]}"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                ${candleSVG(candleC, 58)}
+              </div>
+              <div class="absolute bottom-2 left-2 bg-black/40 text-white text-xs px-2 py-0.5 rounded-full backdrop-blur-sm">${v}</div>
+              ${S.variation===i ? `
+                <div class="absolute top-2 right-2 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center shadow">
+                  ${checkIcon('w-3 h-3 text-white')}
+                </div>` : ''}
+            </div>
+          </button>`).join('')}
+      </div>
+    </div>
+    <div class="p-5 border-t border-gray-100 flex-shrink-0 space-y-2">
+      <button onclick="go('compare')" class="w-full py-2.5 rounded-xl text-sm font-medium border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors">
+        Compare with original
+      </button>
+      <button onclick="go('apply')"
+        class="w-full py-2.5 rounded-xl text-sm font-semibold transition-all
+          bg-gray-900 text-white hover:bg-gray-800">
+        Apply to this photo
+      </button>
+    </div>`;
+}
+
+function stepCompare() {
+  const scene = SCENES.find(s=>s.id===S.direction);
+  const bg = scene?.bg || SCENES[0].bg;
+  const candleC = scene?.id==='spa' ? '#e8f4f0' : '#d0e8f8';
+
+  return panelHeader() + `
+    <div class="flex-1 panel-scroll p-5 fade-up">
+      <button onclick="go('results')" class="flex items-center gap-1 text-gray-400 hover:text-gray-700 text-xs mb-5 transition-colors">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        Back to results
+      </button>
+      <h3 class="font-semibold text-gray-900 text-base">Compare</h3>
+      <p class="text-sm text-gray-500 mt-1 mb-4">Drag to compare. Tap a style below to switch.</p>
+
+      <!-- Compare slider -->
+      <div id="compareSlider" class="rounded-2xl overflow-hidden relative h-56" style="touch-action:none">
+        <!-- Original -->
+        <div class="compare-left bg-gradient-to-br from-amber-50 to-orange-50">
+          <div class="absolute inset-0 flex items-center justify-center">
+            ${candleSVG('#f5f0e8', 110)}
+          </div>
+          <div class="absolute top-2.5 left-2.5">
+            <span class="bg-white/90 backdrop-blur-sm text-gray-700 text-xs px-2 py-1 rounded font-semibold shadow-sm">ORIGINAL</span>
+          </div>
+        </div>
+
+        <!-- AI Mockup (right) -->
+        <div class="compare-right" id="compareRight" style="width:50%">
+          <div class="absolute inset-0" style="background:${bg};width:320px">
+            <div class="absolute inset-0" style="background:${VAR_OVERLAYS[S.variation]}"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              ${candleSVG(candleC, 110)}
+            </div>
+          </div>
+          <div class="absolute top-2.5 right-2.5">
+            <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded font-semibold shadow-sm">AI MOCKUP</span>
+          </div>
+        </div>
+
+        <!-- Divider handle -->
+        <div class="compare-divider" id="compareDivider" style="left:50%">
+          <div class="compare-handle">
+            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Style switcher -->
+      <div class="mt-4">
+        <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2.5">Choose style</p>
+        <div class="grid grid-cols-2 gap-2">
+          ${VARIATIONS.map((v,i) => `
+            <button onclick="selectVariation(${i}); renderPanel();"
+              class="relative rounded-lg overflow-hidden border-2 transition-all text-left
+                ${S.variation===i ? 'border-blue-500' : 'border-transparent hover:border-gray-200'}">
+              <div class="h-14 relative" style="background:${bg}">
+                <div class="absolute inset-0" style="background:${VAR_OVERLAYS[i]}"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                  ${candleSVG(candleC, 36)}
+                </div>
+              </div>
+              <div class="px-2 py-1.5 bg-white">
+                <div class="text-xs font-semibold text-gray-900">${v}</div>
+                <div class="text-xs ${S.variation===i ? 'text-blue-500' : 'text-gray-400'}">
+                  ${S.variation===i ? 'Selected' : 'Tap to preview'}
+                </div>
+              </div>
+            </button>`).join('')}
+        </div>
+      </div>
+    </div>
+    <div class="p-5 border-t border-gray-100 flex-shrink-0">
+      <button onclick="go('apply')" class="w-full bg-gray-900 text-white py-3 rounded-xl font-semibold text-sm hover:bg-gray-800 transition-colors">
+        Use this mockup
+      </button>
+    </div>`;
+}
+
+function stepApply() {
+  S.enhanced = 1;
+  renderDetail(); // update main content with 1/6
+
+  const scene = SCENES.find(s=>s.id===S.direction);
+  const bg = scene?.bg || SCENES[0].bg;
+  const candleC = scene?.id==='spa' ? '#e8f4f0' : '#d0e8f8';
+
+  return panelHeader() + `
+    <div class="flex-1 flex flex-col items-center justify-center p-8 text-center fade-up">
+      <div class="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center mb-5">
+        ${checkIcon('w-7 h-7 text-green-500')}
+      </div>
+      <h3 class="font-semibold text-gray-900 text-base">Looking good!</h3>
+      <p class="text-sm text-gray-500 mt-2">This photo has been enhanced. Apply the same style to all photos for a consistent storefront?</p>
+
+      <!-- Preview -->
+      <div class="mt-5 w-full rounded-2xl overflow-hidden h-36 relative" style="background:${bg}">
+        <div class="absolute inset-0" style="background:${VAR_OVERLAYS[S.variation]}"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          ${candleSVG(candleC, 90)}
+        </div>
+      </div>
+    </div>
+    <div class="p-5 border-t border-gray-100 flex-shrink-0 space-y-2">
+      <button onclick="applyAll()"
+        class="w-full bg-gray-900 text-white py-3 rounded-xl font-semibold text-sm hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
+        ${starIcon('w-4 h-4')}
+        Apply style to all 6 photos
+      </button>
+      <button onclick="applyOne()"
+        class="w-full border border-gray-200 text-gray-700 py-3 rounded-xl font-semibold text-sm hover:bg-gray-50 transition-colors">
+        Just this photo
+      </button>
+      <button onclick="go('results')" class="w-full text-gray-400 text-sm py-2 hover:text-gray-600 transition-colors">
+        Choose a different mockup
+      </button>
+    </div>`;
+}
+
+function stepApplyAll() {
+  return panelHeader() + `
+    <div class="flex-1 flex flex-col items-center justify-center p-8 text-center fade-up">
+      <div class="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center mb-5">
+        ${checkIcon('w-7 h-7 text-green-500')}
+      </div>
+      <h3 class="font-semibold text-gray-900 text-base">Ready to review</h3>
+      <p class="text-sm text-gray-500 mt-2">All 6 photos now share the same style. Close this panel to preview the updated gallery and click through the thumbnails.</p>
+    </div>
+    <div class="p-5 border-t border-gray-100 flex-shrink-0 space-y-2">
+      <button onclick="handlePublish()"
+        class="w-full bg-gray-900 text-white py-3 rounded-xl font-semibold text-sm hover:bg-gray-800 transition-colors">
+        Publish
+      </button>
+      <button onclick="go('results')" class="w-full text-gray-400 text-sm py-2 hover:text-gray-600 transition-colors">
+        Undo & choose different style
+      </button>
+    </div>`;
+}
+
+// ─────────────────────────────────────────
+// ACTIONS
+// ─────────────────────────────────────────
+function go(step) {
+  S.step = step;
+  // Refresh panel with animation
+  const panel = document.getElementById('panel');
+  panel.classList.remove('slide-in-right');
+  void panel.offsetWidth; // reflow
+  panel.classList.add('slide-in-right');
+  renderPanel();
+}
+
+function openPanel(step) {
+  S.step = step;
+  const panel = document.getElementById('panel');
+  panel.classList.remove('hidden');
+  panel.classList.remove('slide-in-right');
+  void panel.offsetWidth;
+  panel.classList.add('slide-in-right');
+  renderPanel();
+}
+
+function closePanel() {
+  S.step = null;
+  document.getElementById('panel').classList.add('hidden');
+  renderDetail();
+}
+
+function goToProducts() {
+  Object.assign(S, { screen:'products', step:null, placement:null, direction:null, variation:0, enhanced:0, allEnhanced:false, uploadCount:1, uploadedPhotos:[], published:false });
+  document.getElementById('panel').classList.add('hidden');
+  renderProducts();
+}
+
+function goToDetail() {
+  S.screen = 'detail';
+  renderDetail();
+}
+
+function triggerFileInput() {
+  // Re-use or create file input outside the panel so it persists
+  let input = document.getElementById('photoFileInput');
+  if (!input) {
+    input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.multiple = true;
+    input.id = 'photoFileInput';
+    input.style.display = 'none';
+    input.onchange = (e) => handleFileUpload(e.target);
+    document.body.appendChild(input);
+  }
+  input.value = '';
+  input.click();
+}
+
+function handleFileUpload(input) {
+  if (!input.files || !input.files.length) return;
+  if (!S.uploadedPhotos) S.uploadedPhotos = [];
+  const remaining = 10 - S.uploadedPhotos.length;
+  const files = Array.from(input.files).slice(0, remaining);
+  let loaded = 0;
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      S.uploadedPhotos.push(e.target.result);
+      loaded++;
+      if (loaded === files.length) renderPanel();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function removePhoto(index) {
+  if (S.uploadedPhotos) {
+    S.uploadedPhotos.splice(index, 1);
+    renderPanel();
+  }
+}
+
+function addPhoto() { triggerFileInput(); }
+function selectPlacement(id) { S.placement = id; renderPanel(); }
+function selectDirection(id) { S.direction = id; renderPanel(); }
+function selectVariation(i)  { S.variation = i;  renderPanel(); }
+
+function applyAll() {
+  S.enhanced = 6;
+  S.allEnhanced = true;
+  renderDetail();
+  go('applyAll');
+}
+
+function applyOne() {
+  S.enhanced = 1;
+  closePanel();
+}
+
+function handlePublish() {
+  closePanel();
+  const toast = document.getElementById('toast');
+  toast.classList.remove('hidden');
+  toast.classList.add('toast-in');
+  // Show "Back to Products" button in the header after publishing
+  S.published = true;
+  renderDetail();
+  setTimeout(() => {
+    toast.classList.add('hidden');
+  }, 4500);
+}
+
+// ─────────────────────────────────────────
+// COMPARE SLIDER
+// ─────────────────────────────────────────
+function initCompareSlider() {
+  const slider = document.getElementById('compareSlider');
+  if (!slider) return;
+  let dragging = false;
+
+  const setPos = (x) => {
+    const rect = slider.getBoundingClientRect();
+    const pct = Math.max(5, Math.min(95, ((x - rect.left) / rect.width) * 100));
+    const right = document.getElementById('compareRight');
+    const divider = document.getElementById('compareDivider');
+    if (right) right.style.width = (100 - pct) + '%';
+    if (divider) divider.style.left = pct + '%';
+  };
+
+  slider.addEventListener('mousedown', e => { dragging = true; setPos(e.clientX); e.preventDefault(); });
+  document.addEventListener('mousemove', e => { if (dragging) setPos(e.clientX); });
+  document.addEventListener('mouseup', () => { dragging = false; });
+  slider.addEventListener('touchstart', e => { dragging = true; setPos(e.touches[0].clientX); }, {passive:true});
+  document.addEventListener('touchmove', e => { if (dragging) setPos(e.touches[0].clientX); }, {passive:true});
+  document.addEventListener('touchend', () => { dragging = false; });
+}
+
+// Re-init compare slider after panel renders
+const _renderPanel = renderPanel;
+window.renderPanel = function() {
+  _renderPanel();
+  setTimeout(initCompareSlider, 50);
+};
+
+// ─────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────
+renderProducts();
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/claudeception-activator.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@github/github-mcp-server"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "ADD_YOUR_TOKEN_HERE"
+      }
+    },
+    "slack": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-slack"],
+      "env": {
+        "SLACK_BOT_TOKEN": "ADD_YOUR_SLACK_BOT_TOKEN_HERE",
+        "SLACK_TEAM_ID": "ADD_YOUR_TEAM_ID_HERE"
+      }
+    },
+    "gdrive": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-gdrive"],
+      "env": {
+        "GDRIVE_OAUTH_PATH": "/Users/brandonkhoo/.config/mcp-google/gcp-oauth.keys.json",
+        "GDRIVE_CREDENTIALS_PATH": "/Users/brandonkhoo/.config/mcp-google/gdrive-credentials.json"
+      }
+    },
+    "stitch": {
+      "type": "http",
+      "url": "https://stitch.googleapis.com/mcp",
+      "headers": {
+        "X-Goog-Api-Key": "AQ.Ab8RN6JztJZDPIkyWDwm6NW_yRDrhbOWe09J5Z7o0aN3j2-HyA"
+      }
+    }
+  }
+}
