@@ -1271,7 +1271,7 @@ export default function TPRMMonitoringPage() {
         <div className="flex flex-1 overflow-hidden">
           {/* Scrollable main area */}
           <div className="flex-1 overflow-y-auto">
-            <div className="p-6 space-y-4 max-w-[1400px]">
+            <div className="p-6 space-y-4 w-full">
               {/* Page header */}
               <div className="flex items-start justify-between">
                 <div>
