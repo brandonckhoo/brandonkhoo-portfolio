@@ -133,13 +133,26 @@ const categories: Category[] = [
     id: "voice",
     label: "Voice Agents",
     description: "AI voice agent infrastructure, workflows, and integrations",
-    tools: [{ label: "Retell AI" }, { label: "ElevenLabs" }],
+    tools: [{ label: "Retell AI" }],
     accent: "rgba(224, 61, 96, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
         <path d="M9 2a3 3 0 0 1 3 3v4a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3Z" stroke="currentColor" strokeWidth="1.4" />
         <path d="M4 9a5 5 0 0 0 10 0" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
         <path d="M9 14v2M7 16h4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    id: "marketing",
+    label: "Marketing",
+    description: "Content creation, voice synthesis, and campaign tools",
+    tools: [{ label: "ElevenLabs" }],
+    accent: "rgba(255, 140, 0, 0.75)",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <path d="M2 13L7 5l4 5 2-3 3 5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="14" cy="4" r="1.5" stroke="currentColor" strokeWidth="1.4" />
       </svg>
     ),
   },
