@@ -133,7 +133,7 @@ const categories: Category[] = [
     id: "voice",
     label: "Voice Agents",
     description: "AI voice agent infrastructure, workflows, and integrations",
-    tools: [{ label: "Retell AI" }],
+    tools: [{ label: "Retell AI" }, { label: "ElevenLabs" }],
     accent: "rgba(224, 61, 96, 0.75)",
     icon: (
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
